@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,6 +17,13 @@
 		331BEE05254EDD0E0050AB73 /* TodoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331BEE04254EDD0E0050AB73 /* TodoUITests.swift */; };
 		5617DAFF6D375A58B4CCFC36 /* Pods_Todo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52C788246F612C31160F9278 /* Pods_Todo.framework */; };
 		A7638CC2618CFD5A6BF60DC4 /* Pods_TodoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B4241DCDD268B959376E652 /* Pods_TodoTests.framework */; };
+		C92BD41625553714002A0DCA /* LoginUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92BD41525553714002A0DCA /* LoginUsecase.swift */; };
+		C92BD41E2555371F002A0DCA /* TodoUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92BD41D2555371F002A0DCA /* TodoUsecase.swift */; };
+		C92BD42325553737002A0DCA /* LoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92BD42225553737002A0DCA /* LoginRepository.swift */; };
+		C92BD42825553740002A0DCA /* TodoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92BD42725553740002A0DCA /* TodoRepository.swift */; };
+		C92BD4352555376B002A0DCA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92BD4342555376B002A0DCA /* LoginViewController.swift */; };
+		C930664A2552478100957493 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93066492552478100957493 /* Todo.swift */; };
+		C930669B2553B34600957493 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C930669A2553B34600957493 /* README.md */; };
 		CBC3FE15D167339E17463A04 /* Pods_Todo_TodoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7F14E1625C18E9009F5128E /* Pods_Todo_TodoUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +65,13 @@
 		A6A15BCA2EBEAB95B4EF3384 /* Pods-TodoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoTests.debug.xcconfig"; path = "Target Support Files/Pods-TodoTests/Pods-TodoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C2CB19B8D1E485E538C7D721 /* Pods-TodoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoTests.release.xcconfig"; path = "Target Support Files/Pods-TodoTests/Pods-TodoTests.release.xcconfig"; sourceTree = "<group>"; };
 		C7F14E1625C18E9009F5128E /* Pods_Todo_TodoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Todo_TodoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C92BD41525553714002A0DCA /* LoginUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUsecase.swift; sourceTree = "<group>"; };
+		C92BD41D2555371F002A0DCA /* TodoUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoUsecase.swift; sourceTree = "<group>"; };
+		C92BD42225553737002A0DCA /* LoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRepository.swift; sourceTree = "<group>"; };
+		C92BD42725553740002A0DCA /* TodoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRepository.swift; sourceTree = "<group>"; };
+		C92BD4342555376B002A0DCA /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		C93066492552478100957493 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
+		C930669A2553B34600957493 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EB09DE73D5C560DAEB04A0E0 /* Pods-Todo-TodoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Todo-TodoUITests.release.xcconfig"; path = "Target Support Files/Pods-Todo-TodoUITests/Pods-Todo-TodoUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F286CBEFE9FED4E384941587 /* Pods-Todo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Todo.release.xcconfig"; path = "Target Support Files/Pods-Todo/Pods-Todo.release.xcconfig"; sourceTree = "<group>"; };
 		FD3298FB15F3501D16947F09 /* Pods-Todo-TodoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Todo-TodoUITests.debug.xcconfig"; path = "Target Support Files/Pods-Todo-TodoUITests/Pods-Todo-TodoUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -94,6 +108,7 @@
 		331BEDD6254EDD0D0050AB73 = {
 			isa = PBXGroup;
 			children = (
+				C930669A2553B34600957493 /* README.md */,
 				331BEDE1254EDD0D0050AB73 /* Todo */,
 				331BEDF8254EDD0E0050AB73 /* TodoTests */,
 				331BEE03254EDD0E0050AB73 /* TodoUITests */,
@@ -119,6 +134,10 @@
 				331BEDE2254EDD0D0050AB73 /* AppDelegate.swift */,
 				331BEDE4254EDD0D0050AB73 /* SceneDelegate.swift */,
 				331BEDE6254EDD0D0050AB73 /* ViewController.swift */,
+				C930664F2552479500957493 /* Entity */,
+				C9306653255247FF00957493 /* Usecase */,
+				C930664E2552478700957493 /* Data */,
+				C92BD4122554FC06002A0DCA /* Presentation */,
 				331BEDE8254EDD0D0050AB73 /* Main.storyboard */,
 				331BEDEB254EDD0E0050AB73 /* Assets.xcassets */,
 				331BEDED254EDD0E0050AB73 /* LaunchScreen.storyboard */,
@@ -155,6 +174,160 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C92BD4122554FC06002A0DCA /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				C92BD43A25553786002A0DCA /* LoginView */,
+				C92BD43E255537EA002A0DCA /* TodoListView */,
+				C92BD44325553829002A0DCA /* TodoDetail */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		C92BD43925553778002A0DCA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C92BD4342555376B002A0DCA /* LoginViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C92BD43A25553786002A0DCA /* LoginView */ = {
+			isa = PBXGroup;
+			children = (
+				C92BD43925553778002A0DCA /* View */,
+				C92BD43D255537C0002A0DCA /* ViewModel */,
+				C92BD43B255537A5002A0DCA /* Wireframe */,
+				C92BD43C255537B5002A0DCA /* Builder */,
+			);
+			path = LoginView;
+			sourceTree = "<group>";
+		};
+		C92BD43B255537A5002A0DCA /* Wireframe */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Wireframe;
+			sourceTree = "<group>";
+		};
+		C92BD43C255537B5002A0DCA /* Builder */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Builder;
+			sourceTree = "<group>";
+		};
+		C92BD43D255537C0002A0DCA /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C92BD43E255537EA002A0DCA /* TodoListView */ = {
+			isa = PBXGroup;
+			children = (
+				C92BD43F255537F4002A0DCA /* View */,
+				C92BD440255537FB002A0DCA /* ViewModel */,
+				C92BD4422555380E002A0DCA /* Wireframe */,
+				C92BD44125553807002A0DCA /* Builder */,
+			);
+			path = TodoListView;
+			sourceTree = "<group>";
+		};
+		C92BD43F255537F4002A0DCA /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C92BD440255537FB002A0DCA /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C92BD44125553807002A0DCA /* Builder */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Builder;
+			sourceTree = "<group>";
+		};
+		C92BD4422555380E002A0DCA /* Wireframe */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Wireframe;
+			sourceTree = "<group>";
+		};
+		C92BD44325553829002A0DCA /* TodoDetail */ = {
+			isa = PBXGroup;
+			children = (
+				C92BD44725553857002A0DCA /* View */,
+				C92BD4462555384D002A0DCA /* ViewModel */,
+				C92BD44525553847002A0DCA /* Wireframe */,
+				C92BD44425553841002A0DCA /* Builder */,
+			);
+			path = TodoDetail;
+			sourceTree = "<group>";
+		};
+		C92BD44425553841002A0DCA /* Builder */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Builder;
+			sourceTree = "<group>";
+		};
+		C92BD44525553847002A0DCA /* Wireframe */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Wireframe;
+			sourceTree = "<group>";
+		};
+		C92BD4462555384D002A0DCA /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C92BD44725553857002A0DCA /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C930664E2552478700957493 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				C92BD42225553737002A0DCA /* LoginRepository.swift */,
+				C92BD42725553740002A0DCA /* TodoRepository.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		C930664F2552479500957493 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				C93066492552478100957493 /* Todo.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		C9306653255247FF00957493 /* Usecase */ = {
+			isa = PBXGroup;
+			children = (
+				C92BD41525553714002A0DCA /* LoginUsecase.swift */,
+				C92BD41D2555371F002A0DCA /* TodoUsecase.swift */,
+			);
+			path = Usecase;
+			sourceTree = "<group>";
+		};
 		F61341FBE082ADE81B05C748 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,7 +338,6 @@
 				A6A15BCA2EBEAB95B4EF3384 /* Pods-TodoTests.debug.xcconfig */,
 				C2CB19B8D1E485E538C7D721 /* Pods-TodoTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -280,6 +452,7 @@
 			files = (
 				331BEDEF254EDD0E0050AB73 /* LaunchScreen.storyboard in Resources */,
 				331BEDEC254EDD0E0050AB73 /* Assets.xcassets in Resources */,
+				C930669B2553B34600957493 /* README.md in Resources */,
 				331BEDEA254EDD0D0050AB73 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -425,9 +598,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C92BD4352555376B002A0DCA /* LoginViewController.swift in Sources */,
+				C92BD41625553714002A0DCA /* LoginUsecase.swift in Sources */,
 				331BEDE7254EDD0D0050AB73 /* ViewController.swift in Sources */,
 				331BEDE3254EDD0D0050AB73 /* AppDelegate.swift in Sources */,
+				C92BD42325553737002A0DCA /* LoginRepository.swift in Sources */,
+				C92BD41E2555371F002A0DCA /* TodoUsecase.swift in Sources */,
+				C92BD42825553740002A0DCA /* TodoRepository.swift in Sources */,
 				331BEDE5254EDD0D0050AB73 /* SceneDelegate.swift in Sources */,
+				C930664A2552478100957493 /* Todo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
