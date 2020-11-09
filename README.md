@@ -17,57 +17,15 @@
 
 |  役割 | 抽象型 | 具象型 |
 | --- | --- | --- |
-|  View | (ModuleName)View | (ModuleName)ViewController |
-|  Interactor | (ModuleName)UseCase | (ModuleName)UseCaseImpl |
+|  View | | (ModuleName)View, (ModuleName)ViewController |
 |  Presenter | (ModuleName)Presenter | (ModuleName)PresenterImpl |
+|  UseCase | (ModuleName)UseCase | (ModuleName)UseCaseImpl |
 |  Entity |  | Entity |
 |  Router | (ModuleName)Router | (ModuleName)RouterImpl |
 
 ## Clean Architecture
 
 <!-- TODO: delete this section and create UML -->
-
-- Entity
-  - Todo.swift
-
-- Domain
-  - Usecase
-    - LoginUsecase.swift
-    - TodoUsecase.swift
-    - TodoUseCaseImpl.swift
-  - DataInterface
-    - TodoRepository.swift
-    - LoginRepository.swift
-  - PresenterInterface
-    - LoginPresenter.swift
-    - TodoListPresenter.swift
-    - TodoDetailPresenter.swift
-
-- RepositoryImpl
-  - TodoRepositoryImpl.swift
-  - LoginRepositoryImpl.swift
-
-- InterfaceAdopterImpl
-  - LoginPresenterImpl.swift
-  - TodoListPresenterImpl.swift
-  - TodoDetailPresenterImpl.swift
-
-- Presentation
-  - LoginView
-    - View
-      - LoginViewController.swift
-    - Router
-      - LoginRouter.swift
-  - TodoListView
-    - View
-      - TodoListViewController.swift
-    - Router
-      - TodoListRouter.swift
-  - TodoDetailView
-    - View
-      - TodoDetailViewController.swift
-    - Router
-      - TodoListRouter.swift
 
 ## File Structure of the Program
 
@@ -85,7 +43,7 @@
     - \<P>TodoUsecaseInjectable
     - \<P>TodoUseCase
     - TodoUseCaseImpl
-  
+
 - Data
   - Repository
     - LoginRepository.swift
