@@ -4,7 +4,7 @@
 
 ## Requirements
 
-- Clean Architecture + Wireframe(Router) a.k.a Viper
+- Clean Architecture + Router a.k.a Viper
 - Swift 5
 - iOS14
 - RxSwift
@@ -18,10 +18,10 @@
 |  役割 | 抽象型 | 具象型 |
 | --- | --- | --- |
 |  View | (ModuleName)View | (ModuleName)ViewController |
-|  Interactor | (ModuleName)UseCase | (ModuleName)Interactor |
-|  Presenter | (ModuleName)Presentaiton | (ModuleName)Presenter |
+|  Interactor | (ModuleName)UseCase | (ModuleName)UseCaseImpl |
+|  Presenter | (ModuleName)Presenter | (ModuleName)PresenterImpl |
 |  Entity |  | Entity |
-|  Router | (ModuleName)Wireframe | (ModuleName)Router |
+|  Router | (ModuleName)Router | (ModuleName)RouterImpl |
 
 ## Clean Architecture
 
@@ -56,18 +56,18 @@
   - LoginView
     - View
       - LoginViewController.swift
-    - Wireframe
-      - LoginWireframe.swift
+    - Router
+      - LoginRouter.swift
   - TodoListView
     - View
       - TodoListViewController.swift
-    - Wireframe
-      - TodoListWireframe.swift
+    - Router
+      - TodoListRouter.swift
   - TodoDetailView
     - View
       - TodoDetailViewController.swift
-    - Wireframe
-      - TodoListWireframe.swift
+    - Router
+      - TodoListRouter.swift
 
 ## File Structure of the Program
 
@@ -113,12 +113,12 @@
         - \<P>LoginPresenterInjectable
         - \<P>LoginPresenter
         - LoginPresenterImpl
-    - Wireframe
-      - LoginWireframe.swift
+    - Router
+      - LoginRouter.swift
         - \<P>LoginTransitionble
-        - \<P>LoginWireframeInjectable
-        - \<P>LoginWireframe
-        - LoginWireframeImpl
+        - \<P>LoginRouterInjectable
+        - \<P>LoginRouter
+        - LoginRouterImpl
       - Builder
         - LoginBuilder.swift
 
@@ -130,12 +130,12 @@
         - \<P>TodoListPresenterInjectable
         - \<P>TodoListPresenter
         - TodoListPresenterImpl
-    - Wireframe
-      - TodoListWireframe.swift
+    - Router
+      - TodoListRouter.swift
       - \<P>TodoListTransitionable
-      - \<P>TodoListWireframeInjectable
-      - \<P>TodoListWireframe
-      - TodoListWireframeImpl
+      - \<P>TodoListRouterInjectable
+      - \<P>TodoListRouter
+      - TodoListRouterImpl
     - Builder
       - TodoListBuilder.swift
 
@@ -147,12 +147,12 @@
         - \<P>TodoDetailInjectable
         - \<P>TodoDetailPresenter
         - TodoDetailPresenterImpl
-    - Wireframe
-      - TodoDetailWireframe.swift
+    - Router
+      - TodoDetailRouter.swift
         - \<P>TodoDetailTransitionable
-        - \<P>TodoDetailWireframeInjectable
-        - \<P>TodoDetailWireframe
-        - TodoDetailWireframeImpl
+        - \<P>TodoDetailRouterInjectable
+        - \<P>TodoDetailRouter
+        - TodoDetailRouterImpl
     - Builder
       - TodoDetailBuilder.swift
 
@@ -161,12 +161,12 @@
 - protocolとそれを準拠したクラスないしは構造体は、protocolの名称 + Implと命名する。
 
 - DIの部分は、protocolの**Injectable.protocolを作成し、protocol extensionに実体を配置する
-- Wireframeについて
-  - 画面遷移にはWireframe(Router)パターンを採用。画面遷移部分を切り離す。
-  - 各Wireframeに対応したUIViewControllerの参照を持ち、Presenterから受けた入力によって画面遷移させる。
-  - BuilderはPresenter, UseCase, WireframeをDIさせる。
+- Routerについて
+  - 画面遷移にはRouterパターンを採用。画面遷移部分を切り離す。
+  - 各Routerに対応したUIViewControllerの参照を持ち、Presenterから受けた入力によって画面遷移させる。
+  - BuilderはPresenter, UseCase, RouterをDIさせる。
   - 各Transitionableは、buildして画面遷移する責務を持つ
-  - 各Transitionableに準拠したWireframe(UIViewControllerの実体を持つ)は、その準拠した画面へ遷移することができるようになる。（遷移するための実装がそのTransitionableにあるので）
+  - 各Transitionableに準拠したRouter(UIViewControllerの実体を持つ)は、その準拠した画面へ遷移することができるようになる。（遷移するための実装がそのTransitionableにあるので）
 
 ## Reference
 
