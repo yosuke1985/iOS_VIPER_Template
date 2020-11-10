@@ -1,4 +1,4 @@
-# Todo
+# iOS Sample Todo Application build with Clean Architecture + Router a.k.a Viper
 
 ## UI
 
@@ -11,9 +11,11 @@
 - Firebase
 - Firestore
 
-## UML
+## Class Chart
 
-## 命名規則
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vSgHoUQDGKzsEiM8oaBD5dv5hGxEjHILlpnIOmOni308qQD79W35BrA6kxwEhBwugF1GkaJ81hF8meF/pub?w=960&amp;h=720">
+
+## Naming conventions
 
 |  役割 | 抽象型 | 具象型 |
 | --- | --- | --- |
@@ -22,10 +24,7 @@
 |  UseCase | (ModuleName)UseCase | (ModuleName)UseCaseImpl |
 |  Entity |  | Entity |
 |  Router | (ModuleName)Router | (ModuleName)RouterImpl |
-
-## Clean Architecture
-
-<!-- TODO: delete this section and create UML -->
+|  Repository | (ModuleName)Repository | (ModuleName)RepositoryImpl |
 
 ## File Structure of the Program
 
@@ -48,11 +47,11 @@
   - Repository
     - LoginRepository.swift
       - \<P>LoginRepositoryInjectable
-      - LoginRepository
+      - \<P>LoginRepository
       - LoginRepositoryImpl
     - TodoRepository.swift
       - \<P>TodoRepositoryInjectable
-      - TodoRepository
+      - \<P>TodoRepository
       - TodoRepositoryImpl
   - RequestResponse
     - Login
@@ -133,3 +132,5 @@
 
 - Viper研究読本 VIPER研究読本1 クリーンアーキテクチャ解説編
   <https://swift.booth.pm/items/1758609>
+
+- iOSアプリ設計入門　<https://peaks.cc/books/iOS_architecture>
