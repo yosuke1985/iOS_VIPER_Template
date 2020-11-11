@@ -113,17 +113,15 @@
     - Builder
       - TodoDetailBuilder.swift
 
-## Memo
+## 注釈
 
-- protocolとそれを準拠したクラスないしは構造体は、protocolの名称 + Implと命名する。
-
-- DIの部分は、protocolの**Injectable.protocolを作成し、protocol extensionに実体を配置する
-- Routerについて
-  - 画面遷移にはRouterパターンを採用。画面遷移部分を切り離す。
-  - 各Routerに対応したUIViewControllerの参照を持ち、Presenterから受けた入力によって画面遷移させる。
-  - BuilderはPresenter, UseCase, RouterをDIさせる。
-  - 各Transitionableは、buildして画面遷移する責務を持つ
-  - 各Transitionableに準拠したRouter(UIViewControllerの実体を持つ)は、その準拠した画面へ遷移することができるようになる。（遷移するための実装がそのTransitionableにあるので）
+1. Clean Architecture + Routerのアーキテクチャ　＝　VIPERであり、VIPERはView Interactor Presenter Entity Routerの頭文字を取ったもの。
+2. VIPERでは UseCaseのことをInteractorと名付けている。
+3. protocolとそれを準拠したクラスないしは構造体は、protocolの名称 + Implと命名する。
+4. DIの部分は、protocolの**Injectable.protocolを作成し、protocol extensionに実体を配置する
+5. 画面遷移にはRouterパターンを採用。画面遷移部分を切り離す。各Routerに対応したUIViewControllerの参照を持ち、Presenterから受けた入力によって画面遷移させる。
+6. BuilderはPresenter, UseCase, RouterをDIさせる。
+7. 各Transitionableは、buildして画面遷移する責務を持つ。各Transitionableに準拠したRouter(UIViewControllerの実体を持つ)は、その準拠した画面へ遷移することができるようになる。（遷移するための実装がそのTransitionableにあるので）
 
 ## Reference
 
