@@ -1,10 +1,10 @@
-# iOS Sample Todo Application build with Clean Architecture + Router a.k.a Viper
+# iOS Todo app build with Clean Architecture + Router a.k.a VIPER
 
 ## UI
 
 ## Requirements
 
-- Clean Architecture + Router a.k.a Viper
+- Clean Architecture + Router a.k.a VIPER
 - Swift 5
 - iOS14
 - RxSwift
