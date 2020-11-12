@@ -1,15 +1,36 @@
-# iOS Todo app build with Clean Architecture + Router a.k.a VIPER
+# iOS Todo app build with Clean Architecture + Router a.k.a VIPER<sup>[1](#note1)</sup>
+
+## README残
+
+- [ ] Referenceの作者の記述
+- [ ] 注釈の作成
+- [ ] アーキテクチャの概要
+- [ ] UIのスクリーンショットの貼り付け
+- [ ] RxSwiftのバインディングについて（別枠？Gist?）
+- [ ] 英語バージョン、日本語バージョンの切り分け
 
 ## UI
 
+TODO: スクリーンショット貼り付け
+
 ## Requirements
 
-- Clean Architecture + Router a.k.a VIPER
+- Clean Architecture + Router a.k.a VIPER<sup>[1](#note1)</sup>
 - Swift 5
 - iOS14
 - RxSwift
 - Firebase
 - Firestore
+
+## アーキテクチャの概要
+
+TODO:
+- Clean Architectureの概要
+- 双方向バインディング、RxSwiftの話
+- DIのInjectableの話
+- レポジトリにはInterface adapterがない
+- 命名規則について
+- VIPERとの関係
 
 ## Class Chart
 
@@ -21,7 +42,7 @@
 | --- | --- | --- |
 |  View | | (ModuleName)View, (ModuleName)ViewController |
 |  Presenter | (ModuleName)Presenter | (ModuleName)PresenterImpl |
-|  UseCase | (ModuleName)UseCase | (ModuleName)UseCaseImpl |
+|  UseCase<sup>[2](#note2)</sup> | (ModuleName)UseCase | (ModuleName)UseCaseImpl |
 |  Entity |  | Entity |
 |  Router | (ModuleName)Router | (ModuleName)RouterImpl |
 |  Repository | (ModuleName)Repository | (ModuleName)RepositoryImpl |
@@ -115,8 +136,8 @@
 
 ## 注釈
 
-1. Clean Architecture + Routerのアーキテクチャ　＝　VIPERであり、VIPERはView Interactor Presenter Entity Routerの頭文字を取ったもの。
-2. VIPERでは UseCaseのことをInteractorと名付けている。
+1. <p id="note1">Clean Architecture + Routerのアーキテクチャ　＝　VIPERであり、VIPERはView Interactor Presenter Entity Routerの頭文字を取ったもの。</p>
+2. <p id="note2">VIPERでは UseCaseのことをInteractorと名付けている。</p>
 3. protocolとそれを準拠したクラスないしは構造体は、protocolの名称 + Implと命名する。
 4. DIの部分は、protocolの**Injectable.protocolを作成し、protocol extensionに実体を配置する
 5. 画面遷移にはRouterパターンを採用。画面遷移部分を切り離す。各Routerに対応したUIViewControllerの参照を持ち、Presenterから受けた入力によって画面遷移させる。
