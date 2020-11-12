@@ -55,10 +55,10 @@ TODO: スクリーンショット貼り付け
 |  役割 | 抽象型 | 具象型 |
 | --- | --- | --- |
 |  View | | (ModuleName)View, (ModuleName)ViewController |
-|  Presenter | (ModuleName)Presenter | (ModuleName)PresenterImpl |
-|  UseCase| (ModuleName)UseCase<sup>[2](#note2)</sup>  | (ModuleName)UseCaseImpl |
+|  Presenter | (ModuleName)Presenter <sup>[2](#note2)</sup>| (ModuleName)PresenterImpl |
+|  UseCase| (ModuleName)UseCase<sup>[3](#note3)</sup>  | (ModuleName)UseCaseImpl |
 |  Entity |  | Entity |
-|  Router | (ModuleName)Router | (ModuleName)RouterImpl |
+|  Router | (ModuleName)Router<sup>[4](#note4)</sup> | (ModuleName)RouterImpl |
 |  Repository | (ModuleName)Repository | (ModuleName)RepositoryImpl |
 
 ## File Structure of the Program
@@ -151,7 +151,9 @@ TODO: スクリーンショット貼り付け
 ## 注釈
 
 1. <p id="note1">Clean Architecture + Routerのアーキテクチャ　＝　VIPERであり、VIPERはView Interactor Presenter Entity Routerの頭文字を取ったもの。</p>
-2. <p id="note2">VIPERでは UseCaseのことをInteractorと名付けている。</p>
+2. <p id="note2">Presenterは、MVVMでいうところのViewModel</p>
+3. <p id="note3">VIPERでは UseCaseのことをInteractorと名付けている。</p>
+4. <p id="note4">Routerは、Wireframeと名付けることもある</p>
 
 ## Reference
 
