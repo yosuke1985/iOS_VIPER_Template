@@ -1,5 +1,5 @@
-# Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+project 'Todo.xcodeproj'
+platform :ios, '14.1'
 
 target 'Todo' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -7,6 +7,9 @@ target 'Todo' do
 
   pod 'RxSwift', '6.0.0-rc.1'
   pod 'RxCocoa', '6.0.0-rc.1'
+
+  pod 'SwiftLint'
+  pod 'SwiftFormat/CLI'
 
   target 'TodoTests' do
     inherit! :search_paths

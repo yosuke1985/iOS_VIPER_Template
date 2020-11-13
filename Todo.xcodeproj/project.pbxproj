@@ -349,6 +349,7 @@
 			buildConfigurationList = 331BEE09254EDD0E0050AB73 /* Build configuration list for PBXNativeTarget "Todo" */;
 			buildPhases = (
 				14F5E6378378D6004A34EECF /* [CP] Check Pods Manifest.lock */,
+				332FAD35255EB97500BC64E3 /* SwiftLint/SwiftFormat Run Script */,
 				331BEDDB254EDD0D0050AB73 /* Sources */,
 				331BEDDC254EDD0D0050AB73 /* Frameworks */,
 				331BEDDD254EDD0D0050AB73 /* Resources */,
@@ -495,6 +496,24 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		332FAD35255EB97500BC64E3 /* SwiftLint/SwiftFormat Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "SwiftLint/SwiftFormat Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat\" . --exclude Carthage,Pods --trimwhitespace nonblank-lines --stripunusedargs closure-only --disable strongOutlets,trailingCommas\n\"${PODS_ROOT}/SwiftLint/swiftlint\"\n\n\n\n";
 		};
 		3F6C2E99CFA7563D5B19F0F3 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -664,6 +683,7 @@
 		331BEE07254EDD0E0050AB73 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -725,6 +745,7 @@
 		331BEE08254EDD0E0050AB73 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -781,6 +802,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6E48B39612BCC2E11453DC59 /* Pods-Todo.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -801,6 +823,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F286CBEFE9FED4E384941587 /* Pods-Todo.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -821,7 +844,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A6A15BCA2EBEAB95B4EF3384 /* Pods-TodoTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 826UFXVDY8;
@@ -844,7 +867,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C2CB19B8D1E485E538C7D721 /* Pods-TodoTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 826UFXVDY8;
@@ -867,7 +890,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FD3298FB15F3501D16947F09 /* Pods-Todo-TodoUITests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 826UFXVDY8;
 				INFOPLIST_FILE = TodoUITests/Info.plist;
@@ -888,7 +911,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EB09DE73D5C560DAEB04A0E0 /* Pods-Todo-TodoUITests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 826UFXVDY8;
 				INFOPLIST_FILE = TodoUITests/Info.plist;

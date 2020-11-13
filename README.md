@@ -40,7 +40,8 @@ TODO: スクリーンショット貼り付け
 ## Requirements
 
 - Clean Architecture + Router a.k.a VIPER<sup>[1](#note1)</sup>
-- Swift 5
+- Xcode 12.x
+- Swift 5.x
 - iOS14
 - RxSwift
 - Firebase
