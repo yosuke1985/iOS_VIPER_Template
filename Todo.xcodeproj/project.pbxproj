@@ -29,6 +29,7 @@
 		332FAD8C255EBFDA00BC64E3 /* TodoDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332FAD8B255EBFDA00BC64E3 /* TodoDetailPresenter.swift */; };
 		332FAD91255EBFE400BC64E3 /* TodoDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332FAD90255EBFE400BC64E3 /* TodoDetailRouter.swift */; };
 		332FAD96255EBFF200BC64E3 /* TodoDetailBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332FAD95255EBFF200BC64E3 /* TodoDetailBuilder.swift */; };
+		332FADA025609BC300BC64E3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 332FAD9F25609BC300BC64E3 /* GoogleService-Info.plist */; };
 		5617DAFF6D375A58B4CCFC36 /* Pods_Todo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52C788246F612C31160F9278 /* Pods_Todo.framework */; };
 		A7638CC2618CFD5A6BF60DC4 /* Pods_TodoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B4241DCDD268B959376E652 /* Pods_TodoTests.framework */; };
 		C92BD41625553714002A0DCA /* LoginUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92BD41525553714002A0DCA /* LoginUsecase.swift */; };
@@ -88,6 +89,7 @@
 		332FAD8B255EBFDA00BC64E3 /* TodoDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetailPresenter.swift; sourceTree = "<group>"; };
 		332FAD90255EBFE400BC64E3 /* TodoDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetailRouter.swift; sourceTree = "<group>"; };
 		332FAD95255EBFF200BC64E3 /* TodoDetailBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetailBuilder.swift; sourceTree = "<group>"; };
+		332FAD9F25609BC300BC64E3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		52C788246F612C31160F9278 /* Pods_Todo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Todo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E48B39612BCC2E11453DC59 /* Pods-Todo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Todo.debug.xcconfig"; path = "Target Support Files/Pods-Todo/Pods-Todo.debug.xcconfig"; sourceTree = "<group>"; };
 		A6A15BCA2EBEAB95B4EF3384 /* Pods-TodoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoTests.debug.xcconfig"; path = "Target Support Files/Pods-TodoTests/Pods-TodoTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 			isa = PBXGroup;
 			children = (
 				331BEDEB254EDD0E0050AB73 /* Assets.xcassets */,
+				332FAD9F25609BC300BC64E3 /* GoogleService-Info.plist */,
 				331BEDF0254EDD0E0050AB73 /* Info.plist */,
 			);
 			path = Resources;
@@ -422,6 +425,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				331BEDEF254EDD0E0050AB73 /* LaunchScreen.storyboard in Resources */,
+				332FADA025609BC300BC64E3 /* GoogleService-Info.plist in Resources */,
 				332FAD6B255EBF5D00BC64E3 /* TodoListViewController.storyboard in Resources */,
 				331BEDEC254EDD0E0050AB73 /* Assets.xcassets in Resources */,
 				332FAD61255EBF3C00BC64E3 /* LoginViewController.storyboard in Resources */,
@@ -791,7 +795,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 826UFXVDY8;
-				INFOPLIST_FILE = Todo/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Todo/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -812,7 +816,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 826UFXVDY8;
-				INFOPLIST_FILE = Todo/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Todo/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
