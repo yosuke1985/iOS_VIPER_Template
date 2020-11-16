@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(windowScene: windowScene)
-        self.setWindow(window: window!)
+        setWindow(window: window!)
     }
     
     func setWindow(window: UIWindow) {

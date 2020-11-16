@@ -349,7 +349,7 @@ PODS:
   - RxSwift (6.0.0-rc.1)
   - RxTest (6.0.0-rc.1):
     - RxSwift (= 6.0.0-rc.1)
-  - SwiftFormat/CLI (0.47.3)
+  - SwiftFormat/CLI (0.47.4)
   - SwiftLint (0.41.0)
 
 DEPENDENCIES:
@@ -418,9 +418,9 @@ SPEC CHECKSUMS:
   RxRelay: 56abad6d32f73567858506d08735fdb341935b9a
   RxSwift: dae1a32c48148897494b9e2a6b00a68b40694236
   RxTest: 168030c245ae98ebd710692af173aa47eda6f3c2
-  SwiftFormat: b080923fedca75e92a19738fc23c633ca4f921d9
+  SwiftFormat: 43c9302b7dbca1cda59acfc2ac63ac86e281fb14
   SwiftLint: c585ebd615d9520d7fbdbe151f527977b0534f1e
 
 PODFILE CHECKSUM: 41aacc9226ebb683ee60bff96cae9c95cac21e17
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.9.3

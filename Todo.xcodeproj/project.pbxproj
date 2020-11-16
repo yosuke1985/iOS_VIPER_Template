@@ -38,6 +38,7 @@
 		C92BD4352555376B002A0DCA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92BD4342555376B002A0DCA /* LoginViewController.swift */; };
 		C930664A2552478100957493 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93066492552478100957493 /* Todo.swift */; };
 		C930669B2553B34600957493 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C930669A2553B34600957493 /* README.md */; };
+		C9AA2FE2256279620050BD8F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9AA2FE1256279620050BD8F /* GoogleService-Info.plist */; };
 		CBC3FE15D167339E17463A04 /* Pods_Todo_TodoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7F14E1625C18E9009F5128E /* Pods_Todo_TodoUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -100,6 +101,7 @@
 		C92BD4342555376B002A0DCA /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		C93066492552478100957493 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		C930669A2553B34600957493 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		C9AA2FE1256279620050BD8F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EB09DE73D5C560DAEB04A0E0 /* Pods-Todo-TodoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Todo-TodoUITests.release.xcconfig"; path = "Target Support Files/Pods-Todo-TodoUITests/Pods-Todo-TodoUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F286CBEFE9FED4E384941587 /* Pods-Todo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Todo.release.xcconfig"; path = "Target Support Files/Pods-Todo/Pods-Todo.release.xcconfig"; sourceTree = "<group>"; };
 		FD3298FB15F3501D16947F09 /* Pods-Todo-TodoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Todo-TodoUITests.debug.xcconfig"; path = "Target Support Files/Pods-Todo-TodoUITests/Pods-Todo-TodoUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 			children = (
 				331BEDEB254EDD0E0050AB73 /* Assets.xcassets */,
 				332FAD9F25609BC300BC64E3 /* GoogleService-Info.plist */,
+				C9AA2FE1256279620050BD8F /* GoogleService-Info.plist */,
 				331BEDF0254EDD0E0050AB73 /* Info.plist */,
 			);
 			path = Resources;
@@ -430,6 +433,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				331BEDEF254EDD0E0050AB73 /* LaunchScreen.storyboard in Resources */,
+				C9AA2FE2256279620050BD8F /* GoogleService-Info.plist in Resources */,
 				332FADA025609BC300BC64E3 /* GoogleService-Info.plist in Resources */,
 				332FAD6B255EBF5D00BC64E3 /* TodoListViewController.storyboard in Resources */,
 				331BEDEC254EDD0E0050AB73 /* Assets.xcassets in Resources */,
@@ -790,8 +794,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 826UFXVDY8;
 				INFOPLIST_FILE = "$(SRCROOT)/Todo/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -813,8 +817,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 826UFXVDY8;
 				INFOPLIST_FILE = "$(SRCROOT)/Todo/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

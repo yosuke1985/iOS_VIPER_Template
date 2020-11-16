@@ -17,13 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         FirebaseApp.configure()
         
-//        if #available(iOS 13.0, *) {
-//        } else {
-        if let window = window {
-            setWindow(window: window)
-        }
-//        }
-        
         return true
     }
 
@@ -40,5 +33,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-    
 }
