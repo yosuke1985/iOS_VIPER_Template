@@ -7,21 +7,16 @@
 
 import UIKit
 
-struct TodoListBuilder: TodoListPresenterInjectable,
-    TodoUseCaseInjectable,
-    TodoListRouterInjectable
-{
-    lazy var todoListPresenter: TodoListPresenter = todoListPresenterImpl
-    lazy var todoUseCase: TodoUseCase = todoUseCaseImpl
-    lazy var todoListRouter: TodoListRouter = todoListRouterImpl
-    
-    mutating func build() -> UIViewController {
+struct TodoListBuilder: TodoUseCaseInjectable {
+    func build() -> UIViewController {
         let vc = TodoListViewController.instantiate()
+        let router = TodoListRouterImpl()
+        let presenter = TodoListPresenterImpl()
         
-        todoListRouter.viewController = vc
-        todoListPresenter.todoListRouter = todoListRouter
-        todoListPresenter.todoListUseCase = todoUseCase
-        vc.presenter = todoListPresenter
+        router.viewController = vc
+        presenter.todoListRouter = router
+        presenter.todoListUseCase = todoUseCaseImpl
+        vc.presenter = presenter
         
         let navigationViewController = UINavigationController(rootViewController: vc)
 

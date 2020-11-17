@@ -8,16 +8,6 @@
 import Foundation
 import UIKit
 
-protocol TodoListRouterInjectable {
-    var todoListRouterImpl: TodoListRouter { get }
-}
-
-extension TodoListRouterInjectable {
-    var todoListRouterImpl: TodoListRouter {
-        return TodoListRouterImpl()
-    }
-}
-
 protocol TodoListRouter
 //    :TodoListTransitionable,
 {

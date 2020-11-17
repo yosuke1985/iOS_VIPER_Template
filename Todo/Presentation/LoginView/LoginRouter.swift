@@ -8,16 +8,6 @@
 import Foundation
 import UIKit
 
-protocol LoginRouterInjectable {
-    var loginRouterImpl: LoginRouter { get }
-}
-
-extension LoginRouterInjectable {
-    var loginRouterImpl: LoginRouter {
-        return LoginRouterImpl()
-    }
-}
-
 protocol LoginRouter
 //    :TodoListTransitionable,
 {

@@ -7,16 +7,6 @@
 
 import Foundation
 
-protocol TodoListPresenterInjectable {
-    var todoListPresenterImpl: TodoListPresenter { get }
-}
-
-extension TodoListPresenterInjectable {
-    var todoListPresenterImpl: TodoListPresenter {
-        return TodoListPresenterImpl()
-    }
-}
-
 // MARK: - <P>TodoListPresenter
 
 protocol TodoListPresenter {

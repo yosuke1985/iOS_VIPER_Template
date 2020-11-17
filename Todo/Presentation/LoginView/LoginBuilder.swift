@@ -7,21 +7,16 @@
 
 import UIKit
 
-struct LoginBuilder: LoginPresenterInjectable,
-    LoginUseCaseInjectable,
-    LoginRouterInjectable
-{
-    lazy var loginPresenter: LoginPresenter = loginPresenterImpl
-    lazy var loginUseCase: LoginUseCase = loginUseCaseImpl
-    lazy var loginRouter: LoginRouter = loginRouterImpl
-    
-    mutating func build() -> UIViewController {
+struct LoginBuilder: LoginUseCaseInjectable {
+    func build() -> UIViewController {
         let vc = LoginViewController.instantiate()
+        let router = LoginRouterImpl()
+        let presenter = LoginPresenterImpl()
         
-        loginRouter.viewController = vc
-        loginPresenter.loginRouter = loginRouter
-        loginPresenter.loginUseCase = loginUseCase
-        vc.presenter = loginPresenter
+        router.viewController = vc
+        presenter.loginRouter = router
+        presenter.loginUseCase = loginUseCaseImpl
+        vc.presenter = presenter
         
         let navigationViewController = UINavigationController(rootViewController: vc)
 

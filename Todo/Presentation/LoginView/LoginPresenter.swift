@@ -7,18 +7,6 @@
 
 import Foundation
 
-// MARK: - <P>LoginPresenterInjectable
-
-protocol LoginPresenterInjectable {
-    var loginPresenterImpl: LoginPresenter { get }
-}
-
-extension LoginPresenterInjectable {
-    var loginPresenterImpl: LoginPresenter {
-        return LoginPresenterImpl()
-    }
-}
-
 // MARK: - <P>LoginPresenter
 
 protocol LoginPresenter {
