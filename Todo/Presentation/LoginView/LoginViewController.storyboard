@@ -15,8 +15,20 @@
                     <view key="view" contentMode="scaleToFill" id="Aqv-eT-dIJ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pbz-Hx-fiJ">
+                                <rect key="frame" x="186" y="437.5" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="qWA-c4-irv"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="pbz-Hx-fiJ" firstAttribute="centerY" secondItem="Aqv-eT-dIJ" secondAttribute="centerY" id="MNd-wp-HdR"/>
+                            <constraint firstItem="pbz-Hx-fiJ" firstAttribute="centerX" secondItem="Aqv-eT-dIJ" secondAttribute="centerX" id="y3c-fu-glE"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="m3B-c6-tli"/>
                 </viewController>
