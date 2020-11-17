@@ -6,3 +6,15 @@
 //
 
 import Foundation
+import UIKit
+
+/// ログイン.
+protocol LoginRouter
+//    :TodoListTransitionable,
+{
+    var viewController: UIViewController? { get set }
+}
+
+final class LoginRouterImpl: LoginRouter {
+    weak var viewController: UIViewController?
+}

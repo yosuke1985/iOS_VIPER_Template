@@ -6,3 +6,17 @@
 //
 
 import Foundation
+
+// MARK: - <P>LoginPresenterInjectable
+
+protocol LoginPresenterInjectable {}
+
+extension LoginPresenterInjectable {}
+
+// MARK: - <P>LoginPresenter
+
+protocol LoginPresenter {}
+
+// MARK: - LoginPresenterImpl
+
+final class LoginPresenterImpl: LoginPresenter {}

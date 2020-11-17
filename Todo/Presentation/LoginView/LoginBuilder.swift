@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoginBuilder {
+class LoginBuilder: LoginPresenterInjectable {
     func build() -> UIViewController {
         let vc = LoginViewController.instantiate()
         let navigationViewController = UINavigationController(rootViewController: vc)

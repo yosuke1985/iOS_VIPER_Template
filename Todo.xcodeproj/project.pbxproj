@@ -31,14 +31,15 @@
 		333EB2D22560FC48001BC049 /* UIViewController+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333EB2D12560FC48001BC049 /* UIViewController+extensions.swift */; };
 		5617DAFF6D375A58B4CCFC36 /* Pods_Todo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52C788246F612C31160F9278 /* Pods_Todo.framework */; };
 		A7638CC2618CFD5A6BF60DC4 /* Pods_TodoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B4241DCDD268B959376E652 /* Pods_TodoTests.framework */; };
-		C92BD41625553714002A0DCA /* LoginUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92BD41525553714002A0DCA /* LoginUsecase.swift */; };
-		C92BD41E2555371F002A0DCA /* TodoUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92BD41D2555371F002A0DCA /* TodoUsecase.swift */; };
+		C92BD41625553714002A0DCA /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92BD41525553714002A0DCA /* LoginUseCase.swift */; };
+		C92BD41E2555371F002A0DCA /* TodoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92BD41D2555371F002A0DCA /* TodoUseCase.swift */; };
 		C92BD42325553737002A0DCA /* LoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92BD42225553737002A0DCA /* LoginRepository.swift */; };
 		C92BD42825553740002A0DCA /* TodoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92BD42725553740002A0DCA /* TodoRepository.swift */; };
 		C92BD4352555376B002A0DCA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92BD4342555376B002A0DCA /* LoginViewController.swift */; };
 		C930664A2552478100957493 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93066492552478100957493 /* Todo.swift */; };
 		C930669B2553B34600957493 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C930669A2553B34600957493 /* README.md */; };
 		C9AA2FE2256279620050BD8F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9AA2FE1256279620050BD8F /* GoogleService-Info.plist */; };
+		C9AA2FF62562904F0050BD8F /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AA2FF52562904F0050BD8F /* Router.swift */; };
 		CBC3FE15D167339E17463A04 /* Pods_Todo_TodoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7F14E1625C18E9009F5128E /* Pods_Todo_TodoUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -94,14 +95,15 @@
 		A6A15BCA2EBEAB95B4EF3384 /* Pods-TodoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoTests.debug.xcconfig"; path = "Target Support Files/Pods-TodoTests/Pods-TodoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C2CB19B8D1E485E538C7D721 /* Pods-TodoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoTests.release.xcconfig"; path = "Target Support Files/Pods-TodoTests/Pods-TodoTests.release.xcconfig"; sourceTree = "<group>"; };
 		C7F14E1625C18E9009F5128E /* Pods_Todo_TodoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Todo_TodoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C92BD41525553714002A0DCA /* LoginUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUsecase.swift; sourceTree = "<group>"; };
-		C92BD41D2555371F002A0DCA /* TodoUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoUsecase.swift; sourceTree = "<group>"; };
+		C92BD41525553714002A0DCA /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
+		C92BD41D2555371F002A0DCA /* TodoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoUseCase.swift; sourceTree = "<group>"; };
 		C92BD42225553737002A0DCA /* LoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRepository.swift; sourceTree = "<group>"; };
 		C92BD42725553740002A0DCA /* TodoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRepository.swift; sourceTree = "<group>"; };
 		C92BD4342555376B002A0DCA /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		C93066492552478100957493 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		C930669A2553B34600957493 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C9AA2FE1256279620050BD8F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C9AA2FF52562904F0050BD8F /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		EB09DE73D5C560DAEB04A0E0 /* Pods-Todo-TodoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Todo-TodoUITests.release.xcconfig"; path = "Target Support Files/Pods-Todo-TodoUITests/Pods-Todo-TodoUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F286CBEFE9FED4E384941587 /* Pods-Todo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Todo.release.xcconfig"; path = "Target Support Files/Pods-Todo/Pods-Todo.release.xcconfig"; sourceTree = "<group>"; };
 		FD3298FB15F3501D16947F09 /* Pods-Todo-TodoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Todo-TodoUITests.debug.xcconfig"; path = "Target Support Files/Pods-Todo-TodoUITests/Pods-Todo-TodoUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -165,7 +167,7 @@
 				331BEDE4254EDD0D0050AB73 /* SceneDelegate.swift */,
 				331BEDED254EDD0E0050AB73 /* LaunchScreen.storyboard */,
 				C930664F2552479500957493 /* Entity */,
-				C9306653255247FF00957493 /* Usecase */,
+				C9306653255247FF00957493 /* UseCase */,
 				C930664E2552478700957493 /* Data */,
 				C92BD4122554FC06002A0DCA /* Presentation */,
 				332FAD9E255EC17F00BC64E3 /* Resources */,
@@ -252,6 +254,7 @@
 		C92BD4122554FC06002A0DCA /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				C9AA2FF52562904F0050BD8F /* Router.swift */,
 				C92BD43A25553786002A0DCA /* LoginView */,
 				332FAD5A255EBEFB00BC64E3 /* TodoListView */,
 				C92BD44325553829002A0DCA /* TodoDetail */,
@@ -300,13 +303,13 @@
 			path = Entity;
 			sourceTree = "<group>";
 		};
-		C9306653255247FF00957493 /* Usecase */ = {
+		C9306653255247FF00957493 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
-				C92BD41525553714002A0DCA /* LoginUsecase.swift */,
-				C92BD41D2555371F002A0DCA /* TodoUsecase.swift */,
+				C92BD41525553714002A0DCA /* LoginUseCase.swift */,
+				C92BD41D2555371F002A0DCA /* TodoUseCase.swift */,
 			);
-			path = Usecase;
+			path = UseCase;
 			sourceTree = "<group>";
 		};
 		F61341FBE082ADE81B05C748 /* Pods */ = {
@@ -607,14 +610,15 @@
 				332FAD96255EBFF200BC64E3 /* TodoDetailBuilder.swift in Sources */,
 				332FAD7B255EBFB300BC64E3 /* TodoDetailViewController.swift in Sources */,
 				332FAD8C255EBFDA00BC64E3 /* TodoDetailPresenter.swift in Sources */,
-				C92BD41625553714002A0DCA /* LoginUsecase.swift in Sources */,
+				C92BD41625553714002A0DCA /* LoginUseCase.swift in Sources */,
 				332FAD5C255EBF1B00BC64E3 /* TodoListViewController.swift in Sources */,
 				331BEDE3254EDD0D0050AB73 /* AppDelegate.swift in Sources */,
 				332FAD70255EBF7000BC64E3 /* TodoListRouter.swift in Sources */,
 				332FAD4C255EBEA500BC64E3 /* LoginPresenter.swift in Sources */,
+				C9AA2FF62562904F0050BD8F /* Router.swift in Sources */,
 				C92BD42325553737002A0DCA /* LoginRepository.swift in Sources */,
 				332FAD75255EBF7E00BC64E3 /* TodoListBuilder.swift in Sources */,
-				C92BD41E2555371F002A0DCA /* TodoUsecase.swift in Sources */,
+				C92BD41E2555371F002A0DCA /* TodoUseCase.swift in Sources */,
 				C92BD42825553740002A0DCA /* TodoRepository.swift in Sources */,
 				332FAD51255EBEB900BC64E3 /* LoginRouter.swift in Sources */,
 				333EB2D22560FC48001BC049 /* UIViewController+extensions.swift in Sources */,
