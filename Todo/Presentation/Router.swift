@@ -8,15 +8,15 @@
 import Foundation
 import UIKit
 
-protocol LoginTransitionable {
+protocol LoginViewTransitionable {
     var viewController: UIViewController? { get set }
 
-    func toLogin()
+    func toLoginView()
 }
 
-extension LoginTransitionable {
-    func toLogin() {
-        let viewController = LoginViewController.instantiate()
+extension LoginViewTransitionable {
+    func toLoginView() {
+        let viewController = LoginBuilder().build()
         guard let window = UIApplication.shared.keyWindow else { return }
         guard let rootViewController = window.rootViewController else { return }
         let navigationController = UINavigationController(rootViewController: viewController)
@@ -27,5 +27,18 @@ extension LoginTransitionable {
                           options: .transitionCrossDissolve,
                           animations: { window.rootViewController = navigationController },
                           completion: nil)
+    }
+}
+
+protocol TodoListViewTransitionable {
+    var viewController: UIViewController? { get set }
+
+    func toTodoListView()
+}
+
+extension TodoListViewTransitionable {
+    func toTodoListView() {
+        let vc = TodoListBuilder().build()
+        viewController?.navigationController?.pushViewController(vc, animated: true)
     }
 }
