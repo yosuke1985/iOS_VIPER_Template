@@ -18,10 +18,11 @@ class TodoListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        backToLogin.rx.tap
-            .subscribe(onNext: { [weak self] _ in
-                self?.presenter.toLoginView()
-            })
-            .disposed(by: bag)
+        let leftButton = UIBarButtonItem(title: "Logout", style: UIBarButtonItem.Style.plain, target: self, action: #selector(toLogin))
+        navigationItem.leftBarButtonItem = leftButton
+    }
+    
+    @objc private func toLogin() {
+        presenter.toLoginView()
     }
 }

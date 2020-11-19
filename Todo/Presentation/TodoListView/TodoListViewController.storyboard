@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="EYC-Hk-is8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="SwV-UY-N2g">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
@@ -8,39 +8,42 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Todo List View Controller-->
+        <!--Todo List-->
         <scene sceneID="RT9-OF-tcm">
             <objects>
                 <viewController storyboardIdentifier="TodoListViewController" id="EYC-Hk-is8" customClass="TodoListViewController" customModule="Todo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fSQ-gh-Jfd">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TodoList" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OVc-eb-bQi">
-                                <rect key="frame" x="174.5" y="437.5" width="65.5" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9WB-e2-3gc">
-                                <rect key="frame" x="160.5" y="588.5" width="93" height="30"/>
-                                <state key="normal" title="Back to Login"/>
-                            </button>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="efM-1i-VV2"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="9WB-e2-3gc" firstAttribute="top" secondItem="OVc-eb-bQi" secondAttribute="bottom" constant="130" id="Ew2-5g-Kin"/>
-                            <constraint firstItem="OVc-eb-bQi" firstAttribute="centerX" secondItem="fSQ-gh-Jfd" secondAttribute="centerX" id="H42-5u-aw8"/>
-                            <constraint firstItem="OVc-eb-bQi" firstAttribute="centerY" secondItem="fSQ-gh-Jfd" secondAttribute="centerY" id="cPi-Mm-zfm"/>
-                            <constraint firstItem="9WB-e2-3gc" firstAttribute="centerX" secondItem="fSQ-gh-Jfd" secondAttribute="centerX" id="khG-SS-1bz"/>
-                        </constraints>
                     </view>
-                    <connections>
-                        <outlet property="backToLogin" destination="9WB-e2-3gc" id="Sj5-kb-e9b"/>
-                    </connections>
+                    <navigationItem key="navigationItem" title="Todo List" id="EE8-2D-H5h">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="R1R-NE-k97"/>
+                        <connections>
+                            <outlet property="leftBarButtonItem" destination="R1R-NE-k97" id="M6M-U1-3Vd"/>
+                        </connections>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6lv-ab-V0e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="234.78260869565219" y="-303.34821428571428"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="KCD-PY-OkE">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SwV-UY-N2g" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hZP-KP-fbg">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="EYC-Hk-is8" kind="relationship" relationship="rootViewController" id="h1c-Vc-ejd"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z6M-bN-b41" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-675.36231884057975" y="-303.34821428571428"/>
         </scene>
