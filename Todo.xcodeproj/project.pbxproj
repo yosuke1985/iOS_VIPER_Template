@@ -40,6 +40,9 @@
 		C930669B2553B34600957493 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C930669A2553B34600957493 /* README.md */; };
 		C9AA2FE2256279620050BD8F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9AA2FE1256279620050BD8F /* GoogleService-Info.plist */; };
 		C9AA2FF62562904F0050BD8F /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AA2FF52562904F0050BD8F /* Router.swift */; };
+		C9C7FEC92566666E00EA8260 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C7FEC72566666E00EA8260 /* TaskCell.swift */; };
+		C9C7FECA2566666E00EA8260 /* TaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9C7FEC82566666E00EA8260 /* TaskCell.xib */; };
+		C9C7FED32566674B00EA8260 /* UITableViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C7FED22566674B00EA8260 /* UITableViewCell+Extension.swift */; };
 		CBC3FE15D167339E17463A04 /* Pods_Todo_TodoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7F14E1625C18E9009F5128E /* Pods_Todo_TodoUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -104,6 +107,9 @@
 		C930669A2553B34600957493 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C9AA2FE1256279620050BD8F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C9AA2FF52562904F0050BD8F /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		C9C7FEC72566666E00EA8260 /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
+		C9C7FEC82566666E00EA8260 /* TaskCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskCell.xib; sourceTree = "<group>"; };
+		C9C7FED22566674B00EA8260 /* UITableViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extension.swift"; sourceTree = "<group>"; };
 		EB09DE73D5C560DAEB04A0E0 /* Pods-Todo-TodoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Todo-TodoUITests.release.xcconfig"; path = "Target Support Files/Pods-Todo-TodoUITests/Pods-Todo-TodoUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F286CBEFE9FED4E384941587 /* Pods-Todo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Todo.release.xcconfig"; path = "Target Support Files/Pods-Todo/Pods-Todo.release.xcconfig"; sourceTree = "<group>"; };
 		FD3298FB15F3501D16947F09 /* Pods-Todo-TodoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Todo-TodoUITests.debug.xcconfig"; path = "Target Support Files/Pods-Todo-TodoUITests/Pods-Todo-TodoUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -213,6 +219,7 @@
 		332FAD5A255EBEFB00BC64E3 /* TodoListView */ = {
 			isa = PBXGroup;
 			children = (
+				C9C7FECE2566667900EA8260 /* Parts */,
 				332FAD5B255EBF1B00BC64E3 /* TodoListViewController.swift */,
 				332FAD6A255EBF5D00BC64E3 /* TodoListViewController.storyboard */,
 				332FAD65255EBF5000BC64E3 /* TodoListPresenter.swift */,
@@ -237,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				333EB2D12560FC48001BC049 /* UIViewController+extensions.swift */,
+				C9C7FED22566674B00EA8260 /* UITableViewCell+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -310,6 +318,15 @@
 				C92BD41D2555371F002A0DCA /* TodoUseCase.swift */,
 			);
 			path = UseCase;
+			sourceTree = "<group>";
+		};
+		C9C7FECE2566667900EA8260 /* Parts */ = {
+			isa = PBXGroup;
+			children = (
+				C9C7FEC72566666E00EA8260 /* TaskCell.swift */,
+				C9C7FEC82566666E00EA8260 /* TaskCell.xib */,
+			);
+			path = Parts;
 			sourceTree = "<group>";
 		};
 		F61341FBE082ADE81B05C748 /* Pods */ = {
@@ -436,6 +453,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				331BEDEF254EDD0E0050AB73 /* LaunchScreen.storyboard in Resources */,
+				C9C7FECA2566666E00EA8260 /* TaskCell.xib in Resources */,
 				C9AA2FE2256279620050BD8F /* GoogleService-Info.plist in Resources */,
 				332FADA025609BC300BC64E3 /* GoogleService-Info.plist in Resources */,
 				332FAD6B255EBF5D00BC64E3 /* TodoListViewController.storyboard in Resources */,
@@ -623,7 +641,9 @@
 				332FAD51255EBEB900BC64E3 /* LoginRouter.swift in Sources */,
 				333EB2D22560FC48001BC049 /* UIViewController+extensions.swift in Sources */,
 				332FAD56255EBEE200BC64E3 /* LoginBuilder.swift in Sources */,
+				C9C7FEC92566666E00EA8260 /* TaskCell.swift in Sources */,
 				331BEDE5254EDD0D0050AB73 /* SceneDelegate.swift in Sources */,
+				C9C7FED32566674B00EA8260 /* UITableViewCell+Extension.swift in Sources */,
 				332FAD91255EBFE400BC64E3 /* TodoDetailRouter.swift in Sources */,
 				C930664A2552478100957493 /* Todo.swift in Sources */,
 			);

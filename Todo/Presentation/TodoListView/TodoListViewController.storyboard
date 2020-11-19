@@ -16,25 +16,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="53D-pU-9oc">
-                                <rect key="frame" x="164" y="433" width="86" height="30"/>
-                                <state key="normal" title="toTodoDetail"/>
-                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uBB-to-fZB">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="efM-1i-VV2"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="53D-pU-9oc" firstAttribute="centerY" secondItem="fSQ-gh-Jfd" secondAttribute="centerY" id="FZB-fV-t8K"/>
-                            <constraint firstItem="53D-pU-9oc" firstAttribute="centerX" secondItem="fSQ-gh-Jfd" secondAttribute="centerX" id="eaw-bq-uOe"/>
+                            <constraint firstItem="uBB-to-fZB" firstAttribute="leading" secondItem="efM-1i-VV2" secondAttribute="leading" id="Mcp-qF-6hC"/>
+                            <constraint firstItem="uBB-to-fZB" firstAttribute="trailing" secondItem="efM-1i-VV2" secondAttribute="trailing" id="WJd-yZ-glA"/>
+                            <constraint firstItem="uBB-to-fZB" firstAttribute="top" secondItem="efM-1i-VV2" secondAttribute="top" id="ks8-kz-Yco"/>
+                            <constraint firstAttribute="bottom" secondItem="uBB-to-fZB" secondAttribute="bottom" id="n3B-aD-tqj"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Todo List" id="EE8-2D-H5h">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="R1R-NE-k97"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="cVu-9a-fSW">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="53D-pU-9oc">
+                                <rect key="frame" x="308" y="7" width="86" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="toTodoDetail"/>
+                            </button>
+                        </barButtonItem>
                         <connections>
                             <outlet property="leftBarButtonItem" destination="R1R-NE-k97" id="M6M-U1-3Vd"/>
                         </connections>
                     </navigationItem>
                     <connections>
+                        <outlet property="tableView" destination="uBB-to-fZB" id="ay2-P9-C9A"/>
                         <outlet property="todoDetailButton" destination="53D-pU-9oc" id="f3G-Vm-iq4"/>
                     </connections>
                 </viewController>

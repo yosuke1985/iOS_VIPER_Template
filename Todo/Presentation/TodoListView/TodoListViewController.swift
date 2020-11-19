@@ -14,6 +14,13 @@ class TodoListViewController: UIViewController {
     var bag = DisposeBag()
     
     @IBOutlet weak var todoDetailButton: UIButton!
+    @IBOutlet weak var tableView: UITableView! {
+        didSet {
+            tableView.delegate = self
+            tableView.dataSource = self
+            tableView.register(TaskCell.nib, forCellReuseIdentifier: TaskCell.identifier)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,5 +37,22 @@ class TodoListViewController: UIViewController {
     
     @objc private func toLogin() {
         presenter.toLoginView()
+    }
+}
+
+extension TodoListViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: TaskCell.identifier, for: indexPath) as! TaskCell
+        return cell
+    }
+}
+
+extension TodoListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter.toTodoDetailView()
     }
 }
