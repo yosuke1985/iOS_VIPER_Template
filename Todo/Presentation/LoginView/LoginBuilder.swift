@@ -18,8 +18,6 @@ struct LoginBuilder: LoginUseCaseInjectable {
         presenter.loginUseCase = loginUseCaseImpl
         vc.presenter = presenter
         
-        let navigationViewController = UINavigationController(rootViewController: vc)
-
-        return navigationViewController
+        return vc
     }
 }

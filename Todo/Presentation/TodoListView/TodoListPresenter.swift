@@ -12,6 +12,8 @@ import Foundation
 protocol TodoListPresenter {
     var todoListRouter: TodoListRouter! { get set }
     var todoListUseCase: TodoUseCase! { get set }
+    
+    func toLoginView()
 }
 
 // MARK: - TodoListPresenterImpl
@@ -19,4 +21,8 @@ protocol TodoListPresenter {
 final class TodoListPresenterImpl: TodoListPresenter {
     var todoListRouter: TodoListRouter!
     var todoListUseCase: TodoUseCase!
+    
+    func toLoginView() {
+        todoListRouter.toLoginView()
+    }
 }

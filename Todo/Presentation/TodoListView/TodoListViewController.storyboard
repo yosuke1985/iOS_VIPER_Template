@@ -36,6 +36,9 @@
                             <constraint firstItem="9WB-e2-3gc" firstAttribute="centerX" secondItem="fSQ-gh-Jfd" secondAttribute="centerX" id="khG-SS-1bz"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="backToLogin" destination="9WB-e2-3gc" id="Sj5-kb-e9b"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6lv-ab-V0e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
