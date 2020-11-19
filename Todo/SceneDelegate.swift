@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func setWindow(window: UIWindow) {
-        var loginVC = LoginBuilder().build()
+        let loginVC = LoginBuilder().build()
         window.rootViewController = loginVC
         window.makeKeyAndVisible()
     }

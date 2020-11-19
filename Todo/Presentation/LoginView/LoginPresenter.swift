@@ -12,6 +12,8 @@ import Foundation
 protocol LoginPresenter {
     var loginRouter: LoginRouter! { get set }
     var loginUseCase: LoginUseCase! { get set }
+    
+    func toTodoListView()
 }
 
 // MARK: - LoginPresenterImpl
@@ -19,4 +21,8 @@ protocol LoginPresenter {
 final class LoginPresenterImpl: LoginPresenter {
     var loginRouter: LoginRouter!
     var loginUseCase: LoginUseCase!
+    
+    func toTodoListView() {
+        loginRouter.toTodoListView()
+    }
 }

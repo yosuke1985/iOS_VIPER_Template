@@ -18,8 +18,6 @@ struct TodoListBuilder: TodoUseCaseInjectable {
         presenter.todoListUseCase = todoUseCaseImpl
         vc.presenter = presenter
         
-        let navigationViewController = UINavigationController(rootViewController: vc)
-
-        return navigationViewController
+        return vc
     }
 }

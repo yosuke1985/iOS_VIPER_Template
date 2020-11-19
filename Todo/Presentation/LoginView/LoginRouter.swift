@@ -8,9 +8,7 @@
 import Foundation
 import UIKit
 
-protocol LoginRouter
-//    :TodoListTransitionable,
-{
+protocol LoginRouter: TodoListViewTransitionable {
     var viewController: UIViewController? { get set }
 }
 

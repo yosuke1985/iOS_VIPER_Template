@@ -22,12 +22,18 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9WB-e2-3gc">
+                                <rect key="frame" x="160.5" y="588.5" width="93" height="30"/>
+                                <state key="normal" title="Back to Login"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="efM-1i-VV2"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="9WB-e2-3gc" firstAttribute="top" secondItem="OVc-eb-bQi" secondAttribute="bottom" constant="130" id="Ew2-5g-Kin"/>
                             <constraint firstItem="OVc-eb-bQi" firstAttribute="centerX" secondItem="fSQ-gh-Jfd" secondAttribute="centerX" id="H42-5u-aw8"/>
                             <constraint firstItem="OVc-eb-bQi" firstAttribute="centerY" secondItem="fSQ-gh-Jfd" secondAttribute="centerY" id="cPi-Mm-zfm"/>
+                            <constraint firstItem="9WB-e2-3gc" firstAttribute="centerX" secondItem="fSQ-gh-Jfd" secondAttribute="centerX" id="khG-SS-1bz"/>
                         </constraints>
                     </view>
                 </viewController>

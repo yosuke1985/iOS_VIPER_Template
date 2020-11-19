@@ -17,7 +17,7 @@ protocol LoginViewTransitionable {
 extension LoginViewTransitionable {
     func toLoginView() {
         let viewController = LoginBuilder().build()
-        guard let window = UIApplication.shared.keyWindow else { return }
+        guard let window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
         guard let rootViewController = window.rootViewController else { return }
         let navigationController = UINavigationController(rootViewController: viewController)
         viewController.view.frame = rootViewController.view.frame
