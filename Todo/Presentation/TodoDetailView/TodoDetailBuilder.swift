@@ -1,5 +1,5 @@
 //
-//  TodoListBuilder.swift
+//  TodoDetailBuilder.swift
 //  Todo
 //
 //  Created by Yosuke Nakayama on 2020/11/13.
@@ -7,11 +7,11 @@
 
 import UIKit
 
-struct TodoListBuilder: TodoUseCaseInjectable {
+struct TodoDetailBuilder: TodoUseCaseInjectable {
     func build() -> UIViewController {
-        let vc = TodoListViewController.instantiate()
-        let router = TodoListRouterImpl()
-        let presenter = TodoListPresenterImpl()
+        let vc = TodoDetailViewController.instantiate()
+        let router = TodoDetailRouterImpl()
+        let presenter = TodoDetailPresenterImpl()
         
         router.viewController = vc
         presenter.router = router

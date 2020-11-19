@@ -14,7 +14,7 @@ struct LoginBuilder: LoginUseCaseInjectable {
         let presenter = LoginPresenterImpl()
         
         router.viewController = vc
-        presenter.loginRouter = router
+        presenter.router = router
         presenter.loginUseCase = loginUseCaseImpl
         vc.presenter = presenter
         

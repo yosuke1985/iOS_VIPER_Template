@@ -257,7 +257,7 @@
 				C9AA2FF52562904F0050BD8F /* Router.swift */,
 				C92BD43A25553786002A0DCA /* LoginView */,
 				332FAD5A255EBEFB00BC64E3 /* TodoListView */,
-				C92BD44325553829002A0DCA /* TodoDetail */,
+				C92BD44325553829002A0DCA /* TodoDetailView */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -274,7 +274,7 @@
 			path = LoginView;
 			sourceTree = "<group>";
 		};
-		C92BD44325553829002A0DCA /* TodoDetail */ = {
+		C92BD44325553829002A0DCA /* TodoDetailView */ = {
 			isa = PBXGroup;
 			children = (
 				332FAD79255EBFB300BC64E3 /* TodoDetailViewController.swift */,
@@ -283,7 +283,7 @@
 				332FAD90255EBFE400BC64E3 /* TodoDetailRouter.swift */,
 				332FAD95255EBFF200BC64E3 /* TodoDetailBuilder.swift */,
 			);
-			path = TodoDetail;
+			path = TodoDetailView;
 			sourceTree = "<group>";
 		};
 		C930664E2552478700957493 /* Data */ = {

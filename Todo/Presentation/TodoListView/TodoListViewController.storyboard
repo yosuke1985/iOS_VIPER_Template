@@ -15,8 +15,18 @@
                     <view key="view" contentMode="scaleToFill" id="fSQ-gh-Jfd">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="53D-pU-9oc">
+                                <rect key="frame" x="164" y="433" width="86" height="30"/>
+                                <state key="normal" title="toTodoDetail"/>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="efM-1i-VV2"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="53D-pU-9oc" firstAttribute="centerY" secondItem="fSQ-gh-Jfd" secondAttribute="centerY" id="FZB-fV-t8K"/>
+                            <constraint firstItem="53D-pU-9oc" firstAttribute="centerX" secondItem="fSQ-gh-Jfd" secondAttribute="centerX" id="eaw-bq-uOe"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Todo List" id="EE8-2D-H5h">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="R1R-NE-k97"/>
@@ -24,6 +34,9 @@
                             <outlet property="leftBarButtonItem" destination="R1R-NE-k97" id="M6M-U1-3Vd"/>
                         </connections>
                     </navigationItem>
+                    <connections>
+                        <outlet property="todoDetailButton" destination="53D-pU-9oc" id="f3G-Vm-iq4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6lv-ab-V0e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

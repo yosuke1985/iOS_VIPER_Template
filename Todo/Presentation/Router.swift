@@ -50,3 +50,15 @@ extension TodoListViewTransitionable {
                           completion: nil)
     }
 }
+
+protocol TodoDetailViewTransitionable {
+    var viewController: UIViewController? { get set }
+    func toTodoDetailView()
+}
+
+extension TodoDetailViewTransitionable {
+    func toTodoDetailView() {
+        let vc = TodoDetailBuilder().build()
+        viewController?.navigationController?.pushViewController(vc, animated: true)
+    }
+}
