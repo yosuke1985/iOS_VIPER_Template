@@ -13,7 +13,7 @@ class TodoListViewController: UIViewController {
     var presenter: TodoListPresenter!
     var bag = DisposeBag()
     
-    @IBOutlet weak var todoDetailButton: UIButton!
+    @IBOutlet weak var toCreateTaskButton: UIButton!
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.delegate = self
@@ -28,9 +28,9 @@ class TodoListViewController: UIViewController {
         let leftButton = UIBarButtonItem(title: "Logout", style: UIBarButtonItem.Style.plain, target: self, action: #selector(toLogin))
         navigationItem.leftBarButtonItem = leftButton
         
-        todoDetailButton.rx.tap
+        toCreateTaskButton.rx.tap
             .subscribe { [weak self] _ in
-                self?.presenter.toTodoDetailView()
+                self?.presenter.toCreateTaskView()
             }
             .disposed(by: bag)
     }

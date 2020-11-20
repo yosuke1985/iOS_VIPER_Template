@@ -34,9 +34,9 @@
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="R1R-NE-k97"/>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="cVu-9a-fSW">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="53D-pU-9oc">
-                                <rect key="frame" x="308" y="7" width="86" height="30"/>
+                                <rect key="frame" x="320" y="7" width="74" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="toTodoDetail"/>
+                                <state key="normal" title="createTask"/>
                             </button>
                         </barButtonItem>
                         <connections>
@@ -45,7 +45,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="uBB-to-fZB" id="ay2-P9-C9A"/>
-                        <outlet property="todoDetailButton" destination="53D-pU-9oc" id="f3G-Vm-iq4"/>
+                        <outlet property="toCreateTaskButton" destination="53D-pU-9oc" id="Nzo-Hj-kle"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6lv-ab-V0e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

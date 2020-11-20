@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Todo Detail-->
+        <scene sceneID="aSW-hg-M6r">
+            <objects>
+                <viewController storyboardIdentifier="CreateTaskViewController" id="qpT-Y5-RON" customClass="CreateTaskViewController" customModule="Todo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zR5-ZG-qcU">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8lm-wp-fCV">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                            </navigationBar>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="quw-wS-b1n" customClass="DescriptionTextView" customModule="Todo" customModuleProvider="target">
+                                <rect key="frame" x="30" y="185" width="354" height="150"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="QxJ-fy-Xi7"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                        <attributes>
+                                            <color key="NSColor" systemColor="labelColor"/>
+                                            <font key="NSFont" size="18" name="HiraMaruProN-W4"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yjf-mI-AfU">
+                                <rect key="frame" x="30" y="103" width="354" height="34"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W5s-M9-E1R">
+                                <rect key="frame" x="30" y="156" width="88" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Task Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XDQ-zO-8eW">
+                                <rect key="frame" x="30" y="74" width="84" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="xmF-GR-q0E"/>
+                        <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="quw-wS-b1n" firstAttribute="top" secondItem="Yjf-mI-AfU" secondAttribute="bottom" constant="48" id="2p2-hg-3rm"/>
+                            <constraint firstItem="quw-wS-b1n" firstAttribute="top" secondItem="W5s-M9-E1R" secondAttribute="bottom" constant="8" symbolic="YES" id="G7A-V3-N5d"/>
+                            <constraint firstItem="Yjf-mI-AfU" firstAttribute="top" secondItem="XDQ-zO-8eW" secondAttribute="bottom" constant="8" symbolic="YES" id="HeQ-Yq-u0K"/>
+                            <constraint firstItem="xmF-GR-q0E" firstAttribute="trailing" secondItem="quw-wS-b1n" secondAttribute="trailing" constant="30" id="SdO-dP-4Ky"/>
+                            <constraint firstItem="quw-wS-b1n" firstAttribute="leading" secondItem="xmF-GR-q0E" secondAttribute="leading" constant="30" id="Vcj-P0-AXG"/>
+                            <constraint firstAttribute="trailing" secondItem="8lm-wp-fCV" secondAttribute="trailing" id="Z8i-M8-rLC"/>
+                            <constraint firstItem="Yjf-mI-AfU" firstAttribute="top" secondItem="8lm-wp-fCV" secondAttribute="bottom" constant="59" id="ZJ1-oV-Gi1"/>
+                            <constraint firstItem="8lm-wp-fCV" firstAttribute="top" secondItem="zR5-ZG-qcU" secondAttribute="top" id="awD-K8-dy0"/>
+                            <constraint firstItem="W5s-M9-E1R" firstAttribute="leading" secondItem="xmF-GR-q0E" secondAttribute="leading" constant="30" id="bC8-fX-ovJ"/>
+                            <constraint firstItem="8lm-wp-fCV" firstAttribute="leading" secondItem="zR5-ZG-qcU" secondAttribute="leading" id="lSz-rW-jvz"/>
+                            <constraint firstItem="Yjf-mI-AfU" firstAttribute="leading" secondItem="xmF-GR-q0E" secondAttribute="leading" constant="30" id="urs-fz-Tu8"/>
+                            <constraint firstItem="xmF-GR-q0E" firstAttribute="trailing" secondItem="Yjf-mI-AfU" secondAttribute="trailing" constant="30" id="wBZ-kA-AaD"/>
+                            <constraint firstItem="XDQ-zO-8eW" firstAttribute="leading" secondItem="xmF-GR-q0E" secondAttribute="leading" constant="30" id="wZj-dN-AwB"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Todo Detail" id="Lka-Pn-hgs"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ag7-K4-Luy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="784.05797101449286" y="46.875"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
