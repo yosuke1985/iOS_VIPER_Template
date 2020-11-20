@@ -9,8 +9,6 @@ import UIKit
 
 @IBDesignable
 class NavigationBar: UINavigationBar {
-    let addHeight: CGFloat = 40.0
-
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
