@@ -41,12 +41,12 @@ extension TodoListViewTransitionable {
         guard let window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
         guard let rootViewController = window.rootViewController else { return }
         viewController.view.frame = rootViewController.view.frame
-        let navigationController = UINavigationController(rootViewController: viewController)
+        let navi = NavigationController(rootVC: viewController, naviBarClass: NavigationBar.self, toolbarClass: nil)
         viewController.view.layoutIfNeeded()
         UIView.transition(with: window,
                           duration: 0.5,
                           options: .transitionCrossDissolve,
-                          animations: { window.rootViewController = navigationController },
+                          animations: { window.rootViewController = navi },
                           completion: nil)
     }
 }

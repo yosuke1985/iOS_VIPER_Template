@@ -22,8 +22,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func setWindow(window: UIWindow) {
         let loginVC = LoginBuilder().build()
-        let naviLoginVC = UINavigationController(rootViewController: loginVC)
-        window.rootViewController = naviLoginVC
+//        let navi = NavigationController(rootVC: loginVC, naviBarClass: NavigationBar.self, toolbarClass: nil)
+        window.rootViewController = loginVC
         window.makeKeyAndVisible()
     }
 

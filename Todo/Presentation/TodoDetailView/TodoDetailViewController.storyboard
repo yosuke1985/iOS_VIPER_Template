@@ -16,45 +16,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U4V-W9-RFS">
-                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pIE-9I-Q6B">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VFR-gp-CvC">
-                                                <rect key="frame" x="186" y="393.5" width="42" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstItem="VFR-gp-CvC" firstAttribute="centerX" secondItem="pIE-9I-Q6B" secondAttribute="centerX" id="Tvz-xd-RMt"/>
-                                            <constraint firstItem="VFR-gp-CvC" firstAttribute="centerY" secondItem="pIE-9I-Q6B" secondAttribute="centerY" id="bsQ-So-jBI"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8lm-wp-fCV">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                            </navigationBar>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="quw-wS-b1n" customClass="DescriptionTextView" customModule="Todo" customModuleProvider="target">
+                                <rect key="frame" x="30" y="123" width="354" height="150"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="pIE-9I-Q6B" firstAttribute="top" secondItem="U4V-W9-RFS" secondAttribute="top" id="2ys-MJ-gMJ"/>
-                                    <constraint firstItem="pIE-9I-Q6B" firstAttribute="width" secondItem="U4V-W9-RFS" secondAttribute="width" id="44a-Hs-WQx"/>
-                                    <constraint firstAttribute="trailing" secondItem="pIE-9I-Q6B" secondAttribute="trailing" id="6G5-F1-J2i"/>
-                                    <constraint firstItem="pIE-9I-Q6B" firstAttribute="leading" secondItem="U4V-W9-RFS" secondAttribute="leading" id="LK6-QH-be8"/>
-                                    <constraint firstItem="pIE-9I-Q6B" firstAttribute="height" secondItem="U4V-W9-RFS" secondAttribute="height" id="UIo-CP-oSa"/>
-                                    <constraint firstAttribute="bottom" secondItem="pIE-9I-Q6B" secondAttribute="bottom" id="u12-B7-3xP"/>
+                                    <constraint firstAttribute="height" constant="150" id="QxJ-fy-Xi7"/>
                                 </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="DdV-Yc-sRI"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="VYC-oH-Q5C"/>
-                            </scrollView>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                        <attributes>
+                                            <color key="NSColor" systemColor="labelColor"/>
+                                            <font key="NSFont" size="18" name="HiraMaruProN-W4"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xmF-GR-q0E"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="U4V-W9-RFS" firstAttribute="trailing" secondItem="xmF-GR-q0E" secondAttribute="trailing" id="9iz-nJ-H7q"/>
-                            <constraint firstAttribute="bottom" secondItem="U4V-W9-RFS" secondAttribute="bottom" id="E35-ns-oLQ"/>
-                            <constraint firstItem="U4V-W9-RFS" firstAttribute="leading" secondItem="xmF-GR-q0E" secondAttribute="leading" id="SSp-3s-LFD"/>
-                            <constraint firstItem="U4V-W9-RFS" firstAttribute="top" secondItem="xmF-GR-q0E" secondAttribute="top" id="X8P-VD-Zby"/>
+                            <constraint firstItem="xmF-GR-q0E" firstAttribute="trailing" secondItem="quw-wS-b1n" secondAttribute="trailing" constant="30" id="SdO-dP-4Ky"/>
+                            <constraint firstItem="quw-wS-b1n" firstAttribute="leading" secondItem="xmF-GR-q0E" secondAttribute="leading" constant="30" id="Vcj-P0-AXG"/>
+                            <constraint firstAttribute="trailing" secondItem="8lm-wp-fCV" secondAttribute="trailing" id="Z8i-M8-rLC"/>
+                            <constraint firstItem="8lm-wp-fCV" firstAttribute="top" secondItem="zR5-ZG-qcU" secondAttribute="top" id="awD-K8-dy0"/>
+                            <constraint firstItem="quw-wS-b1n" firstAttribute="top" secondItem="xmF-GR-q0E" secondAttribute="top" constant="35" id="chh-TV-ay6"/>
+                            <constraint firstItem="8lm-wp-fCV" firstAttribute="leading" secondItem="zR5-ZG-qcU" secondAttribute="leading" id="lSz-rW-jvz"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Todo Detail" id="Lka-Pn-hgs"/>
@@ -66,9 +62,9 @@
         <!--Navigation Controller-->
         <scene sceneID="Jvh-ej-BVr">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NVa-EY-UPG" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NVa-EY-UPG" customClass="NavigationController" customModule="Todo" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kA7-tm-K0B">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kA7-tm-K0B" customClass="NavigationBar" customModule="Todo" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -82,7 +78,15 @@
             <point key="canvasLocation" x="-126.08695652173914" y="46.875"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="kA7-tm-K0B">
+            <size key="intrinsicContentSize" width="-1" height="44"/>
+        </designable>
+    </designables>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -21,8 +21,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="a task" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1h4-gC-2zJ">
-                                <rect key="frame" x="137" y="19.5" width="46" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="58" y="17" width="257" height="26.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -32,6 +32,7 @@
                                     <constraint firstAttribute="width" constant="45" id="SV8-zY-3Pe"/>
                                     <constraint firstAttribute="height" constant="45" id="lkJ-CS-2Kg"/>
                                 </constraints>
+                                <color key="tintColor" red="0.22353118659999999" green="0.22352626919999999" blue="0.2235296071" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Button"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isChecked" value="NO"/>
@@ -41,8 +42,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="8wH-0k-j8I" firstAttribute="centerY" secondItem="DBq-tG-ImL" secondAttribute="centerY" id="MyX-ZV-sT4"/>
-                            <constraint firstItem="1h4-gC-2zJ" firstAttribute="centerX" secondItem="DBq-tG-ImL" secondAttribute="centerX" id="Q2X-DU-SCK"/>
+                            <constraint firstItem="1h4-gC-2zJ" firstAttribute="leading" secondItem="8wH-0k-j8I" secondAttribute="leading" constant="50" id="OXe-8d-MWH"/>
                             <constraint firstItem="8wH-0k-j8I" firstAttribute="leading" secondItem="DBq-tG-ImL" secondAttribute="leading" constant="8" id="Y7L-Oy-ww2"/>
+                            <constraint firstAttribute="trailing" secondItem="1h4-gC-2zJ" secondAttribute="trailing" constant="5" id="mMB-eV-wFT"/>
                             <constraint firstItem="1h4-gC-2zJ" firstAttribute="centerY" secondItem="DBq-tG-ImL" secondAttribute="centerY" id="mNQ-tb-hoK"/>
                         </constraints>
                     </view>

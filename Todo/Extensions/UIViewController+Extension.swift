@@ -1,5 +1,5 @@
 //
-//  UIViewController+extensions.swift
+//  UIViewController+Extension.swift
 //  Todo
 //
 //  Created by Yosuke Nakayama on 2020/11/15.

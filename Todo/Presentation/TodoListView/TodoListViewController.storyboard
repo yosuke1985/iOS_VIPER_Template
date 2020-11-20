@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uBB-to-fZB">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uBB-to-fZB">
                                 <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
@@ -26,7 +26,7 @@
                         <constraints>
                             <constraint firstItem="uBB-to-fZB" firstAttribute="leading" secondItem="efM-1i-VV2" secondAttribute="leading" id="Mcp-qF-6hC"/>
                             <constraint firstItem="uBB-to-fZB" firstAttribute="trailing" secondItem="efM-1i-VV2" secondAttribute="trailing" id="WJd-yZ-glA"/>
-                            <constraint firstItem="uBB-to-fZB" firstAttribute="top" secondItem="efM-1i-VV2" secondAttribute="top" id="ks8-kz-Yco"/>
+                            <constraint firstItem="uBB-to-fZB" firstAttribute="top" secondItem="efM-1i-VV2" secondAttribute="top" id="bCS-hK-0hg"/>
                             <constraint firstAttribute="bottom" secondItem="uBB-to-fZB" secondAttribute="bottom" id="n3B-aD-tqj"/>
                         </constraints>
                     </view>
@@ -55,9 +55,9 @@
         <!--Navigation Controller-->
         <scene sceneID="KCD-PY-OkE">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SwV-UY-N2g" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SwV-UY-N2g" customClass="NavigationController" customModule="Todo" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hZP-KP-fbg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hZP-KP-fbg" customClass="NavigationBar" customModule="Todo" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -71,6 +71,11 @@
             <point key="canvasLocation" x="-675.36231884057975" y="-303.34821428571428"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="hZP-KP-fbg">
+            <size key="intrinsicContentSize" width="-1" height="44"/>
+        </designable>
+    </designables>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
