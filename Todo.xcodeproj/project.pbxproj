@@ -31,6 +31,7 @@
 		333EB2D22560FC48001BC049 /* UIViewController+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333EB2D12560FC48001BC049 /* UIViewController+extensions.swift */; };
 		5617DAFF6D375A58B4CCFC36 /* Pods_Todo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52C788246F612C31160F9278 /* Pods_Todo.framework */; };
 		A7638CC2618CFD5A6BF60DC4 /* Pods_TodoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B4241DCDD268B959376E652 /* Pods_TodoTests.framework */; };
+		C923C2272567463200C1F7E0 /* CheckBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C923C2262567463200C1F7E0 /* CheckBoxButton.swift */; };
 		C92BD41625553714002A0DCA /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92BD41525553714002A0DCA /* LoginUseCase.swift */; };
 		C92BD41E2555371F002A0DCA /* TodoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92BD41D2555371F002A0DCA /* TodoUseCase.swift */; };
 		C92BD42325553737002A0DCA /* LoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92BD42225553737002A0DCA /* LoginRepository.swift */; };
@@ -98,6 +99,7 @@
 		A6A15BCA2EBEAB95B4EF3384 /* Pods-TodoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoTests.debug.xcconfig"; path = "Target Support Files/Pods-TodoTests/Pods-TodoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C2CB19B8D1E485E538C7D721 /* Pods-TodoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoTests.release.xcconfig"; path = "Target Support Files/Pods-TodoTests/Pods-TodoTests.release.xcconfig"; sourceTree = "<group>"; };
 		C7F14E1625C18E9009F5128E /* Pods_Todo_TodoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Todo_TodoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C923C2262567463200C1F7E0 /* CheckBoxButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxButton.swift; sourceTree = "<group>"; };
 		C92BD41525553714002A0DCA /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
 		C92BD41D2555371F002A0DCA /* TodoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoUseCase.swift; sourceTree = "<group>"; };
 		C92BD42225553737002A0DCA /* LoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRepository.swift; sourceTree = "<group>"; };
@@ -259,9 +261,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C923C2252567460000C1F7E0 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				C923C2262567463200C1F7E0 /* CheckBoxButton.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		C92BD4122554FC06002A0DCA /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				C923C2252567460000C1F7E0 /* Common */,
 				C9AA2FF52562904F0050BD8F /* Router.swift */,
 				C92BD43A25553786002A0DCA /* LoginView */,
 				332FAD5A255EBEFB00BC64E3 /* TodoListView */,
@@ -633,6 +644,7 @@
 				331BEDE3254EDD0D0050AB73 /* AppDelegate.swift in Sources */,
 				332FAD70255EBF7000BC64E3 /* TodoListRouter.swift in Sources */,
 				332FAD4C255EBEA500BC64E3 /* LoginPresenter.swift in Sources */,
+				C923C2272567463200C1F7E0 /* CheckBoxButton.swift in Sources */,
 				C9AA2FF62562904F0050BD8F /* Router.swift in Sources */,
 				C92BD42325553737002A0DCA /* LoginRepository.swift in Sources */,
 				332FAD75255EBF7E00BC64E3 /* TodoListBuilder.swift in Sources */,
