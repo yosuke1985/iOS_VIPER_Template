@@ -9,11 +9,12 @@ import UIKit
 
 @IBDesignable
 class CheckBoxButton: UIButton {
-    let checkedImage = UIImage(named: "checkBoxTrue")
-    let uncheckedImage = UIImage(named: "checkBoxFalse")
-    
+    @IBInspectable
     var isChecked: Bool = false {
         didSet {
+            let bundle = Bundle(for: CheckBoxButton.self)
+            let checkedImage = UIImage(named: "checkBoxTrue", in: bundle, compatibleWith: nil)
+            let uncheckedImage = UIImage(named: "checkBoxFalse", in: bundle, compatibleWith: nil)
             if isChecked == true {
                 self.setImage(checkedImage, for: UIControl.State.normal)
             } else {

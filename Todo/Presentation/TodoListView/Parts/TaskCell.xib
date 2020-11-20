@@ -33,6 +33,9 @@
                                     <constraint firstAttribute="height" constant="45" id="lkJ-CS-2Kg"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isChecked" value="NO"/>
+                                </userDefinedRuntimeAttributes>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -57,7 +60,7 @@
     </objects>
     <designables>
         <designable name="8wH-0k-j8I">
-            <size key="intrinsicContentSize" width="54" height="34"/>
+            <size key="intrinsicContentSize" width="170.5" height="120"/>
         </designable>
     </designables>
     <resources>

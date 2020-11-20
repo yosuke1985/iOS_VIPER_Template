@@ -7,6 +7,7 @@
 
 import UIKit
 
+@IBDesignable
 class TaskCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
