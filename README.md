@@ -36,10 +36,7 @@
 
 ## UI
 
-<img src="/Screenshots/LoginView.png" height = 400px>
-<img src="/Screenshots/TodoListView.png" height = 400px>
-<img src="/Screenshots/CreateTodoView.png" height = 400px>
-<img src="/Screenshots/TodoDetailView.png" height = 400px>
+<img src="/Screenshots/LoginView.png" height = 400px><img src="/Screenshots/TodoListView.png" height = 400px><img src="/Screenshots/CreateTodoView.png" height = 400px><img src="/Screenshots/TodoDetailView.png" height = 400px>
 
 ## Requirements
 
