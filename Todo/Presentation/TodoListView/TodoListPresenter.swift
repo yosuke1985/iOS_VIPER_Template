@@ -15,7 +15,7 @@ protocol TodoListPresenter {
     
     func toLoginView()
     func toTodoDetailView()
-    func toCreateTaskView()
+    func toCreateTodoView()
 }
 
 // MARK: - TodoListPresenterImpl
@@ -32,7 +32,7 @@ final class TodoListPresenterImpl: TodoListPresenter {
         router.toTodoDetailView()
     }
     
-    func toCreateTaskView() {
-        router.toCreateTaskView()
+    func toCreateTodoView() {
+        router.toCreateTodoView()
     }
 }

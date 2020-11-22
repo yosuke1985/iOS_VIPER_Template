@@ -1,5 +1,5 @@
 //
-//  TaskCell.swift
+//  TodoCell.swift
 //  Todo
 //
 //  Created by yosuke.nakayama on 2020/11/19.
@@ -8,7 +8,9 @@
 import UIKit
 
 @IBDesignable
-class TaskCell: UITableViewCell {
+class TodoCell: UITableViewCell {
+    @IBOutlet weak var todoName: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }

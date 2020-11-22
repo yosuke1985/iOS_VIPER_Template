@@ -63,14 +63,14 @@ extension TodoDetailViewTransitionable {
     }
 }
 
-protocol CreateTaskViewTransitionable {
+protocol CreateTodoViewTransitionable {
     var viewController: UIViewController? { get set }
     func toTodoDetailView()
 }
 
-extension CreateTaskViewTransitionable {
-    func toCreateTaskView() {
-        let vc = CreateTaskBuilder().build()
+extension CreateTodoViewTransitionable {
+    func toCreateTodoView() {
+        let vc = CreateTodoBuilder().build()
         viewController?.present(vc, animated: true, completion: nil)
     }
 }

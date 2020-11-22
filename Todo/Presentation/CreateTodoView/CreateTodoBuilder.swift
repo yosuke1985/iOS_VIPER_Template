@@ -1,5 +1,5 @@
 //
-//  CreateTaskBuilder.swift
+//  CreateTodoBuilder.swift
 //  Todo
 //
 //  Created by Yosuke Nakayama on 2020/11/13.
@@ -7,11 +7,11 @@
 
 import UIKit
 
-struct CreateTaskBuilder: TodoUseCaseInjectable {
+struct CreateTodoBuilder: TodoUseCaseInjectable {
     func build() -> UIViewController {
-        let vc = CreateTaskViewController.instantiate()
-        let router = CreateTaskRouterImpl()
-        let presenter = CreateTaskPresenterImpl()
+        let vc = CreateTodoViewController.instantiate()
+        let router = CreateTodoRouterImpl()
+        let presenter = CreateTodoPresenterImpl()
         
         router.viewController = vc
         presenter.router = router

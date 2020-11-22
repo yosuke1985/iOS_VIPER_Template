@@ -1,5 +1,5 @@
 //
-//  CreateTaskRouter.swift
+//  CreateTodoRouter.swift
 //  Todo
 //
 //  Created by Yosuke Nakayama on 2020/11/13.
@@ -8,10 +8,10 @@
 import Foundation
 import UIKit
 
-protocol CreateTaskRouter {
+protocol CreateTodoRouter {
     var viewController: UIViewController? { get set }
 }
 
-final class CreateTaskRouterImpl: CreateTaskRouter {
+final class CreateTodoRouterImpl: CreateTodoRouter {
     weak var viewController: UIViewController?
 }

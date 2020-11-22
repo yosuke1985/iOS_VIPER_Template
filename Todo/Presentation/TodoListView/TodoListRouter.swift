@@ -11,7 +11,7 @@ import UIKit
 protocol TodoListRouter:
     LoginViewTransitionable,
     TodoDetailViewTransitionable,
-    CreateTaskViewTransitionable
+    CreateTodoViewTransitionable
 {
     var viewController: UIViewController? { get set }
 }
