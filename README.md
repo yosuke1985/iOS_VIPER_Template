@@ -1,8 +1,9 @@
 # iOS Todo app build with Clean Architecture + Router a.k.a VIPER<sup>[1](#note1)</sup>
 
-## README残
+## 残
 
-- [ ] UIのスクリーンショットの貼り付け
+- [ ] ロジック部分
+- [ ] 概要のブラッシュアップ　Routerについて
 - [ ] RxSwiftのバインディングについて（別枠？Gist?）
 - [ ] 英語バージョン、日本語バージョンの切り分け
 
@@ -35,7 +36,10 @@
 
 ## UI
 
-TODO: スクリーンショット貼り付け
+<img src="/Screenshots/LoginView.png" height = 400px>
+<img src="/Screenshots/TodoListView.png" height = 400px>
+<img src="/Screenshots/CreateTodoView.png" height = 400px>
+<img src="/Screenshots/TodoDetailView.png" height = 400px>
 
 ## Requirements
 
