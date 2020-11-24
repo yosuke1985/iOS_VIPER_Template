@@ -29,6 +29,18 @@ extension LoginViewTransitionable {
     }
 }
 
+protocol CreateUserViewTransitionable {
+    var viewController: UIViewController? { get set }
+    func toCreateUserView()
+}
+
+extension CreateUserViewTransitionable {
+    func toCreateUserView() {
+        let vc = CreateUserBuilder().build()
+        viewController?.present(vc, animated: true, completion: nil)
+    }
+}
+
 protocol TodoListViewTransitionable {
     var viewController: UIViewController? { get set }
 
@@ -72,5 +84,16 @@ extension CreateTodoViewTransitionable {
     func toCreateTodoView() {
         let vc = CreateTodoBuilder().build()
         viewController?.present(vc, animated: true, completion: nil)
+    }
+}
+
+protocol DismissTransitionable {
+    var viewController: UIViewController? { get set }
+    func dismiss(animated: Bool, completion: (() -> Void)?)
+}
+
+extension DismissTransitionable {
+    func dismiss(animated: Bool, completion: (() -> Void)?) {
+        viewController?.dismiss(animated: animated, completion: completion)
     }
 }

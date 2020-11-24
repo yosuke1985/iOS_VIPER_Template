@@ -1,5 +1,5 @@
 //
-//  LoginBuilder.swift
+//  CreateUserBuilder.swift
 //  Todo
 //
 //  Created by Yosuke Nakayama on 2020/11/13.
@@ -7,11 +7,11 @@
 
 import UIKit
 
-struct LoginBuilder: AuthUseCaseInjectable {
+struct CreateUserBuilder: AuthUseCaseInjectable {
     func build() -> UIViewController {
-        let vc = LoginViewController.instantiate()
-        let router = LoginRouterImpl()
-        let presenter = LoginPresenterImpl()
+        let vc = CreateUserViewController.instantiate()
+        let router = CreateUserRouterImpl()
+        let presenter = CreateUserPresenterImpl()
         
         router.viewController = vc
         presenter.router = router

@@ -4,14 +4,13 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Login View Controller-->
+        <!--Create User View Controller-->
         <scene sceneID="AkF-cf-cND">
             <objects>
-                <viewController storyboardIdentifier="LoginViewController" id="3Ng-Ww-VPW" customClass="LoginViewController" customModule="Todo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateUserViewController" id="3Ng-Ww-VPW" customClass="CreateUserViewController" customModule="Todo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Aqv-eT-dIJ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -22,11 +21,17 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="YzM-OB-x1z">
                                         <rect key="frame" x="0.0" y="0.0" width="314" height="35"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QT5-4G-7oq">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QT5-4G-7oq">
                                                 <rect key="frame" x="0.0" y="0.0" width="96" height="35"/>
                                                 <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Email">
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <font key="NSFont" size="17" name="HelveticaNeue-Italic"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zn7-8B-nZG">
@@ -45,10 +50,16 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="mdH-CN-mbO">
                                         <rect key="frame" x="0.0" y="64" width="314" height="35"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pass" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g83-X5-TzR">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g83-X5-TzR">
                                                 <rect key="frame" x="0.0" y="0.0" width="96" height="35"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Pass">
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <font key="NSFont" size="17" name="HelveticaNeue-Italic"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="W9h-rx-tFP">
@@ -67,39 +78,28 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pbz-Hx-fiJ">
-                                <rect key="frame" x="134" y="147.5" width="146" height="76.5"/>
+                                <rect key="frame" x="68.5" y="147.5" width="277.5" height="76.5"/>
                                 <color key="tintColor" red="0.064483858640000002" green="0.0" blue="0.96084100009999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <attributedString key="attributedText">
-                                    <fragment content="Todo">
+                                    <fragment content="New user">
                                         <attributes>
                                             <color key="NSColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" size="64" name="HelveticaNeue-Medium"/>
+                                            <font key="NSFont" size="64" name="HelveticaNeue-MediumItalic"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                 </attributedString>
                                 <color key="highlightedColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QfU-SL-9Zy">
-                                <rect key="frame" x="182" y="413" width="50" height="55"/>
+                                <rect key="frame" x="168.5" y="443" width="77" height="40.5"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
-                                        <fragment content="Go">
+                                        <fragment content="Create">
                                             <attributes>
                                                 <color key="NSColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <font key="NSFont" size="36" name="HelveticaNeue-Bold"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sj4-dU-1kj">
-                                <rect key="frame" x="131" y="493" width="152" height="33.5"/>
-                                <state key="normal">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="Create a new user">
-                                            <attributes>
-                                                <color key="NSColor" red="0.70241761209999998" green="0.70252043009999998" blue="0.70239514110000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <font key="NSFont" size="18" name="HelveticaNeue-MediumItalic"/>
+                                                <font key="NSFont" size="24" name="HelveticaNeue-BoldItalic"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             </attributes>
                                         </fragment>
                                     </attributedString>
@@ -107,16 +107,14 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="qWA-c4-irv"/>
-                        <color key="backgroundColor" systemColor="tertiaryLabelColor"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="Sj4-dU-1kj" firstAttribute="top" secondItem="QfU-SL-9Zy" secondAttribute="bottom" constant="25" id="G6L-5C-OV6"/>
-                            <constraint firstItem="QfU-SL-9Zy" firstAttribute="top" secondItem="ojb-Se-Ujd" secondAttribute="bottom" constant="20" id="G9e-Qz-IL6"/>
+                            <constraint firstItem="QfU-SL-9Zy" firstAttribute="top" secondItem="ojb-Se-Ujd" secondAttribute="bottom" constant="50" id="G9e-Qz-IL6"/>
                             <constraint firstItem="qWA-c4-irv" firstAttribute="trailing" secondItem="ojb-Se-Ujd" secondAttribute="trailing" constant="50" id="Jn2-Qu-lCK"/>
                             <constraint firstItem="QfU-SL-9Zy" firstAttribute="centerX" secondItem="ojb-Se-Ujd" secondAttribute="centerX" id="bGM-DU-RqW"/>
                             <constraint firstItem="ojb-Se-Ujd" firstAttribute="top" secondItem="pbz-Hx-fiJ" secondAttribute="bottom" constant="70" id="caJ-4Q-gyf"/>
                             <constraint firstItem="ojb-Se-Ujd" firstAttribute="centerX" secondItem="Aqv-eT-dIJ" secondAttribute="centerX" id="eBj-9O-nSN"/>
-                            <constraint firstItem="Sj4-dU-1kj" firstAttribute="centerX" secondItem="Aqv-eT-dIJ" secondAttribute="centerX" id="q8n-Xk-J9Q"/>
                             <constraint firstItem="ojb-Se-Ujd" firstAttribute="leading" secondItem="qWA-c4-irv" secondAttribute="leading" constant="50" id="rwM-0N-fiF"/>
                             <constraint firstItem="pbz-Hx-fiJ" firstAttribute="centerX" secondItem="Aqv-eT-dIJ" secondAttribute="centerX" id="y3c-fu-glE"/>
                             <constraint firstItem="ojb-Se-Ujd" firstAttribute="top" secondItem="Aqv-eT-dIJ" secondAttribute="topMargin" constant="250" id="zcF-1e-AvP"/>
@@ -124,8 +122,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="m3B-c6-tli"/>
                     <connections>
-                        <outlet property="createUserButton" destination="Sj4-dU-1kj" id="I2f-Ad-s2G"/>
-                        <outlet property="loginButton" destination="QfU-SL-9Zy" id="bDb-eb-D7U"/>
+                        <outlet property="CreateUserButton" destination="QfU-SL-9Zy" id="bDb-eb-D7U"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vhD-rs-nHU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -133,9 +130,4 @@
             <point key="canvasLocation" x="1160.8695652173915" y="186.83035714285714"/>
         </scene>
     </scenes>
-    <resources>
-        <systemColor name="tertiaryLabelColor">
-            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-    </resources>
 </document>

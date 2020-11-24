@@ -1,5 +1,5 @@
 //
-//  LoginRouter.swift
+//  CreateUserRouter.swift
 //  Todo
 //
 //  Created by Yosuke Nakayama on 2020/11/13.
@@ -8,12 +8,10 @@
 import Foundation
 import UIKit
 
-protocol LoginRouter: TodoListViewTransitionable,
-    CreateUserViewTransitionable
-{
+protocol CreateUserRouter: DismissTransitionable {
     var viewController: UIViewController? { get set }
 }
 
-final class LoginRouterImpl: LoginRouter {
+final class CreateUserRouterImpl: CreateUserRouter {
     weak var viewController: UIViewController?
 }

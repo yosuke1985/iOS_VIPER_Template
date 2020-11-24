@@ -11,18 +11,24 @@ import Foundation
 
 protocol LoginPresenter {
     var router: LoginRouter! { get set }
-    var loginUseCase: LoginUseCase! { get set }
+    var authUseCase: AuthUseCase! { get set }
     
     func toTodoListView()
+    
+    func toCreateUserView()
 }
 
 // MARK: - LoginPresenterImpl
 
 final class LoginPresenterImpl: LoginPresenter {
     var router: LoginRouter!
-    var loginUseCase: LoginUseCase!
+    var authUseCase: AuthUseCase!
     
     func toTodoListView() {
         router.toTodoListView()
+    }
+    
+    func toCreateUserView() {
+        router.toCreateUserView()
     }
 }

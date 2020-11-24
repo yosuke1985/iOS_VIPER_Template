@@ -1,5 +1,5 @@
 //
-//  LoginViewController.swift
+//  CreateUserViewController.swift
 //  Todo
 //
 //  Created by yosuke.nakayama on 2020/11/06.
@@ -9,25 +9,18 @@ import RxCocoa
 import RxSwift
 import UIKit
 
-class LoginViewController: UIViewController {
-    var presenter: LoginPresenter!
+class CreateUserViewController: UIViewController {
+    var presenter: CreateUserPresenter!
     var bag = DisposeBag()
     
-    @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var createUserButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loginButton.rx.tap
-            .subscribe(onNext: { [weak self] _ in
-                self?.presenter.toTodoListView()
-            })
-            .disposed(by: bag)
-        
         createUserButton.rx.tap
             .subscribe(onNext: { [weak self] _ in
-                self?.presenter.toCreateUserView()
+                self?.presenter.toLoginView()
             })
             .disposed(by: bag)
     }
