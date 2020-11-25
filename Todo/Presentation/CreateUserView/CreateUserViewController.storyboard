@@ -15,8 +15,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="ojb-Se-Ujd">
-                                <rect key="frame" x="50" y="294" width="314" height="106"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ojb-Se-Ujd">
+                                <rect key="frame" x="50" y="294" width="314" height="114"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FKy-HM-uxW">
                                         <rect key="frame" x="0.0" y="0.0" width="314" height="52"/>
@@ -32,7 +32,8 @@
                                                     <fragment content="Email">
                                                         <attributes>
                                                             <color key="NSColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <font key="NSFont" size="17" name="HelveticaNeue-Italic"/>
+                                                            <font key="NSFont" size="20" name="HelveticaNeue-Italic"/>
+                                                            <font key="NSOriginalFont" size="18" name="HelveticaNeue-Italic"/>
                                                         </attributes>
                                                     </fragment>
                                                 </attributedString>
@@ -58,7 +59,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PwR-D3-Kdz">
-                                        <rect key="frame" x="0.0" y="54" width="314" height="52"/>
+                                        <rect key="frame" x="0.0" y="62" width="314" height="52"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Byy-jR-SMc">
                                                 <rect key="frame" x="0.0" y="9" width="90" height="34"/>
@@ -71,7 +72,7 @@
                                                     <fragment content="Pass">
                                                         <attributes>
                                                             <color key="NSColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <font key="NSFont" size="17" name="HelveticaNeue-Italic"/>
+                                                            <font key="NSFont" size="20" name="HelveticaNeue-Italic"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
@@ -114,7 +115,7 @@
                                 <color key="highlightedColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QfU-SL-9Zy">
-                                <rect key="frame" x="176" y="440" width="62" height="36"/>
+                                <rect key="frame" x="176" y="448" width="62" height="36"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
                                         <fragment content="Create">
