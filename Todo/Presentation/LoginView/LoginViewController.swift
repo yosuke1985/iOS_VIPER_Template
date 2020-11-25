@@ -16,6 +16,9 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var createUserButton: UIButton!
     
+    @IBOutlet weak var emailInputFieldView: InputFieldView!
+    @IBOutlet weak var passInputFieldView: InputFieldView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
