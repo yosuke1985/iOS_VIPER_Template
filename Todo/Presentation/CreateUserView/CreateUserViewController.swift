@@ -25,9 +25,3 @@ class CreateUserViewController: UIViewController {
             .disposed(by: bag)
     }
 }
-
-extension CreateUserViewController: UITextFieldDelegate {
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
-    }
-}

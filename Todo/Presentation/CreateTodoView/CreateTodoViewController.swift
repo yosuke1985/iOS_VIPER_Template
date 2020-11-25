@@ -17,9 +17,3 @@ class CreateTodoViewController: UIViewController {
         super.viewDidLoad()
     }
 }
-
-extension CreateTodoViewController: UITextFieldDelegate {
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
-    }
-}
