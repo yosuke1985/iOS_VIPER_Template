@@ -9,6 +9,8 @@ disabled_rules:
 - trailing_whitespace
 - closure_parameter_position
 - trailing_comma
+- opening_brace
+- colon
 
 identifier_name:
   min_length:

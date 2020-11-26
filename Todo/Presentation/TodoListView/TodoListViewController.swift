@@ -10,15 +10,21 @@ import RxDataSources
 import RxSwift
 import UIKit
 
-struct SectionOfTodoData {
+struct SectionTodo {
     var header: String
     var items: [Item]
 }
 
-extension SectionOfTodoData: SectionModelType {
+// AnimatableSectionModelType
+extension SectionTodo: AnimatableSectionModelType {
     typealias Item = Todo
+    typealias Identity = String
 
-    init(original: SectionOfTodoData, items: [Item]) {
+    var identity: String {
+        return header
+    }
+    
+    init(original: SectionTodo, items: [Item]) {
         self = original
         self.items = items
     }
@@ -47,24 +53,19 @@ class TodoListViewController: UIViewController {
             }
             .disposed(by: bag)
         
-        let dataSource = RxTableViewSectionedReloadDataSource<SectionOfTodoData>(
-            configureCell: { _, tableView, indexPath, item in
-                let cell = tableView.dequeueReusableCell(withIdentifier: TodoCell.identifier, for: indexPath) as! TodoCell
-                cell.todoName.text = "\(item.name)"
-                return cell
-            })
-        
+        let dataSource = returnDataSource()
+                
         let sections = [
-            SectionOfTodoData(header: "Genre1", items: [
-                Todo(name: "todo1", deadline: Date(), comment: "comment1", assign: User(id: 0, name: "yo", createdAt: Date()), created: User(id: 0, name: "yo", createdAt: Date()), createdAt: Date(), updatedAt: Date()),
-                Todo(name: "todo2", deadline: Date(), comment: "comment2", assign: User(id: 0, name: "yo", createdAt: Date()), created: User(id: 0, name: "yo", createdAt: Date()), createdAt: Date(), updatedAt: Date()),
-                Todo(name: "todo3", deadline: Date(), comment: "comment1", assign: User(id: 0, name: "yo", createdAt: Date()), created: User(id: 0, name: "yo", createdAt: Date()), createdAt: Date(), updatedAt: Date()),
+            SectionTodo(header: "Genre1", items: [
+                Todo(id: "id1", name: "todo1", deadline: Date(), comment: "comment1", assign: User(id: 0, name: "yo", createdAt: Date()), created: User(id: 0, name: "yo", createdAt: Date()), createdAt: Date(), updatedAt: Date()),
+                Todo(id: "id2", name: "todo2", deadline: Date(), comment: "comment2", assign: User(id: 0, name: "yo", createdAt: Date()), created: User(id: 0, name: "yo", createdAt: Date()), createdAt: Date(), updatedAt: Date()),
+                Todo(id: "id3", name: "todo3", deadline: Date(), comment: "comment1", assign: User(id: 0, name: "yo", createdAt: Date()), created: User(id: 0, name: "yo", createdAt: Date()), createdAt: Date(), updatedAt: Date()),
             ]),
-            SectionOfTodoData(header: "Genre2", items: [
-                Todo(name: "todo4", deadline: Date(), comment: "comment1", assign: User(id: 0, name: "yo", createdAt: Date()), created: User(id: 0, name: "yo", createdAt: Date()), createdAt: Date(), updatedAt: Date()),
-                Todo(name: "todo5", deadline: Date(), comment: "comment1", assign: User(id: 0, name: "yo", createdAt: Date()), created: User(id: 0, name: "yo", createdAt: Date()), createdAt: Date(), updatedAt: Date()),
-                Todo(name: "todo6", deadline: Date(), comment: "comment1", assign: User(id: 0, name: "yo", createdAt: Date()), created: User(id: 0, name: "yo", createdAt: Date()), createdAt: Date(), updatedAt: Date()),
-                Todo(name: "todo7", deadline: Date(), comment: "comment1", assign: User(id: 0, name: "yo", createdAt: Date()), created: User(id: 0, name: "yo", createdAt: Date()), createdAt: Date(), updatedAt: Date())
+            SectionTodo(header: "Genre2", items: [
+                Todo(id: "id4", name: "todo4", deadline: Date(), comment: "comment1", assign: User(id: 0, name: "yo", createdAt: Date()), created: User(id: 0, name: "yo", createdAt: Date()), createdAt: Date(), updatedAt: Date()),
+                Todo(id: "id5", name: "todo5", deadline: Date(), comment: "comment1", assign: User(id: 0, name: "yo", createdAt: Date()), created: User(id: 0, name: "yo", createdAt: Date()), createdAt: Date(), updatedAt: Date()),
+                Todo(id: "id6", name: "todo6", deadline: Date(), comment: "comment1", assign: User(id: 0, name: "yo", createdAt: Date()), created: User(id: 0, name: "yo", createdAt: Date()), createdAt: Date(), updatedAt: Date()),
+                Todo(id: "id7", name: "todo7", deadline: Date(), comment: "comment1", assign: User(id: 0, name: "yo", createdAt: Date()), created: User(id: 0, name: "yo", createdAt: Date()), createdAt: Date(), updatedAt: Date()),
             ]),
         ]
     
@@ -87,5 +88,42 @@ extension TodoListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60.0
+    }
+    
+    func returnDataSource() -> RxTableViewSectionedAnimatedDataSource<SectionTodo> {
+        return RxTableViewSectionedAnimatedDataSource(
+            animationConfiguration: AnimationConfiguration(insertAnimation: .top,
+                                                           reloadAnimation: .fade,
+                                                           deleteAnimation: .left),
+            configureCell: { _, tableView, indexPath, item in
+                let cell = tableView.dequeueReusableCell(withIdentifier: TodoCell.identifier, for: indexPath) as! TodoCell
+                cell.todoName?.text = "\(item.name)"
+                return cell
+            },
+            canEditRowAtIndexPath: { _, _ in
+                true
+            },
+            canMoveRowAtIndexPath: { _, _ in
+                true
+            }
+        )
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+//            objects.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+        }
+    }
+
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let contextItem = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
+            // TODO:
+        }
+        let swipeActions = UISwipeActionsConfiguration(actions: [contextItem])
+
+        return swipeActions
     }
 }
