@@ -13,7 +13,13 @@ class CreateUserViewController: UIViewController {
     var presenter: CreateUserPresenter!
     var bag = DisposeBag()
     
-    @IBOutlet weak var createUserButton: UIButton!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passTextField: UITextField!
+    @IBOutlet weak var createUserButton: UIButton! {
+        didSet {
+            createUserButton.isHidden = true
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

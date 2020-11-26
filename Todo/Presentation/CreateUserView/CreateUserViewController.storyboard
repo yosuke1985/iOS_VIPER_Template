@@ -145,7 +145,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="m3B-c6-tli"/>
                     <connections>
-                        <outlet property="CreateUserButton" destination="QfU-SL-9Zy" id="bDb-eb-D7U"/>
+                        <outlet property="createUserButton" destination="QfU-SL-9Zy" id="KmW-o1-U19"/>
+                        <outlet property="emailTextField" destination="zn7-8B-nZG" id="KyE-Ae-OOk"/>
+                        <outlet property="passTextField" destination="8rC-dk-qCj" id="lCK-k9-Iox"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vhD-rs-nHU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
