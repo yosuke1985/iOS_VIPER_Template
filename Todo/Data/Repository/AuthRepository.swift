@@ -39,11 +39,7 @@ struct AuthRepositoryImpl: AuthRepository {
     
     func createUser(email: String, password: String) -> Single<Void> {
         Single<Void>.create { (observer) -> Disposable in
-            print("yes")
-            print("takasu2")
             Auth.auth().createUser(withEmail: email, password: password) { _, errorOptional in
-                print("takasu")
-
                 if let error = errorOptional {
                     return observer(.error(error))
                 } else {

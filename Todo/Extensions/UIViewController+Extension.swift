@@ -13,6 +13,13 @@ extension UIViewController {
         let name = String(describing: `self`)
         return UIStoryboard(name: name, bundle: bundle).instantiateViewController(withIdentifier: name) as! Self
     }
+    
+    func showErrorAlert(message: String, completion: (() -> Void)? = nil) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(action)
+        present(alert, animated: true)
+    }
 }
 
 extension UIViewController: UITextFieldDelegate {
