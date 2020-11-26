@@ -36,7 +36,13 @@
 
 ## UI
 
-<img src="/Screenshots/LoginView.png" height = 400px><img src="/Screenshots/TodoListView.png" height = 400px><img src="/Screenshots/TodoDetailView.png" height = 400px><img src="/Screenshots/CreateTodoView.png" height = 400px>
+### Login Page, Create User Page
+
+<img src="/Screenshots/LoginView.png" height = 400px><img src="/Screenshots/CreateUser.png" height = 400px>
+
+### Todo List Page, Todo Detail Page, Create Todo Page
+
+<img src="/Screenshots/TodoListView.png" height = 400px><img src="/Screenshots/TodoDetailView.png" height = 400px><img src="/Screenshots/CreateTodoView.png" height = 400px>
 
 ## Requirements
 
@@ -62,86 +68,6 @@
 |  Entity |  | Entity |
 |  Router | (ModuleName)Router<sup>[4](#note4)</sup> | (ModuleName)RouterImpl |
 |  Repository | (ModuleName)Repository | (ModuleName)RepositoryImpl |
-
-## File Structure of the Program
-
-\<P> = Protocol
-
-- Entity
-  - Todo.swift
-
-- Usecase
-  - LoginUsecase.swift
-    - \<P>LoginUsecaseInjectable
-    - \<P>LoginUsecase
-    - LoginUsecaseImpl
-  - TodoUsecase.swift
-    - \<P>TodoUsecaseInjectable
-    - \<P>TodoUseCase
-    - TodoUseCaseImpl
-
-- Data
-  - Repository
-    - LoginRepository.swift
-      - \<P>LoginRepositoryInjectable
-      - \<P>LoginRepository
-      - LoginRepositoryImpl
-    - TodoRepository.swift
-      - \<P>TodoRepositoryInjectable
-      - \<P>TodoRepository
-      - TodoRepositoryImpl
-  - RequestResponse
-    - Login
-      - LoginRequest.swift
-      - LoginResponse.swift
-    - Todo
-      - TodoRequest.swift
-      - TodoResponse.swift
-
-- Presentation
-  - LoginView
-    - View
-      - LoginViewController.swift
-    - Presenter
-      - LoginPresenter.swift
-        - \<P>LoginPresenter
-        - LoginPresenterImpl
-    - Router
-      - LoginRouter.swift
-        - \<P>LoginRouter
-        - LoginRouterImpl
-      - Builder
-        - LoginBuilder.swift
-
-  - TodoListView
-    - View
-      - TodoListViewController.swift
-    - Presenter
-      - TodoListPresenter.swift
-        - \<P>TodoListPresenter
-        - TodoListPresenterImpl
-    - Router
-      - TodoListRouter.swift
-      - \<P>TodoListTransitionable
-      - \<P>TodoListRouter
-      - TodoListRouterImpl
-    - Builder
-      - TodoListBuilder.swift
-
-  - TodoDetail
-    - View
-      - TodoDetailViewController.swift
-    - Presenter
-      - TodoDetailPresenter.swift
-        - \<P>TodoDetailPresenter
-        - TodoDetailPresenterImpl
-    - Router
-      - TodoDetailRouter.swift
-        - \<P>TodoDetailTransitionable
-        - \<P>TodoDetailRouter
-        - TodoDetailRouterImpl
-    - Builder
-      - TodoDetailBuilder.swift
 
 ## 注釈
 
