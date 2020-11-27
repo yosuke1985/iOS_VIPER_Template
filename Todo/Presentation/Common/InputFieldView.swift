@@ -9,6 +9,7 @@ import UIKit
 
 @IBDesignable
 class InputFieldView: UIView {
+    @IBOutlet weak var inputTextField: UITextField!
     @IBOutlet weak var titleLabel: UILabel!
     @IBInspectable var fieldTitle: String = "" {
         didSet {

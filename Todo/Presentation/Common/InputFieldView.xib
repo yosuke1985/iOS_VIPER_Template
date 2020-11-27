@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InputFieldView" customModule="Todo" customModuleProvider="target">
             <connections>
+                <outlet property="inputTextField" destination="wBa-vi-K7M" id="47q-Zt-Mxz"/>
                 <outlet property="titleLabel" destination="PwO-TD-VyZ" id="jQF-Lr-Rln"/>
             </connections>
         </placeholder>

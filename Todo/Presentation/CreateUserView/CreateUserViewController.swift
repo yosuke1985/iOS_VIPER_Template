@@ -45,9 +45,10 @@ class CreateUserViewController: UIViewController {
             })
             .disposed(by: bag)
         
-        presenter.showAPIErrorPopupRelay.emit(onNext: { [weak self] error in
-            self?.showErrorAlert(message: error.localizedDescription)
-        })
+        presenter.showAPIErrorPopupRelay
+            .emit(onNext: { [weak self] error in
+                self?.showErrorAlert(message: error.localizedDescription)
+            })
             .disposed(by: bag)
     }
 }
