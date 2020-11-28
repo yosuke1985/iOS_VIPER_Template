@@ -26,10 +26,14 @@ protocol AuthRepository {
 struct AuthRepositoryImpl: AuthRepository {
     func login(email: String, password: String) -> Single<Void> {
         Single<Void>.create { (observer) -> Disposable in
-            Auth.auth().signIn(withEmail: email, password: password) { _, errorOptional in
+            Auth.auth().signIn(withEmail: email, password: password) { result, errorOptional in
                 if let error = errorOptional {
                     return observer(.error(error))
                 } else {
+                    if let uid = result?.user.uid {
+                        let user = User(userId: uid)
+                        SessionRepositoryImpl.shared.userRelay.accept(user)
+                    }
                     return observer(.success(()))
                 }
             }
@@ -39,10 +43,14 @@ struct AuthRepositoryImpl: AuthRepository {
     
     func createUser(email: String, password: String) -> Single<Void> {
         Single<Void>.create { (observer) -> Disposable in
-            Auth.auth().createUser(withEmail: email, password: password) { _, errorOptional in
+            Auth.auth().createUser(withEmail: email, password: password) { result, errorOptional in
                 if let error = errorOptional {
                     return observer(.error(error))
                 } else {
+                    if let uid = result?.user.uid {
+                        let user = User(userId: uid)
+                        SessionRepositoryImpl.shared.userRelay.accept(user)
+                    }
                     return observer(.success(()))
                 }
             }

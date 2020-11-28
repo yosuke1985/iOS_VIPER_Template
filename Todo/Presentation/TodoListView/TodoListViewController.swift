@@ -57,16 +57,12 @@ class TodoListViewController: UIViewController {
                 
         let sections = [
             SectionTodo(header: "Genre1", items: [
-                Todo(id: "id1", name: "todo1", deadline: Date(), comment: "comment1", assign: User(id: 0, name: "yo", createdAt: Date()), created: User(id: 0, name: "yo", createdAt: Date()), createdAt: Date(), updatedAt: Date()),
-                Todo(id: "id2", name: "todo2", deadline: Date(), comment: "comment2", assign: User(id: 0, name: "yo", createdAt: Date()), created: User(id: 0, name: "yo", createdAt: Date()), createdAt: Date(), updatedAt: Date()),
-                Todo(id: "id3", name: "todo3", deadline: Date(), comment: "comment1", assign: User(id: 0, name: "yo", createdAt: Date()), created: User(id: 0, name: "yo", createdAt: Date()), createdAt: Date(), updatedAt: Date()),
-            ]),
-            SectionTodo(header: "Genre2", items: [
-                Todo(id: "id4", name: "todo4", deadline: Date(), comment: "comment1", assign: User(id: 0, name: "yo", createdAt: Date()), created: User(id: 0, name: "yo", createdAt: Date()), createdAt: Date(), updatedAt: Date()),
-                Todo(id: "id5", name: "todo5", deadline: Date(), comment: "comment1", assign: User(id: 0, name: "yo", createdAt: Date()), created: User(id: 0, name: "yo", createdAt: Date()), createdAt: Date(), updatedAt: Date()),
-                Todo(id: "id6", name: "todo6", deadline: Date(), comment: "comment1", assign: User(id: 0, name: "yo", createdAt: Date()), created: User(id: 0, name: "yo", createdAt: Date()), createdAt: Date(), updatedAt: Date()),
-                Todo(id: "id7", name: "todo7", deadline: Date(), comment: "comment1", assign: User(id: 0, name: "yo", createdAt: Date()), created: User(id: 0, name: "yo", createdAt: Date()), createdAt: Date(), updatedAt: Date()),
-            ]),
+                Todo(id: "id1", name: "todo1", description: "description1", createdAt: Date(), updatedAt: Date()),
+                Todo(id: "id1", name: "todo2", description: "description1", createdAt: Date(), updatedAt: Date()),
+                Todo(id: "id1", name: "todo3", description: "description1", createdAt: Date(), updatedAt: Date()),
+                Todo(id: "id1", name: "todo4", description: "description1", createdAt: Date(), updatedAt: Date()),
+                Todo(id: "id1", name: "todo5", description: "description1", createdAt: Date(), updatedAt: Date())
+            ])
         ]
     
         Observable.just(sections)

@@ -11,10 +11,7 @@ import RxDataSources
 struct Todo {
     var id: String
     var name: String
-    var deadline: Date
-    var comment: String
-    var assign: User
-    var created: User
+    var description: String
     var createdAt: Date
     var updatedAt: Date
 }
@@ -35,7 +32,5 @@ extension Todo:
 }
 
 struct User {
-    var id: Int
-    var name: String
-    var createdAt: Date
+    var userId: String
 }
