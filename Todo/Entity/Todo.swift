@@ -12,6 +12,7 @@ struct Todo {
     var id: String
     var name: String
     var description: String
+    var isCompleted: Bool
     var createdAt: Date
     var updatedAt: Date
 }

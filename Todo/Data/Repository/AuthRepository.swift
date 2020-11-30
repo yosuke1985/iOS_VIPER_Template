@@ -6,6 +6,7 @@
 //
 
 import Firebase
+import RxCocoa
 import RxSwift
 
 protocol AuthRepositoryInjectable {
@@ -14,16 +15,35 @@ protocol AuthRepositoryInjectable {
 
 extension AuthRepositoryInjectable {
     var authRepository: AuthRepository {
-        return AuthRepositoryImpl()
+        return AuthRepositoryImpl.shared
     }
 }
 
 protocol AuthRepository {
+    func getSessionUser() -> Single<User?>
     func login(email: String, password: String) -> Single<Void>
     func createUser(email: String, password: String) -> Single<Void>
 }
 
 struct AuthRepositoryImpl: AuthRepository {
+    static var shared = AuthRepositoryImpl()
+    private init() {}
+
+    let userRelay = BehaviorRelay<User?>(value: nil)
+    
+    func getSessionUser() -> Single<User?> {
+        Single<User?>.create { (observer) -> Disposable in
+            Auth.auth().addStateDidChangeListener { _, result in
+                if let result = result {
+                    let user = User(userId: result.uid)
+                    self.userRelay.accept(user)
+                    observer(.success(user))
+                }
+            }
+            return Disposables.create()
+        }
+    }
+
     func login(email: String, password: String) -> Single<Void> {
         Single<Void>.create { (observer) -> Disposable in
             Auth.auth().signIn(withEmail: email, password: password) { result, errorOptional in
@@ -32,7 +52,7 @@ struct AuthRepositoryImpl: AuthRepository {
                 } else {
                     if let uid = result?.user.uid {
                         let user = User(userId: uid)
-                        SessionRepositoryImpl.shared.userRelay.accept(user)
+                        AuthRepositoryImpl.shared.userRelay.accept(user)
                     }
                     return observer(.success(()))
                 }
@@ -49,7 +69,7 @@ struct AuthRepositoryImpl: AuthRepository {
                 } else {
                     if let uid = result?.user.uid {
                         let user = User(userId: uid)
-                        SessionRepositoryImpl.shared.userRelay.accept(user)
+                        AuthRepositoryImpl.shared.userRelay.accept(user)
                     }
                     return observer(.success(()))
                 }

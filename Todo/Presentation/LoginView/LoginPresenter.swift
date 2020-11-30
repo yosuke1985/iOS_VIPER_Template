@@ -15,7 +15,9 @@ protocol LoginPresenter {
     var router: LoginRouter! { get set }
     var authUseCase: AuthUseCase! { get set }
     
+    func getSessionUser()
     func login(email: String, password: String)
+    
     var showAPIErrorPopupRelay: Signal<Error> { get }
 
     func toTodoListView()
@@ -35,6 +37,19 @@ final class LoginPresenterImpl: LoginPresenter {
         return _showAPIErrorPopupRelay.asSignal()
     }
     
+    func getSessionUser() {
+        authUseCase.getSessionUser()
+            .subscribe(onSuccess: { [weak self] user in
+                           if user != nil {
+                               self?.toTodoListView()
+                           }
+                       },
+                       onError: { [weak self] error in
+                           self?._showAPIErrorPopupRelay.accept(error)
+                       })
+            .disposed(by: bag)
+    }
+
     func login(email: String, password: String) {
         authUseCase.login(email: email, password: password)
             .subscribe(onSuccess: { [weak self] _ in

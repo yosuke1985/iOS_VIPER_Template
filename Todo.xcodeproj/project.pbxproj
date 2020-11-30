@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3300E4142572627A00C50A6F /* SessionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3300E4132572627A00C50A6F /* SessionRepository.swift */; };
 		331BEDE3254EDD0D0050AB73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331BEDE2254EDD0D0050AB73 /* AppDelegate.swift */; };
 		331BEDE5254EDD0D0050AB73 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331BEDE4254EDD0D0050AB73 /* SceneDelegate.swift */; };
 		331BEDEC254EDD0E0050AB73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 331BEDEB254EDD0E0050AB73 /* Assets.xcassets */; };
@@ -84,7 +83,6 @@
 
 /* Begin PBXFileReference section */
 		2B4241DCDD268B959376E652 /* Pods_TodoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TodoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3300E4132572627A00C50A6F /* SessionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionRepository.swift; sourceTree = "<group>"; };
 		331BEDDF254EDD0D0050AB73 /* Todo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Todo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		331BEDE2254EDD0D0050AB73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		331BEDE4254EDD0D0050AB73 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -241,7 +239,6 @@
 		332FAD42255EBD9400BC64E3 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				3300E4132572627A00C50A6F /* SessionRepository.swift */,
 				C92BD42225553737002A0DCA /* AuthRepository.swift */,
 				C92BD42725553740002A0DCA /* TodoRepository.swift */,
 			);
@@ -733,7 +730,6 @@
 				C92BD41E2555371F002A0DCA /* TodoUseCase.swift in Sources */,
 				333EB41B256D0489001BC049 /* CreateUserViewController.swift in Sources */,
 				C92BD42825553740002A0DCA /* TodoRepository.swift in Sources */,
-				3300E4142572627A00C50A6F /* SessionRepository.swift in Sources */,
 				332FAD51255EBEB900BC64E3 /* LoginRouter.swift in Sources */,
 				C9D8BC912567626400CC11B0 /* DescriptionTextView.swift in Sources */,
 				332FAD56255EBEE200BC64E3 /* LoginBuilder.swift in Sources */,
