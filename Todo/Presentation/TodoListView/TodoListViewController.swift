@@ -9,26 +9,6 @@ import RxCocoa
 import RxDataSources
 import RxSwift
 import UIKit
-
-struct SectionTodo {
-    var header: String
-    var items: [Item]
-}
-
-// AnimatableSectionModelType
-extension SectionTodo: AnimatableSectionModelType {
-    typealias Item = Todo
-    typealias Identity = String
-
-    var identity: String {
-        return header
-    }
-    
-    init(original: SectionTodo, items: [Item]) {
-        self = original
-        self.items = items
-    }
-}
     
 class TodoListViewController: UIViewController {
     var presenter: TodoListPresenter!
@@ -44,35 +24,12 @@ class TodoListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let leftButton = UIBarButtonItem(title: "Logout", style: UIBarButtonItem.Style.plain, target: self, action: #selector(logout))
-        navigationItem.leftBarButtonItem = leftButton
-        
-        toCreateTodoButton.rx.tap
-            .subscribe { [weak self] _ in
-                self?.presenter.toCreateTodoView()
-            }
-            .disposed(by: bag)
-        
         let userSession = AuthRepositoryImpl.shared.userRelay.value
         print("userSession", userSession)
         
-        let dataSource = returnDataSource()
-                
-        let sections = [
-            SectionTodo(header: "Genre1", items: [
-                Todo(id: "id1", name: "todo1", description: "description1", isCompleted: true, createdAt: Date(), updatedAt: Date()),
-                Todo(id: "id1", name: "todo2", description: "description1", isCompleted: true, createdAt: Date(), updatedAt: Date()),
-                Todo(id: "id1", name: "todo3", description: "description1", isCompleted: true, createdAt: Date(), updatedAt: Date()),
-                Todo(id: "id1", name: "todo4", description: "description1", isCompleted: true, createdAt: Date(), updatedAt: Date()),
-                Todo(id: "id1", name: "todo5", description: "description1", isCompleted: true, createdAt: Date(), updatedAt: Date())
-            ])
-        ]
-    
-        Observable.just(sections)
-            .bind(to: tableView.rx.items(dataSource: dataSource))
-            .disposed(by: bag)
-        
-        tableView.rx.setDelegate(self).disposed(by: bag)
+        setUI()
+        setTableViewBind()
+        presenter.setup()
     }
     
     @objc private func logout() {
@@ -80,7 +37,32 @@ class TodoListViewController: UIViewController {
     }
 }
 
+extension TodoListViewController {
+    private func setUI() {
+        let leftButton = UIBarButtonItem(title: "Logout", style: UIBarButtonItem.Style.plain, target: self, action: #selector(logout))
+        navigationItem.leftBarButtonItem = leftButton
+    }
+    
+    private func setBind() {
+        toCreateTodoButton.rx.tap
+            .subscribe { [weak self] _ in
+                self?.presenter.toCreateTodoView()
+            }
+            .disposed(by: bag)
+    }
+}
+
 extension TodoListViewController: UITableViewDelegate {
+    func setTableViewBind() {
+        let dataSource = returnDataSource()
+                                
+        presenter.todoTableViewRelay
+            .bind(to: tableView.rx.items(dataSource: dataSource))
+            .disposed(by: bag)
+        
+        tableView.rx.setDelegate(self).disposed(by: bag)
+    }
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter.toTodoDetailView()
     }
