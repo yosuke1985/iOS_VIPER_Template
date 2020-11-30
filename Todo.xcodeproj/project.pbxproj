@@ -58,7 +58,7 @@
 		C9C7FECA2566666E00EA8260 /* TodoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9C7FEC82566666E00EA8260 /* TodoCell.xib */; };
 		C9C7FED32566674B00EA8260 /* UITableViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C7FED22566674B00EA8260 /* UITableViewCell+Extension.swift */; };
 		C9D8BC912567626400CC11B0 /* DescriptionTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D8BC902567626400CC11B0 /* DescriptionTextView.swift */; };
-		C9D8BC9725676C0900CC11B0 /* NavigationControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D8BC9525676C0900CC11B0 /* NavigationControllerViewController.swift */; };
+		C9D8BC9725676C0900CC11B0 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D8BC9525676C0900CC11B0 /* NavigationController.swift */; };
 		C9D8BCA125676CCA00CC11B0 /* UIColor+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D8BCA025676CCA00CC11B0 /* UIColor+extensions.swift */; };
 		C9D8BD0F25676F8600CC11B0 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D8BD0E25676F8600CC11B0 /* UIViewController+Extension.swift */; };
 		CBC3FE15D167339E17463A04 /* Pods_Todo_TodoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7F14E1625C18E9009F5128E /* Pods_Todo_TodoUITests.framework */; };
@@ -143,7 +143,7 @@
 		C9C7FEC82566666E00EA8260 /* TodoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodoCell.xib; sourceTree = "<group>"; };
 		C9C7FED22566674B00EA8260 /* UITableViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extension.swift"; sourceTree = "<group>"; };
 		C9D8BC902567626400CC11B0 /* DescriptionTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionTextView.swift; sourceTree = "<group>"; };
-		C9D8BC9525676C0900CC11B0 /* NavigationControllerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerViewController.swift; sourceTree = "<group>"; };
+		C9D8BC9525676C0900CC11B0 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		C9D8BCA025676CCA00CC11B0 /* UIColor+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+extensions.swift"; sourceTree = "<group>"; };
 		C9D8BD0E25676F8600CC11B0 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		EB09DE73D5C560DAEB04A0E0 /* Pods-Todo-TodoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Todo-TodoUITests.release.xcconfig"; path = "Target Support Files/Pods-Todo-TodoUITests/Pods-Todo-TodoUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -314,7 +314,7 @@
 			children = (
 				C923C2262567463200C1F7E0 /* CheckBoxButton.swift */,
 				C9D8BC902567626400CC11B0 /* DescriptionTextView.swift */,
-				C9D8BC9525676C0900CC11B0 /* NavigationControllerViewController.swift */,
+				C9D8BC9525676C0900CC11B0 /* NavigationController.swift */,
 				C9AA01F225678DEC00A5163E /* NavigationBar.swift */,
 				333EB42B256D29CD001BC049 /* InputFieldView.swift */,
 				333EB430256D2A27001BC049 /* InputFieldView.xib */,
@@ -704,7 +704,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C9D8BC9725676C0900CC11B0 /* NavigationControllerViewController.swift in Sources */,
+				C9D8BC9725676C0900CC11B0 /* NavigationController.swift in Sources */,
 				332FAD66255EBF5000BC64E3 /* TodoListPresenter.swift in Sources */,
 				C92BD4352555376B002A0DCA /* LoginViewController.swift in Sources */,
 				332FAD96255EBFF200BC64E3 /* TodoDetailBuilder.swift in Sources */,
