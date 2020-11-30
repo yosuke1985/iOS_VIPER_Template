@@ -15,6 +15,8 @@ target 'Todo' do
   pod 'Firebase/Crashlytics'
   pod 'Firebase/Firestore'
   pod 'Firebase/Auth'
+  pod 'Firebase/Core'
+  pod 'FirebaseFirestoreSwift'
 
   target 'TodoTests' do
     inherit! :search_paths

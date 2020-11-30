@@ -70,6 +70,22 @@
 |  Router | (ModuleName)Router<sup>[4](#note4)</sup> | (ModuleName)RouterImpl |
 |  Repository | (ModuleName)Repository | (ModuleName)RepositoryImpl |
 
+## Firestore
+
+``` yml
+users:
+  documentID: userID
+  createdAt: Date
+
+  todos:
+    documentID: auto
+    title: String
+    description: String?
+    isChecked: Bool
+    createdAt: Date
+    updatedAt: Date
+```
+
 ## 注釈
 
 1. <p id="note1">Clean Architecture + Routerのアーキテクチャ　＝　VIPERであり、VIPERはView Interactor Presenter Entity Routerの頭文字を取ったもの。</p>
