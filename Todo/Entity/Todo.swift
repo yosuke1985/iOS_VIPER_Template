@@ -10,7 +10,7 @@ import RxDataSources
 
 struct Todo {
     var id: String
-    var name: String
+    var title: String
     var description: String
     var isCompleted: Bool
     var createdAt: Date

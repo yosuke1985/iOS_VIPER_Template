@@ -78,7 +78,7 @@ extension TodoListViewController: UITableViewDelegate {
                                                            deleteAnimation: .left),
             configureCell: { _, tableView, indexPath, item in
                 let cell = tableView.dequeueReusableCell(withIdentifier: TodoCell.identifier, for: indexPath) as! TodoCell
-                cell.todoName?.text = "\(item.name)"
+                cell.todoName?.text = "\(item.title)"
                 return cell
             },
             canEditRowAtIndexPath: { _, _ in

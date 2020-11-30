@@ -60,11 +60,11 @@ final class TodoListPresenterImpl: TodoListPresenter {
     func setup() {
         let sections = [
             SectionTodo(header: "Genre1", items: [
-                Todo(id: "id1", name: "todo1", description: "description1", isCompleted: true, createdAt: Date(), updatedAt: Date()),
-                Todo(id: "id1", name: "todo2", description: "description1", isCompleted: true, createdAt: Date(), updatedAt: Date()),
-                Todo(id: "id1", name: "todo3", description: "description1", isCompleted: true, createdAt: Date(), updatedAt: Date()),
-                Todo(id: "id1", name: "todo4", description: "description1", isCompleted: true, createdAt: Date(), updatedAt: Date()),
-                Todo(id: "id1", name: "todo5", description: "description1", isCompleted: true, createdAt: Date(), updatedAt: Date())
+                Todo(id: "id1", title: "todo1", description: "description1", isCompleted: true, createdAt: Date(), updatedAt: Date()),
+                Todo(id: "id1", title: "todo2", description: "description1", isCompleted: true, createdAt: Date(), updatedAt: Date()),
+                Todo(id: "id1", title: "todo3", description: "description1", isCompleted: true, createdAt: Date(), updatedAt: Date()),
+                Todo(id: "id1", title: "todo4", description: "description1", isCompleted: true, createdAt: Date(), updatedAt: Date()),
+                Todo(id: "id1", title: "todo5", description: "description1", isCompleted: true, createdAt: Date(), updatedAt: Date())
             ])
         ]
 
