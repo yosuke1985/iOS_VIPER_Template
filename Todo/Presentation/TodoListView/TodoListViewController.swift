@@ -44,7 +44,7 @@ class TodoListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let leftButton = UIBarButtonItem(title: "Logout", style: UIBarButtonItem.Style.plain, target: self, action: #selector(toLogin))
+        let leftButton = UIBarButtonItem(title: "Logout", style: UIBarButtonItem.Style.plain, target: self, action: #selector(logout))
         navigationItem.leftBarButtonItem = leftButton
         
         toCreateTodoButton.rx.tap
@@ -75,8 +75,8 @@ class TodoListViewController: UIViewController {
         tableView.rx.setDelegate(self).disposed(by: bag)
     }
     
-    @objc private func toLogin() {
-        presenter.toLoginView()
+    @objc private func logout() {
+        presenter.logout()
     }
 }
 

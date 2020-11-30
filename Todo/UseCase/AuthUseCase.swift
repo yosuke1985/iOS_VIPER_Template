@@ -21,6 +21,7 @@ protocol AuthUseCase {
     func getSessionUser() -> Single<User?>
     func createUser(email: String, password: String) -> Single<Void>
     func login(email: String, password: String) -> Single<Void>
+    func logout() -> Completable
 }
 
 struct AuthUseCaseImpl: AuthUseCase,
@@ -36,5 +37,9 @@ struct AuthUseCaseImpl: AuthUseCase,
 
     func login(email: String, password: String) -> Single<Void> {
         return authRepository.login(email: email, password: password)
+    }
+    
+    func logout() -> Completable {
+        return authRepository.logout()
     }
 }

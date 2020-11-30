@@ -16,6 +16,7 @@ struct TodoListBuilder: TodoUseCaseInjectable {
         router.viewController = vc
         presenter.router = router
         presenter.todoUseCase = todoUseCaseImpl
+        presenter.authUseCase = AuthUseCaseImpl()
         vc.presenter = presenter
         
         return vc

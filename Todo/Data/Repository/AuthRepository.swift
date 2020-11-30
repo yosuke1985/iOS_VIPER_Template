@@ -23,6 +23,7 @@ protocol AuthRepository {
     func getSessionUser() -> Single<User?>
     func login(email: String, password: String) -> Single<Void>
     func createUser(email: String, password: String) -> Single<Void>
+    func logout() -> Completable
 }
 
 struct AuthRepositoryImpl: AuthRepository {
@@ -73,6 +74,18 @@ struct AuthRepositoryImpl: AuthRepository {
                     }
                     return observer(.success(()))
                 }
+            }
+            return Disposables.create()
+        }
+    }
+        
+    func logout() -> Completable {
+        return Completable.create { observer -> Disposable in
+            do {
+                try Auth.auth().signOut()
+                observer(.completed)
+            } catch {
+                observer(.error(error))
             }
             return Disposables.create()
         }
