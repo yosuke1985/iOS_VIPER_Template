@@ -8,7 +8,7 @@
 import Foundation
 import RxDataSources
 
-struct Todo {
+struct Todo: Decodable {
     var id: String
     var title: String
     var description: String

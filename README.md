@@ -75,8 +75,7 @@
 ``` yml
 users:
   documentID: userID
-  createdAt: Date
-
+  
   todos:
     documentID: auto
     title: String
