@@ -47,15 +47,18 @@ class TodoRepositoryImpl: TodoRepository {
         return Completable.create { [weak self] (observer) -> Disposable in
             guard let weakSelf = self else { return Disposables.create() }
             if weakSelf.snapshotListener == nil {
-                weakSelf.snapshotListener = Firestore.firestore().collection("users/\(userId)/todos").order(by: "updatedAt").addSnapshotListener
+                weakSelf.snapshotListener = Firestore.firestore().collection("users/\(userId)/todos").order(by: "updatedAt", descending: true).addSnapshotListener
                     { snapshot, error in
                         if let error = error {
                             weakSelf._todosTableViewRelay.accept([])
                             observer(.error(error))
-                        } else if let snapshot = snapshot?.documents.first {
+                        } else if let docs = snapshot?.documents {
                             var todos: [Todo] = []
                             do {
-                                todos = try snapshot.data(as: [Todo].self)!
+                                try docs.forEach { doc in
+                                    let todo = try Firestore.Decoder().decode(Todo.self, from: doc.data())
+                                    todos.append(todo)
+                                }
                                 let sectionTodo = [SectionTodo(header: "", items: todos)]
                                 weakSelf._todosTableViewRelay.accept(sectionTodo)
                                 observer(.completed)
@@ -90,9 +93,14 @@ class TodoRepositoryImpl: TodoRepository {
         // TODO: need no user login Error
 
         return Completable.create { (observer) -> Disposable in
-            Firestore.firestore().collection("users/\(userId)/todos").document().setData([
+            let ref = Firestore.firestore().collection("users/\(userId)/todos").document()
+                
+            ref.setData([
+                "id": ref.documentID,
                 "title": title,
                 "description": description,
+                "isChecked": false,
+                "updatedAt": Date(),
                 "createdAt": Date()
             ], completion: { error in
                 if let error = error {
