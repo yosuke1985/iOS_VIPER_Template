@@ -18,3 +18,6 @@ identifier_name:
 
 type_name:
   max_length: 50
+
+identifier_name:
+  allowed_symbols: "_"
