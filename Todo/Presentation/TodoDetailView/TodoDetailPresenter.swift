@@ -15,4 +15,10 @@ protocol TodoDetailPresenter {
 final class TodoDetailPresenterImpl: TodoDetailPresenter {
     var router: TodoDetailRouter!
     var todoUseCase: TodoUseCase!
+    var indexPath: IndexPath!
+    
+    init(indexPath: IndexPath) {
+        self.indexPath = indexPath
+        print(indexPath)
+    }
 }

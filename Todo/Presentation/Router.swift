@@ -65,19 +65,19 @@ extension TodoListViewTransitionable {
 
 protocol TodoDetailViewTransitionable {
     var viewController: UIViewController? { get set }
-    func toTodoDetailView()
+    func toTodoDetailView(indexPath: IndexPath)
 }
 
 extension TodoDetailViewTransitionable {
-    func toTodoDetailView() {
-        let vc = TodoDetailBuilder().build()
+    func toTodoDetailView(indexPath: IndexPath) {
+        let vc = TodoDetailBuilder().build(indexPath: indexPath)
         viewController?.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
 protocol CreateTodoViewTransitionable {
     var viewController: UIViewController? { get set }
-    func toTodoDetailView()
+    func toCreateTodoView()
 }
 
 extension CreateTodoViewTransitionable {

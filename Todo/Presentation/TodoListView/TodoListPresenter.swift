@@ -45,7 +45,7 @@ protocol TodoListPresenter {
     func logout()
     
     func toLoginView()
-    func toTodoDetailView()
+    func toTodoDetailView(indexPath: IndexPath)
     func toCreateTodoView()
     
     var showAPIErrorPopupRelay: Signal<Error> { get }
@@ -103,8 +103,8 @@ final class TodoListPresenterImpl: TodoListPresenter {
         router.toLoginView()
     }
     
-    func toTodoDetailView() {
-        router.toTodoDetailView()
+    func toTodoDetailView(indexPath: IndexPath) {
+        router.toTodoDetailView(indexPath: indexPath)
     }
     
     func toCreateTodoView() {

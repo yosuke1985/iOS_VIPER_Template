@@ -8,10 +8,10 @@
 import UIKit
 
 struct TodoDetailBuilder: TodoUseCaseInjectable {
-    func build() -> UIViewController {
+    func build(indexPath: IndexPath) -> UIViewController {
         let vc = TodoDetailViewController.instantiate()
         let router = TodoDetailRouterImpl()
-        let presenter = TodoDetailPresenterImpl()
+        let presenter = TodoDetailPresenterImpl(indexPath: indexPath)
         
         router.viewController = vc
         presenter.router = router
