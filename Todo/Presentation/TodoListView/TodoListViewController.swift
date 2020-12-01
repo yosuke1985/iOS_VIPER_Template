@@ -88,7 +88,9 @@ extension TodoListViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter.toTodoDetailView(indexPath: indexPath)
+        if let todo = presenter.todoTableViewRelay.value.first?.items[indexPath.row] {
+            presenter.toTodoDetailView(todo: todo)
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

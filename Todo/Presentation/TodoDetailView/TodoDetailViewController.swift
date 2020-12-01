@@ -17,5 +17,14 @@ class TodoDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setBind()
+    }
+    
+    private func setBind() {
+        presenter.todoRelay
+            .compactMap { $0?.description }
+            .bind(to: descriptionTextField.rx.text)
+            .disposed(by: bag)
     }
 }

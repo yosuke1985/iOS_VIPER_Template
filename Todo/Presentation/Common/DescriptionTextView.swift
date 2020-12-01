@@ -16,5 +16,7 @@ class DescriptionTextView: UITextView {
         }
     }
     
-    override func awakeFromNib() {}
+    override func awakeFromNib() {
+        sizeToFit()
+    }
 }
