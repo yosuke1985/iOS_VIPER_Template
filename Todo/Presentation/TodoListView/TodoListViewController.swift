@@ -24,23 +24,6 @@ class TodoListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let db = Firestore.firestore()
-        
-        if let userId = Auth.auth().currentUser?.uid {
-            Firestore.firestore().collection("users/\(userId)/todos")
-                .document("CU9EZIlyr0O63t7mmJSg").updateData(
-                    ["title": "exampleうあああああ"],
-                    completion: { error in
-                        if let error = error {
-                            print("TODO更新失敗: " + error.localizedDescription)
-     
-                        } else {
-                            print("TODO更新成功")
-                        }
-                    }
-                )
-        }
 
         let userSession = AuthRepositoryImpl.shared.userRelay.value
         print("userSession", userSession)
@@ -48,6 +31,7 @@ class TodoListViewController: UIViewController {
         setUI()
         setTableViewBind()
         presenter.setup()
+        setBind()
     }
     
     @objc private func logout() {

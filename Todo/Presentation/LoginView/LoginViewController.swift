@@ -36,9 +36,9 @@ class LoginViewController: UIViewController {
     }
     
     private func setBind() {
-        Observable.combineLatest(emailInputFieldView.inputTextField.rx.text, passInputFieldView.inputTextField.rx.text)
+        Observable.combineLatest(emailInputFieldView.inputTextField.rx.text.orEmpty, passInputFieldView.inputTextField.rx.text.orEmpty)
             .compactMap { (emailText, passText) -> Bool in
-                if emailText != nil, emailText != "", passText != nil, passText != "" {
+                if emailText != "", passText != "" {
                     return true
                 } else {
                     return false

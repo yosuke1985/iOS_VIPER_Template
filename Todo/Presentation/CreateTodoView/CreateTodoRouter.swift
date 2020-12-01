@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol CreateTodoRouter {
+protocol CreateTodoRouter: DismissTransitionable {
     var viewController: UIViewController? { get set }
 }
 
