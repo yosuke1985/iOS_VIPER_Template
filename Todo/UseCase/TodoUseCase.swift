@@ -19,7 +19,9 @@ extension TodoUseCaseInjectable {
 }
 
 protocol TodoUseCase {
-    func listenTodos() -> Completable
+    func startListenTodos() -> Completable
+    func todosRelay() -> Driver<[SectionTodo]>
+    func tearDown()
     func add(title: String, description: String) -> Completable
     func isChecked(todoId: String, isChecked: Bool) -> Completable
     func updateTitle(todoId: String, title: String) -> Completable
@@ -30,10 +32,18 @@ protocol TodoUseCase {
 struct TodoUseCaseImpl: TodoUseCase,
     TodoRepositoryInjectable
 {
-    func listenTodos() -> Completable {
-        return todoRepository.listenTodos()
+    func startListenTodos() -> Completable {
+        return todoRepository.startListenTodos()
     }
-    
+
+    func todosRelay() -> Driver<[SectionTodo]> {
+        return todoRepository.todosRelay()
+    }
+
+    func tearDown() {
+        return todoRepository.removeTodosListener()
+    }
+
     func add(title: String, description: String) -> Completable {
         return todoRepository.add(title: title, description: description)
     }

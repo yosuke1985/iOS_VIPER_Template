@@ -34,6 +34,10 @@ class TodoListViewController: UIViewController {
         setBind()
     }
     
+    deinit {
+        presenter.tearDown()
+    }
+    
     @objc private func logout() {
         presenter.logout()
     }
@@ -63,6 +67,18 @@ extension TodoListViewController {
 extension TodoListViewController: UITableViewDelegate {
     func setTableViewBind() {
         let dataSource = returnDataSource()
+//
+//        let sections = [
+//            SectionTodo(header: "Genre1", items: [
+//                Todo(id: "id1", title: "todo1", description: "description1", isChecked: true, createdAt: Date(), updatedAt: Date()),
+//                Todo(id: "id1", title: "todo2", description: "description1", isChecked: true, createdAt: Date(), updatedAt: Date()),
+//                Todo(id: "id1", title: "todo3", description: "description1", isChecked: true, createdAt: Date(), updatedAt: Date()),
+//                Todo(id: "id1", title: "todo4", description: "description1", isChecked: true, createdAt: Date(), updatedAt: Date()),
+//                Todo(id: "id1", title: "todo5", description: "description1", isChecked: true, createdAt: Date(), updatedAt: Date())
+//            ])
+//        ]
+//
+//        presenter.todoTableViewRelay.accept(sections)
                                 
         presenter.todoTableViewRelay
             .bind(to: tableView.rx.items(dataSource: dataSource))

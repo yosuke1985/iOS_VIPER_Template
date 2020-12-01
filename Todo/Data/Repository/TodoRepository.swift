@@ -21,7 +21,9 @@ extension TodoRepositoryInjectable {
 }
 
 protocol TodoRepository {
-    func listenTodos() -> Completable
+    func startListenTodos() -> Completable
+    func removeTodosListener()
+    func todosRelay() -> Driver<[SectionTodo]>
     func add(title: String, description: String) -> Completable
     func isChecked(todoId: String, isChecked: Bool) -> Completable
     func updateTitle(todoId: String, title: String) -> Completable
@@ -31,52 +33,56 @@ protocol TodoRepository {
 
 class TodoRepositoryImpl: TodoRepository {
     static var shared = TodoRepositoryImpl()
-    var todoTableViewRelay = BehaviorRelay<[SectionTodo]>(value: [])
+    var _todosTableViewRelay = BehaviorRelay<[SectionTodo]>(value: [])
+    var todosTableViewRelay: Driver<[SectionTodo]> {
+        return _todosTableViewRelay.asDriver()
+    }
+
+    var snapshotListener: ListenerRegistration!
+
     private init() {}
 
-    func listenTodos() -> Completable {
-//
-//        let sections = [
-//            SectionTodo(header: "Genre1", items: [
-//                Todo(id: "id1", title: "todo1", description: "description1", isChecked: true, createdAt: Date(), updatedAt: Date()),
-//                Todo(id: "id1", title: "todo2", description: "description1", isChecked: true, createdAt: Date(), updatedAt: Date()),
-//                Todo(id: "id1", title: "todo3", description: "description1", isChecked: true, createdAt: Date(), updatedAt: Date()),
-//                Todo(id: "id1", title: "todo4", description: "description1", isChecked: true, createdAt: Date(), updatedAt: Date()),
-//                Todo(id: "id1", title: "todo5", description: "description1", isChecked: true, createdAt: Date(), updatedAt: Date())
-//            ])
-//        ]
-//
-//        todoTableViewRelay.accept(sections)
+    func startListenTodos() -> Completable {
         guard let userId = Auth.auth().currentUser?.uid else { return Completable.empty() }
-        return Completable.create { (observer) -> Disposable in
-            var listener: ListenerRegistration!
-            if listener == nil {
-                listener = Firestore.firestore().collection("users/\(userId)/todos").order(by: "updatedAt").addSnapshotListener
+        return Completable.create { [weak self] (observer) -> Disposable in
+            guard let weakSelf = self else { return Disposables.create() }
+            if weakSelf.snapshotListener == nil {
+                weakSelf.snapshotListener = Firestore.firestore().collection("users/\(userId)/todos").order(by: "updatedAt").addSnapshotListener
                     { snapshot, error in
                         if let error = error {
+                            weakSelf._todosTableViewRelay.accept([])
                             observer(.error(error))
                         } else if let snapshot = snapshot?.documents.first {
                             var todos: [Todo] = []
                             do {
                                 todos = try snapshot.data(as: [Todo].self)!
                                 let sectionTodo = [SectionTodo(header: "", items: todos)]
-                                self.todoTableViewRelay.accept(sectionTodo)
+                                weakSelf._todosTableViewRelay.accept(sectionTodo)
+                                observer(.completed)
                             } catch {
                                 print(error)
+                                observer(.error(error))
                             }
-                            observer(.completed)
                         }
                     }
             } else {
-                if listener != nil {
-                    listener.remove()
-                    listener = nil
-                    self.todoTableViewRelay.accept([])
+                if weakSelf.snapshotListener != nil {
+                    weakSelf.snapshotListener.remove()
+                    weakSelf.snapshotListener = nil
+                    weakSelf._todosTableViewRelay.accept([])
                 }
-                observer(.completed)
             }
+            
             return Disposables.create()
         }
+    }
+    
+    func todosRelay() -> Driver<[SectionTodo]> {
+        return todosTableViewRelay
+    }
+
+    func removeTodosListener() {
+        snapshotListener.remove()
     }
 
     func add(title: String, description: String = "") -> Completable {

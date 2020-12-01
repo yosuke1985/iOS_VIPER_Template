@@ -40,6 +40,7 @@ protocol TodoListPresenter {
     var deletedTodoRelay: PublishRelay<IndexPath> { get }
     
     func setup()
+    func tearDown()
     
     func logout()
     
@@ -67,22 +68,27 @@ final class TodoListPresenterImpl: TodoListPresenter {
     var deletedTodoRelay = PublishRelay<IndexPath>()
 
     func setup() {
-//        todoUseCase.listenTodos()
-//            .subscribe(onError: { [weak self] error in
-//                self?._showAPIErrorPopupRelay.accept(error)
-//            })
-//            .disposed(by: bag)
-            
+        todoUseCase.startListenTodos()
+            .subscribe(onError: { [weak self] error in
+                self?._showAPIErrorPopupRelay.accept(error)
+            })
+            .disposed(by: bag)
+                
         // TODO:
-//        todoUseCase.listenTodos()
-//            .bind(to:todoTableViewRelay)
-//            .disposed(by: bag)
+        todoUseCase.todosRelay()
+            .debug()
+            .drive(todoTableViewRelay)
+            .disposed(by: bag)
         
         deletedTodoRelay
             .subscribe(onNext: { indexPath in
                 print("indexPath", indexPath)
             })
             .disposed(by: bag)
+    }
+    
+    func tearDown() {
+        todoUseCase.tearDown()
     }
 
     func logout() {
