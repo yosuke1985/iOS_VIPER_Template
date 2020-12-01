@@ -37,6 +37,7 @@ protocol TodoListPresenter {
     var todoUseCase: TodoUseCase! { get set }
     
     var todoTableViewRelay: BehaviorRelay<[SectionTodo]> { get }
+    var deletedTodoRelay: PublishRelay<IndexPath> { get }
     
     func setup()
     
@@ -45,6 +46,8 @@ protocol TodoListPresenter {
     func toLoginView()
     func toTodoDetailView()
     func toCreateTodoView()
+    
+    var showAPIErrorPopupRelay: Signal<Error> { get }
 }
 
 // MARK: - TodoListPresenterImpl
@@ -56,11 +59,30 @@ final class TodoListPresenterImpl: TodoListPresenter {
     var authUseCase: AuthUseCase!
     
     var todoTableViewRelay = BehaviorRelay<[SectionTodo]>(value: [])
-    
+    private let _showAPIErrorPopupRelay = PublishRelay<Error>()
+    var showAPIErrorPopupRelay: Signal<Error> {
+        return _showAPIErrorPopupRelay.asSignal()
+    }
+
+    var deletedTodoRelay = PublishRelay<IndexPath>()
+
     func setup() {
+//        todoUseCase.listenTodos()
+//            .subscribe(onError: { [weak self] error in
+//                self?._showAPIErrorPopupRelay.accept(error)
+//            })
+//            .disposed(by: bag)
+            
+        // TODO:
 //        todoUseCase.listenTodos()
 //            .bind(to:todoTableViewRelay)
 //            .disposed(by: bag)
+        
+        deletedTodoRelay
+            .subscribe(onNext: { indexPath in
+                print("indexPath", indexPath)
+            })
+            .disposed(by: bag)
     }
 
     func logout() {

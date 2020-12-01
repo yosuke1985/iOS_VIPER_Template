@@ -51,6 +51,12 @@ extension TodoListViewController {
                 self?.presenter.toCreateTodoView()
             }
             .disposed(by: bag)
+        
+        presenter.showAPIErrorPopupRelay
+            .emit(onNext: { [weak self] error in
+                self?.showErrorAlert(message: error.localizedDescription)
+            })
+            .disposed(by: bag)
     }
 }
 
@@ -102,10 +108,12 @@ extension TodoListViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let contextItem = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
-            // TODO:
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, handler in
+            
+            self?.presenter.deletedTodoRelay.accept(indexPath)
+            handler(true)
         }
-        let swipeActions = UISwipeActionsConfiguration(actions: [contextItem])
+        let swipeActions = UISwipeActionsConfiguration(actions: [deleteAction])
 
         return swipeActions
     }

@@ -329,9 +329,9 @@
 				C923C2252567460000C1F7E0 /* Common */,
 				C92BD43A25553786002A0DCA /* LoginView */,
 				333EB40E256D03C0001BC049 /* CreateUserView */,
+				C9AA02162567A98400A5163E /* CreateTodoView */,
 				332FAD5A255EBEFB00BC64E3 /* TodoListView */,
 				C92BD44325553829002A0DCA /* TodoDetailView */,
-				C9AA02162567A98400A5163E /* CreateTodoView */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
