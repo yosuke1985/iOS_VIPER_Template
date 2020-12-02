@@ -13,26 +13,34 @@ protocol TodoDetailPresenter {
     var router: TodoDetailRouter! { get set }
     var todoUseCase: TodoUseCase! { get set }
     
+    func setUp()
     var todoRelay: BehaviorRelay<Todo?> { get }
-    var todoTitleDidChangeRelay: BehaviorRelay<String?> { get }
+    var todoDescriptionDidChangeRelay: BehaviorRelay<String?> { get }
     var didBackToDetailRelay: PublishRelay<Void> { get }
+    
+    var showAPIErrorPopupRelay: Signal<Error> { get }
 }
 
 final class TodoDetailPresenterImpl: TodoDetailPresenter {
     var router: TodoDetailRouter!
     var todoUseCase: TodoUseCase!
-    var todo: Todo!
-    var todoRelay = BehaviorRelay<Todo?>(value: nil)
-    var todoTitleDidChangeRelay = BehaviorRelay<String?>(value: nil)
-    var didBackToDetailRelay = PublishRelay<Void>()
     var bag = DisposeBag()
+
+    private let _showAPIErrorPopupRelay = PublishRelay<Error>()
+    var showAPIErrorPopupRelay: Signal<Error> {
+        return _showAPIErrorPopupRelay.asSignal()
+    }
+
+    var todoRelay = BehaviorRelay<Todo?>(value: nil)
+    var todoDescriptionDidChangeRelay = BehaviorRelay<String?>(value: nil)
+    var didBackToDetailRelay = PublishRelay<Void>()
 
     init(todo: Todo) {
         todoRelay.accept(todo)
-        todoTitleDidChangeRelay.accept(todo.title)
+        todoDescriptionDidChangeRelay.accept(todo.title)
         
         print("todohere", todo)
-        print("didChange", todoTitleDidChangeRelay.value)
+        print("didChange", todoDescriptionDidChangeRelay.value)
     }
     
     func setUp() {
@@ -41,10 +49,18 @@ final class TodoDetailPresenterImpl: TodoDetailPresenter {
     
     private func setBind() {
         didBackToDetailRelay
-            .subscribe(onNext: { _ in
-                print("called")
-                
-            })
+            .flatMap { [weak self] _ -> Single<Void> in
+                guard let weakSelf = self else { return Single<Void>.never() }
+                if let beforeDescription = weakSelf.todoRelay.value?.description, let afterDescription = weakSelf.todoDescriptionDidChangeRelay.value, beforeDescription != afterDescription {
+                    return weakSelf.todoUseCase.updateDescription(todoId: weakSelf.todoRelay.value!.id, description: afterDescription)
+                        .andThen(Single<Void>.just(()))
+                }
+                return Single<Void>.never()
+            }
+            .subscribe(onError: { [weak self] error in
+                self?._showAPIErrorPopupRelay.accept(error)
+            }
+            )
             .disposed(by: bag)
     }
 }

@@ -18,6 +18,7 @@ class TodoDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        presenter.setUp()
         setUI()
         setBind()
     }
@@ -37,14 +38,8 @@ class TodoDetailViewController: UIViewController {
         
         descriptionTextField.rx.text
             .compactMap { $0 }
-            .bind(to: presenter.todoTitleDidChangeRelay)
+            .bind(to: presenter.todoDescriptionDidChangeRelay)
             .disposed(by: bag)
-
-//        descriptionTextField.rx.text
-//            .subscribe { (text) in
-//                <#code#>
-//            }
-//            .disposed(by: bag)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
