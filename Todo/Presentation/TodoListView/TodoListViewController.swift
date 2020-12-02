@@ -87,9 +87,15 @@ extension TodoListViewController: UITableViewDelegate {
             animationConfiguration: AnimationConfiguration(insertAnimation: .top,
                                                            reloadAnimation: .fade,
                                                            deleteAnimation: .left),
-            configureCell: { _, tableView, indexPath, item in
+            configureCell: { _, tableView, indexPath, todo in
                 let cell = tableView.dequeueReusableCell(withIdentifier: TodoCell.identifier, for: indexPath) as! TodoCell
-                cell.todoName?.text = "\(item.title)"
+                cell.todoName?.text = "\(todo.title)"
+                cell.configure(todo: todo)
+                cell.updatedTodoRelay
+                    .subscribe(onNext: { [weak self] updatedTodo in
+                        self?.presenter.isChecked(todoId: updatedTodo.id, isChecked: updatedTodo.isChecked)
+                    })
+                    .disposed(by: cell.bag)
                 return cell
             },
             canEditRowAtIndexPath: { _, _ in

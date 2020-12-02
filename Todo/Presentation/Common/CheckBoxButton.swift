@@ -9,8 +9,7 @@ import UIKit
 
 @IBDesignable
 class CheckBoxButton: UIButton {
-    @IBInspectable
-    var isChecked: Bool = false {
+    var isChecked: Bool? {
         didSet {
             let bundle = Bundle(for: CheckBoxButton.self)
             let checkedImage = UIImage(named: "checkBoxTrue", in: bundle, compatibleWith: nil)
@@ -25,12 +24,11 @@ class CheckBoxButton: UIButton {
     
     override func awakeFromNib() {
         addTarget(self, action: #selector(buttonClicked(sender:)), for: UIControl.Event.touchUpInside)
-        isChecked = false
     }
 
     @objc func buttonClicked(sender: UIButton) {
         if sender == self {
-            isChecked = !isChecked
+            isChecked = !isChecked!
         }
     }
 }

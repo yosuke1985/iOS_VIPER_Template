@@ -42,6 +42,7 @@ protocol TodoListPresenter {
     func setup()
     func tearDown()
     
+    func isChecked(todoId: String, isChecked: Bool)
     func logout()
     
     func toLoginView()
@@ -92,6 +93,14 @@ final class TodoListPresenterImpl: TodoListPresenter {
     
     func tearDown() {
         todoUseCase.tearDown()
+    }
+    
+    func isChecked(todoId: String, isChecked: Bool) {
+        todoUseCase.isChecked(todoId: todoId, isChecked: isChecked)
+            .subscribe(onError: { [weak self] error in
+                self?._showAPIErrorPopupRelay.accept(error)
+            })
+            .disposed(by: bag)
     }
 
     func logout() {
