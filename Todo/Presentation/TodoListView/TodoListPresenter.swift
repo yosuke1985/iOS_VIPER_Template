@@ -37,7 +37,7 @@ protocol TodoListPresenter {
     var todoUseCase: TodoUseCase! { get set }
     
     var todoTableViewRelay: BehaviorRelay<[SectionTodo]> { get }
-    var deletedTodoRelay: PublishRelay<IndexPath> { get }
+    var willDeleteTodoRelay: PublishRelay<Todo> { get }
     
     func setup()
     func tearDown()
@@ -65,7 +65,7 @@ final class TodoListPresenterImpl: TodoListPresenter {
         return _showAPIErrorPopupRelay.asSignal()
     }
 
-    var deletedTodoRelay = PublishRelay<IndexPath>()
+    var willDeleteTodoRelay = PublishRelay<Todo>()
 
     func setup() {
         todoUseCase.startListenTodos()
@@ -78,9 +78,14 @@ final class TodoListPresenterImpl: TodoListPresenter {
             .drive(todoTableViewRelay)
             .disposed(by: bag)
         
-        deletedTodoRelay
-            .subscribe(onNext: { indexPath in
-                print("indexPath", indexPath)
+        willDeleteTodoRelay
+            .flatMap { [weak self] todo -> Single<Void> in
+                guard let weakSelf = self else { return Single<Void>.never() }
+                return weakSelf.todoUseCase.delete(todoId: todo.id)
+                    .andThen(Single<Void>.just(()))
+            }
+            .subscribe(onError: { [weak self] error in
+                self?._showAPIErrorPopupRelay.accept(error)
             })
             .disposed(by: bag)
     }

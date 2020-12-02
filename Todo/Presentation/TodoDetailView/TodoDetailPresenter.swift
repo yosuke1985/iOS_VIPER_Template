@@ -38,9 +38,6 @@ final class TodoDetailPresenterImpl: TodoDetailPresenter {
     init(todo: Todo) {
         todoRelay.accept(todo)
         todoDescriptionDidChangeRelay.accept(todo.title)
-        
-        print("todohere", todo)
-        print("didChange", todoDescriptionDidChangeRelay.value)
     }
     
     func setUp() {

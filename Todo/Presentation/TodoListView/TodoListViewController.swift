@@ -24,9 +24,6 @@ class TodoListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let userSession = AuthRepositoryImpl.shared.userRelay.value
-        print("userSession", userSession)
         
         setUI()
         setTableViewBind()
@@ -104,19 +101,12 @@ extension TodoListViewController: UITableViewDelegate {
         )
     }
 
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-//            objects.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-        }
-    }
-
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, handler in
             
-            self?.presenter.deletedTodoRelay.accept(indexPath)
+            if let willDeleteTodo = self?.presenter.todoTableViewRelay.value.first?.items[indexPath.row] {
+                self?.presenter.willDeleteTodoRelay.accept(willDeleteTodo)
+            }
             handler(true)
         }
         let swipeActions = UISwipeActionsConfiguration(actions: [deleteAction])
