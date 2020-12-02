@@ -43,7 +43,6 @@ class TodoDetailViewController: UIViewController {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        print("Yes Takasu")
         presenter.didBackToDetailRelay.accept(())
     }
 }

@@ -63,7 +63,6 @@ class TodoRepositoryImpl: TodoRepository {
                                 weakSelf._todosTableViewRelay.accept(sectionTodo)
                                 observer(.completed)
                             } catch {
-                                print(error)
                                 observer(.error(error))
                             }
                         }

@@ -36,7 +36,6 @@ class TodoCell: UITableViewCell {
             .subscribe(onNext: { [weak self] _ in
                 guard let weakSelf = self, var udpatedTodo = weakSelf.todo else { return }
                 udpatedTodo.isChecked = !weakSelf.checkBoxButton.isChecked!
-                print("weakSelf.checkBoxButton.isChecked", udpatedTodo.isChecked)
                 weakSelf.updatedTodoRelay.accept(udpatedTodo)
                 
             })
