@@ -18,7 +18,15 @@ class TodoDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setUI()
         setBind()
+    }
+    
+    private func setUI() {
+        if let title = presenter.todoRelay.value?.title {
+            self.title = title
+        }
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
     
     private func setBind() {
@@ -26,5 +34,21 @@ class TodoDetailViewController: UIViewController {
             .compactMap { $0?.description }
             .bind(to: descriptionTextField.rx.text)
             .disposed(by: bag)
+        
+        descriptionTextField.rx.text
+            .compactMap { $0 }
+            .bind(to: presenter.todoTitleDidChangeRelay)
+            .disposed(by: bag)
+
+//        descriptionTextField.rx.text
+//            .subscribe { (text) in
+//                <#code#>
+//            }
+//            .disposed(by: bag)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        print("Yes Takasu")
+        presenter.didBackToDetailRelay.accept(())
     }
 }
