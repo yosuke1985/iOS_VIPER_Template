@@ -2,9 +2,10 @@
 
 ## 残
 
-- [ ] ロジック部分
+- [ ] GIFの追加
+- [ ] 記事を書く
 - [ ] テストコード
-- [ ] 概要のブラッシュアップ　Routerについて
+- [ ] 概要のブラッシュアップ
 - [ ] RxSwiftのバインディングについて（別枠？Gist?）
 - [ ] 英語バージョン、日本語バージョンの切り分け
 
@@ -17,11 +18,6 @@
 - 双方向バインディングにはRxSwiftを使用している。
 - レポジトリにはInterface Adapterは作成しない。
 
-### DIの注入
-
-- DIの部分は、protocolの\\(ModuleName)Injectableを作成し、protocol extensionに実体を持つ。
-- BuilderはRouterの中で依存関係の注入しPresenter, UseCase, RouterにDIする。RouterでもprotocolのInjectableと同様の方法で依存性注入を行おうかと思ったが、明示的にしたいのでBuilderを作成することにした。
-
 ### 命名規則
 
 - protocolとそれを準拠したクラスないしは構造体は、protocolの名称 + Implと命名する。
@@ -30,9 +26,17 @@
 - UseCaseは、Interactorではなく、\\(ModuleName)Usecase
 - Interface Adapterには、ViewModelではなく、\\(ModuleName)Presenter
 
+### DIの注入
+
+- DIの部分は、protocolの\\(ModuleName)Injectableを作成し、protocol extensionに実体を持つ。
+- Builderについて
+  - 各画面に対し、1 ViewControleler, 1 storyboardで構成し、それに対応したBuilderが依存関係の注入しPresenter, UseCase, RouterにDIする。
+
 ### 画面遷移
 
-- 画面遷移の責務を持つRouterパターンを採用。画面遷移部分を切り離す各Routerに対応したUIViewControllerの参照を持ち、Presenterから受けた入力によって画面遷移させる。
+- 画面遷移の責務を持つRouterパターン。
+  - Routerは画面遷移の責務を持つ。画面遷移先のViewControllerをBuildし、遷移する。
+  - 画面遷移部分を切り離す各Routerに対応したUIViewControllerの参照を持ち、Presenterから受けた入力によって画面遷移させる。
 - 各Transitionableは、buildして画面遷移する責務を持つ。各Transitionableに準拠したRouter(UIViewControllerの実体を持つ)は、その準拠した画面へ遷移することができるようになる。（遷移するための実装がそのTransitionableにあるので）
 
 ## UI
@@ -79,7 +83,7 @@ users:
   todos:
     documentID: auto
     title: String
-    description: String?
+    description: String
     isChecked: Bool
     createdAt: Date
     updatedAt: Date
