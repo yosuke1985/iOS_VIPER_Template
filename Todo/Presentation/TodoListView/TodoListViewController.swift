@@ -26,8 +26,8 @@ class TodoListViewController: UIViewController {
         super.viewDidLoad()
         
         setUI()
-        setTableViewBind()
         presenter.setup()
+        setTableViewBind()
         setBind()
     }
     
