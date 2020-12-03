@@ -47,6 +47,7 @@
 		C930664A2552478100957493 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93066492552478100957493 /* Todo.swift */; };
 		C930669B2553B34600957493 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C930669A2553B34600957493 /* README.md */; };
 		C939C219257887700079DA35 /* CreateUserPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C939C218257887700079DA35 /* CreateUserPresenterTests.swift */; };
+		C94CADD32578B3B1002613BE /* AuthUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94CADD22578B3B1002613BE /* AuthUseCaseTests.swift */; };
 		C9AA01F325678DEC00A5163E /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AA01F225678DEC00A5163E /* NavigationBar.swift */; };
 		C9AA021C2567A9A000A5163E /* CreateTodoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AA02172567A9A000A5163E /* CreateTodoRouter.swift */; };
 		C9AA021D2567A9A000A5163E /* CreateTodoBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AA02182567A9A000A5163E /* CreateTodoBuilder.swift */; };
@@ -133,6 +134,7 @@
 		C93066492552478100957493 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		C930669A2553B34600957493 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C939C218257887700079DA35 /* CreateUserPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserPresenterTests.swift; sourceTree = "<group>"; };
+		C94CADD22578B3B1002613BE /* AuthUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUseCaseTests.swift; sourceTree = "<group>"; };
 		C9AA01F225678DEC00A5163E /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		C9AA02172567A9A000A5163E /* CreateTodoRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTodoRouter.swift; sourceTree = "<group>"; };
 		C9AA02182567A9A000A5163E /* CreateTodoBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTodoBuilder.swift; sourceTree = "<group>"; };
@@ -401,6 +403,7 @@
 		C939C224257890370079DA35 /* UseCaseTest */ = {
 			isa = PBXGroup;
 			children = (
+				C94CADD22578B3B1002613BE /* AuthUseCaseTests.swift */,
 			);
 			path = UseCaseTest;
 			sourceTree = "<group>";
@@ -769,6 +772,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C939C219257887700079DA35 /* CreateUserPresenterTests.swift in Sources */,
+				C94CADD32578B3B1002613BE /* AuthUseCaseTests.swift in Sources */,
 				331BEDFA254EDD0E0050AB73 /* TodoTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
