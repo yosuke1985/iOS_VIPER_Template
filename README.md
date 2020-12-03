@@ -113,3 +113,6 @@ users:
 - iOSアプリ設計入門
   - 関 義隆氏, 史 翔新氏, 田中 賢治氏, 松館 大輝氏, 鈴木 大貴氏, 杉上 洋平氏, 加藤 寛人氏
   - <https://peaks.cc/books/iOS_architecture>
+
+- infinum/iOS-VIPER-Xcode-Templates
+  - https://github.com/infinum/iOS-VIPER-Xcode-Templates
