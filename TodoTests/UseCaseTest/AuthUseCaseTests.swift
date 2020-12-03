@@ -5,6 +5,7 @@
 //  Created by yosuke.nakayama on 2020/12/03.
 //
 
+import RxBlocking
 import RxCocoa
 import RxSwift
 import RxTest
@@ -12,11 +13,20 @@ import RxTest
 import XCTest
 
 class AuthUseCaseTests: XCTestCase {
-    let authUseCase = AuthUseCaseImpl()
-    let bag = DisposeBag()
+    var authUseCase: AuthUseCase!
+    var scheduler: TestScheduler!
+    var presenter: CreateUserPresenter!
+    var bag: DisposeBag!
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        authUseCase = AuthUseCaseImpl()
+        bag = DisposeBag()
+        scheduler = TestScheduler(initialClock: 0)
+        
+        presenter = CreateUserPresenterImpl()
+        presenter.authUseCase = authUseCase
+        presenter.load()
     }
 
     override func tearDownWithError() throws {
@@ -24,17 +34,32 @@ class AuthUseCaseTests: XCTestCase {
     }
 
     func testCreateUser() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        authUseCase.createUser(email: "test5@user.com", password: "1234OKMijn")
-            .debug()
-            .subscribe(onSuccess: { _ in
-                           XCTAssertTrue(true)
-                       },
-                       onError: { _ in
-                           XCTAssertTrue(true)
-                       })
-            .disposed(by: bag)
+        let createUser = scheduler.createObserver(Void.self)
+
+
+        // RxBlocking
+        
+//        XCTAssertEqual(try authUseCase.createUser(email: "test5@user.com", password: "1234OKMijn").toBlocking().toArray(), [])
+//    authUseCase.createUser(email: "test5@user.com", password: "1234OKMijn")
+//        .subscribe(isPlaying)
+//        .disposed(by: bag)
+        
+        // RxTest
+        
+//        authUseCase.createUser(email: , password: <#T##String#>)
+//            .subscribe(createUser)
+//            .disposed(by: bag)
+//
+//        scheduler.createColdObservable([.next(3, ())])
+//            .bind(to: presenter.loginRelay)
+//            .disposed(by: bag)
+//
+//
+//        scheduler.start()
+//
+//        XCTAssertEqual(createUser.events, [
+//            .completed,
+//        ])
     }
 
     func testPerformanceExample() throws {
