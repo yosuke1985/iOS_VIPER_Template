@@ -42,9 +42,9 @@ protocol TodoListPresenter {
     func setup()
     func tearDown()
     
-    func isChecked(todoId: String, isChecked: Bool)
-    func logout()
+    var updateIsCheckedRelay: PublishRelay<Todo> { get }
     
+    func logout()
     func toLoginView()
     func toTodoDetailView(todo: Todo)
     func toCreateTodoView()
@@ -67,8 +67,13 @@ final class TodoListPresenterImpl: TodoListPresenter {
     }
 
     var willDeleteTodoRelay = PublishRelay<Todo>()
+    var updateIsCheckedRelay = PublishRelay<Todo>()
 
     func setup() {
+        setBind()
+    }
+    
+    func setBind() {
         todoUseCase.startListenTodos()
             .subscribe(onError: { [weak self] error in
                 self?._showAPIErrorPopupRelay.accept(error)
@@ -82,7 +87,18 @@ final class TodoListPresenterImpl: TodoListPresenter {
         willDeleteTodoRelay
             .flatMap { [weak self] todo -> Single<Void> in
                 guard let weakSelf = self else { return Single<Void>.never() }
-                return weakSelf.todoUseCase.delete(todoId: todo.id)
+                return weakSelf.todoUseCase.delete(todo: todo)
+                    .andThen(Single<Void>.just(()))
+            }
+            .subscribe(onError: { [weak self] error in
+                self?._showAPIErrorPopupRelay.accept(error)
+            })
+            .disposed(by: bag)
+        
+        updateIsCheckedRelay
+            .flatMap { [weak self] (todo) -> Single<Void> in
+                guard let weakSelf = self else { return Single<Void>.just(()) }
+                return weakSelf.todoUseCase.update(todo: todo)
                     .andThen(Single<Void>.just(()))
             }
             .subscribe(onError: { [weak self] error in
@@ -95,13 +111,7 @@ final class TodoListPresenterImpl: TodoListPresenter {
         todoUseCase.tearDown()
     }
     
-    func isChecked(todoId: String, isChecked: Bool) {
-        todoUseCase.isChecked(todoId: todoId, isChecked: isChecked)
-            .subscribe(onError: { [weak self] error in
-                self?._showAPIErrorPopupRelay.accept(error)
-            })
-            .disposed(by: bag)
-    }
+    func isChecked(todoId: String, isChecked: Bool) {}
 
     func logout() {
         authUseCase.logout()

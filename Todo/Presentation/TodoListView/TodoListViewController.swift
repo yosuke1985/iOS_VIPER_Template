@@ -93,7 +93,7 @@ extension TodoListViewController: UITableViewDelegate {
                 cell.configure(todo: todo)
                 cell.updatedTodoRelay
                     .subscribe(onNext: { [weak self] updatedTodo in
-                        self?.presenter.isChecked(todoId: updatedTodo.id, isChecked: updatedTodo.isChecked)
+                        self?.presenter.updateIsCheckedRelay.accept(updatedTodo)
                     })
                     .disposed(by: cell.bag)
                 return cell

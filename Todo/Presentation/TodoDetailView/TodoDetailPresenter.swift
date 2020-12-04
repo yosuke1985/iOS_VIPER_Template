@@ -37,7 +37,6 @@ final class TodoDetailPresenterImpl: TodoDetailPresenter {
 
     init(todo: Todo) {
         todoRelay.accept(todo)
-        todoDescriptionDidChangeRelay.accept(todo.title)
     }
     
     func setUp() {
@@ -45,11 +44,20 @@ final class TodoDetailPresenterImpl: TodoDetailPresenter {
     }
     
     private func setBind() {
+        todoDescriptionDidChangeRelay
+            .compactMap { $0 }
+            .subscribe(onNext: { [weak self] description in
+                var todo = self?.todoRelay.value
+                todo?.description = description
+                self?.todoRelay.accept(todo)
+            })
+            .disposed(by: bag)
+
         didBackToDetailRelay
             .flatMap { [weak self] _ -> Single<Void> in
                 guard let weakSelf = self else { return Single<Void>.never() }
-                if let beforeDescription = weakSelf.todoRelay.value?.description, let afterDescription = weakSelf.todoDescriptionDidChangeRelay.value, beforeDescription != afterDescription {
-                    return weakSelf.todoUseCase.updateDescription(todoId: weakSelf.todoRelay.value!.id, description: afterDescription)
+                if let todo = weakSelf.todoRelay.value {
+                    return weakSelf.todoUseCase.update(todo: todo)
                         .andThen(Single<Void>.just(()))
                 }
                 return Single<Void>.never()

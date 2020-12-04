@@ -25,10 +25,8 @@ protocol TodoRepository {
     func removeTodosListener()
     func todosRelay() -> Driver<[SectionTodo]>
     func add(title: String, description: String) -> Completable
-    func isChecked(todoId: String, isChecked: Bool) -> Completable
-    func updateTitle(todoId: String, title: String) -> Completable
-    func updateDescription(todoId: String, description: String) -> Completable
-    func delete(todoId: String) -> Completable
+    func update(todo: Todo) -> Completable
+    func delete(todo: Todo) -> Completable
 }
 
 class TodoRepositoryImpl: TodoRepository {
@@ -113,70 +111,33 @@ class TodoRepositoryImpl: TodoRepository {
         }
     }
 
-    func isChecked(todoId: String, isChecked: Bool) -> Completable {
+    func update(todo: Todo) -> Completable {
         guard let userId = Auth.auth().currentUser?.uid else { return Completable.empty() }
-
         return Completable.create { (observer) -> Disposable in
-            Firestore.firestore().collection("users/\(userId)/todos").document(todoId).updateData(
-                [
-                    "isChecked": isChecked,
+
+            Firestore.firestore().collection("users/\(userId)/todos").document(todo.id)
+                .updateData([
+                    "id": todo.id,
+                    "title": todo.title,
+                    "description": todo.description,
+                    "isChecked": todo.isChecked,
                     "updatedAt": Date()
                 ],
                 completion: { error in
                     if let error = error {
                         observer(.error(error))
-
                     } else {
                         observer(.completed)
                     }
-                }
-            )
-            
+                })
             return Disposables.create()
         }
     }
 
-    func updateTitle(todoId: String, title: String) -> Completable {
-        guard let userId = Auth.auth().currentUser?.uid else { return Completable.empty() }
-        return Completable.create { (observer) -> Disposable in
-
-            Firestore.firestore().collection("users/\(userId)/todos").document(todoId).updateData(
-                ["title": title,
-                 "updatedAt": Date()],
-                completion: { error in
-                    if let error = error {
-                        observer(.error(error))
-                    } else {
-                        observer(.completed)
-                    }
-                }
-            )
-            return Disposables.create()
-        }
-    }
-
-    func updateDescription(todoId: String, description: String) -> Completable {
-        guard let userId = Auth.auth().currentUser?.uid else { return Completable.empty() }
-        return Completable.create { (observer) -> Disposable in
-            Firestore.firestore().collection("users/\(userId)/todos").document(todoId).updateData(
-                ["description": description,
-                 "updatedAt": Date()],
-                completion: { error in
-                    if let error = error {
-                        observer(.error(error))
-                    } else {
-                        observer(.completed)
-                    }
-                }
-            )
-            return Disposables.create()
-        }
-    }
-
-    func delete(todoId: String) -> Completable {
+    func delete(todo: Todo) -> Completable {
         Completable.create { (observer) -> Disposable in
             if let userId = Auth.auth().currentUser?.uid {
-                Firestore.firestore().collection("users/\(userId)/todos").document(todoId).delete { error in
+                Firestore.firestore().collection("users/\(userId)/todos").document(todo.id).delete { error in
                     if let error = error {
                         observer(.error(error))
 

@@ -23,10 +23,8 @@ protocol TodoUseCase {
     func todosRelay() -> Driver<[SectionTodo]>
     func tearDown()
     func add(title: String, description: String) -> Completable
-    func isChecked(todoId: String, isChecked: Bool) -> Completable
-    func updateTitle(todoId: String, title: String) -> Completable
-    func updateDescription(todoId: String, description: String) -> Completable
-    func delete(todoId: String) -> Completable
+    func update(todo: Todo) -> Completable
+    func delete(todo: Todo) -> Completable
 }
 
 struct TodoUseCaseImpl: TodoUseCase,
@@ -48,19 +46,11 @@ struct TodoUseCaseImpl: TodoUseCase,
         return todoRepository.add(title: title, description: description)
     }
     
-    func isChecked(todoId: String, isChecked: Bool) -> Completable {
-        return todoRepository.isChecked(todoId: todoId, isChecked: isChecked)
+    func update(todo: Todo) -> Completable {
+        return todoRepository.update(todo: todo)
     }
-    
-    func updateTitle(todoId: String, title: String) -> Completable {
-        return todoRepository.updateTitle(todoId: todoId, title: title)
-    }
-    
-    func updateDescription(todoId: String, description: String) -> Completable {
-        return todoRepository.updateDescription(todoId: todoId, description: description)
-    }
-    
-    func delete(todoId: String) -> Completable {
-        return todoRepository.delete(todoId: todoId)
+
+    func delete(todo: Todo) -> Completable {
+        return todoRepository.delete(todo: todo)
     }
 }
