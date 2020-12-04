@@ -86,7 +86,7 @@ final class TodoListPresenterImpl: TodoListPresenter {
         
         willDeleteTodoRelay
             .flatMap { [weak self] todo -> Single<Void> in
-                guard let weakSelf = self else { return Single<Void>.error(CustomError.selfIsNil)}
+                guard let weakSelf = self else { return Single<Void>.error(CustomError.selfIsNil) }
                 return weakSelf.todoUseCase.delete(todo: todo)
                     .andThen(Single<Void>.just(()))
             }

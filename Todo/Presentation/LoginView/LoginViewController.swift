@@ -36,22 +36,15 @@ class LoginViewController: UIViewController {
     }
     
     private func setBind() {
-        Observable.combineLatest(emailInputFieldView.inputTextField.rx.text.orEmpty, passInputFieldView.inputTextField.rx.text.orEmpty)
-            .compactMap { (emailText, passText) -> Bool in
-                if emailText != "", passText != "" {
-                    return true
-                } else {
-                    return false
-                }
-            }
-            .bind(to: loginButton.rx.isEnabled)
+        presenter.isEnableLoginButtonRelay
+            .drive(loginButton.rx.isEnabled)
             .disposed(by: bag)
         
-        emailInputFieldView.inputTextField.rx.text
+        emailInputFieldView.inputTextField.rx.text.orEmpty
             .bind(to: presenter.emailRelay)
             .disposed(by: bag)
         
-        passInputFieldView.inputTextField.rx.text
+        passInputFieldView.inputTextField.rx.text.orEmpty
             .bind(to: presenter.passwordRelay)
             .disposed(by: bag)
         

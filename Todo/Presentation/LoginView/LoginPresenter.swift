@@ -21,7 +21,8 @@ protocol LoginPresenter {
     var loginRelay: PublishRelay<Void> { get }
     var emailRelay: BehaviorRelay<String?> { get }
     var passwordRelay: BehaviorRelay<String?> { get }
-    
+    var isEnableLoginButtonRelay: Driver<Bool> { get }
+
     var showAPIErrorPopupRelay: Signal<Error> { get }
 
     func toTodoListView()
@@ -40,6 +41,10 @@ final class LoginPresenterImpl: LoginPresenter {
     var loginRelay = PublishRelay<Void>()
     var emailRelay = BehaviorRelay<String?>(value: nil)
     var passwordRelay = BehaviorRelay<String?>(value: nil)
+    var _isEnableLoginButtonRelay = BehaviorRelay<Bool>(value: false)
+    var isEnableLoginButtonRelay: Driver<Bool> {
+        return _isEnableLoginButtonRelay.asDriver()
+    }
     
     private let _showAPIErrorPopupRelay = PublishRelay<Error>()
     var showAPIErrorPopupRelay: Signal<Error> {
@@ -51,6 +56,17 @@ final class LoginPresenterImpl: LoginPresenter {
     }
     
     func setBind() {
+        Observable.combineLatest(emailRelay, passwordRelay)
+            .compactMap { (emailText, passText) -> Bool in
+                if emailText != "", passText != "" {
+                    return true
+                } else {
+                    return false
+                }
+            }
+            .bind(to: _isEnableLoginButtonRelay)
+            .disposed(by: bag)
+        
         loginRelay
             .flatMap { [weak self] (_) -> Single<Void> in
                 guard let weakSelf = self else { return Single<Void>.error(CustomError.selfIsNil) }
