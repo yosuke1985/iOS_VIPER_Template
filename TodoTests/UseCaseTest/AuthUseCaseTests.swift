@@ -26,7 +26,6 @@ class AuthUseCaseTests: XCTestCase {
         
         presenter = CreateUserPresenterImpl()
         presenter.authUseCase = authUseCase
-        presenter.load()
     }
 
     override func tearDownWithError() throws {
@@ -34,7 +33,7 @@ class AuthUseCaseTests: XCTestCase {
     }
 
     func testCreateUser() throws {
-        let createUser = scheduler.createObserver(Void.self)
+//        let createUser = scheduler.createObserver(Void.self)
 
         // RxBlocking
         
@@ -45,14 +44,23 @@ class AuthUseCaseTests: XCTestCase {
         
         // RxTest
         
-//        authUseCase.createUser(email: , password: <#T##String#>)
+//        let createUser = scheduler.createObserver(CompletableEvent.self)
+//
+//        presenter.createUserRelay
 //            .subscribe(createUser)
 //            .disposed(by: bag)
 //
-//        scheduler.createColdObservable([.next(3, ())])
-//            .bind(to: presenter.loginRelay)
+//        scheduler.createColdObservable([.next(10, "createdByTest@gmail.com")])
+//            .bind(to: presenter.emailRelay)
 //            .disposed(by: bag)
 //
+//        scheduler.createColdObservable([.next(10, "ijnOKM8080")])
+//            .bind(to: presenter.passwordRelay)
+//            .disposed(by: bag)
+//
+//        scheduler.createColdObservable([.next(11, ())])
+//            .bind(to: presenter.createUserRelay)
+//            .disposed(by: bag)
 //
 //        scheduler.start()
 //
