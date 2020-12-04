@@ -23,6 +23,7 @@ class CreateUserViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.setUp()
         setBind()
     }
     
@@ -38,11 +39,16 @@ class CreateUserViewController: UIViewController {
             .bind(to: createUserButton.rx.isHidden)
             .disposed(by: bag)
         
+        emailTextField.rx.text
+            .bind(to: presenter.emailRelay)
+            .disposed(by: bag)
+        
+        passTextField.rx.text
+            .bind(to: presenter.passwordRelay)
+            .disposed(by: bag)
+        
         createUserButton.rx.tap
-            .subscribe(onNext: { [weak self] _ in
-                guard let weakSelf = self else { return }
-                weakSelf.presenter.createUser(email: weakSelf.emailTextField.text!, password: weakSelf.passTextField.text!)
-            })
+            .bind(to: presenter.createUserRelay)
             .disposed(by: bag)
         
         presenter.showAPIErrorPopupRelay

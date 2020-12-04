@@ -18,24 +18,24 @@ extension AuthUseCaseInjectable {
 }
 
 protocol AuthUseCase {
-    func getSessionUser() -> Single<User?>
-    func createUser(email: String, password: String) -> Single<Void>
-    func login(email: String, password: String) -> Single<Void>
+    func getSessionUser() -> Completable
+    func createUser(email: String, password: String) -> Completable
+    func login(email: String, password: String) -> Completable
     func logout() -> Completable
 }
 
 struct AuthUseCaseImpl: AuthUseCase,
     AuthRepositoryInjectable
 {
-    func getSessionUser() -> Single<User?> {
+    func getSessionUser() -> Completable {
         return authRepository.getSessionUser()
     }
 
-    func createUser(email: String, password: String) -> Single<Void> {
+    func createUser(email: String, password: String) -> Completable {
         return authRepository.createUser(email: email, password: password)
     }
 
-    func login(email: String, password: String) -> Single<Void> {
+    func login(email: String, password: String) -> Completable {
         return authRepository.login(email: email, password: password)
     }
     

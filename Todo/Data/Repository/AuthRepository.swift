@@ -20,9 +20,9 @@ extension AuthRepositoryInjectable {
 }
 
 protocol AuthRepository {
-    func getSessionUser() -> Single<User?>
-    func login(email: String, password: String) -> Single<Void>
-    func createUser(email: String, password: String) -> Single<Void>
+    func getSessionUser() -> Completable
+    func login(email: String, password: String) -> Completable
+    func createUser(email: String, password: String) -> Completable
     func logout() -> Completable
 }
 
@@ -32,21 +32,26 @@ struct AuthRepositoryImpl: AuthRepository {
 
     let userRelay = BehaviorRelay<User?>(value: nil)
     
-    func getSessionUser() -> Single<User?> {
-        Single<User?>.create { (observer) -> Disposable in
-            Auth.auth().addStateDidChangeListener { _, result in
-                if let result = result {
-                    let user = User(userId: result.uid)
-                    self.userRelay.accept(user)
-                    observer(.success(user))
+    func getSessionUser() -> Completable {
+        Completable.create { (observer) -> Disposable in
+            Auth.auth().addStateDidChangeListener { _error, result in
+                
+                if let error = _error as? Error {
+                    observer(.error(error))
+                } else {
+                    if let uid = result?.uid {
+                        let user = User(userId: uid)
+                        self.userRelay.accept(user)
+                    }
+                    observer(.completed)
                 }
             }
             return Disposables.create()
         }
     }
 
-    func login(email: String, password: String) -> Single<Void> {
-        Single<Void>.create { (observer) -> Disposable in
+    func login(email: String, password: String) -> Completable {
+        Completable.create { (observer) -> Disposable in
             Auth.auth().signIn(withEmail: email, password: password) { result, errorOptional in
                 if let error = errorOptional {
                     return observer(.error(error))
@@ -55,15 +60,15 @@ struct AuthRepositoryImpl: AuthRepository {
                         let user = User(userId: uid)
                         AuthRepositoryImpl.shared.userRelay.accept(user)
                     }
-                    return observer(.success(()))
+                    return observer(.completed)
                 }
             }
             return Disposables.create()
         }
     }
     
-    func createUser(email: String, password: String) -> Single<Void> {
-        Single<Void>.create { (observer) -> Disposable in
+    func createUser(email: String, password: String) -> Completable {
+        Completable.create { (observer) -> Disposable in
             Auth.auth().createUser(withEmail: email, password: password) { result, errorOptional in
                 if let error = errorOptional {
                     return observer(.error(error))
@@ -72,7 +77,7 @@ struct AuthRepositoryImpl: AuthRepository {
                         let user = User(userId: uid)
                         AuthRepositoryImpl.shared.userRelay.accept(user)
                     }
-                    return observer(.success(()))
+                    return observer(.completed)
                 }
             }
             return Disposables.create()

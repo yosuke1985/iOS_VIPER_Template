@@ -36,7 +36,6 @@ class AuthUseCaseTests: XCTestCase {
     func testCreateUser() throws {
         let createUser = scheduler.createObserver(Void.self)
 
-
         // RxBlocking
         
 //        XCTAssertEqual(try authUseCase.createUser(email: "test5@user.com", password: "1234OKMijn").toBlocking().toArray(), [])

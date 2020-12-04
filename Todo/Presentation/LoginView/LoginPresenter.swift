@@ -15,8 +15,12 @@ protocol LoginPresenter {
     var router: LoginRouter! { get set }
     var authUseCase: AuthUseCase! { get set }
     
-    func getSessionUser()
-    func login(email: String, password: String)
+    func setUp()
+    
+    var getSessionRelay: PublishRelay<Void> { get }
+    var loginRelay: PublishRelay<Void> { get }
+    var emailRelay: BehaviorRelay<String?> { get }
+    var passwordRelay: BehaviorRelay<String?> { get }
     
     var showAPIErrorPopupRelay: Signal<Error> { get }
 
@@ -32,28 +36,48 @@ final class LoginPresenterImpl: LoginPresenter {
     var authUseCase: AuthUseCase!
     let bag = DisposeBag()
     
+    var getSessionRelay = PublishRelay<Void>()
+    var loginRelay = PublishRelay<Void>()
+    var emailRelay = BehaviorRelay<String?>(value: nil)
+    var passwordRelay = BehaviorRelay<String?>(value: nil)
+    
     private let _showAPIErrorPopupRelay = PublishRelay<Error>()
     var showAPIErrorPopupRelay: Signal<Error> {
         return _showAPIErrorPopupRelay.asSignal()
     }
     
-    func getSessionUser() {
-        authUseCase.getSessionUser()
-            .subscribe(onSuccess: { [weak self] user in
-                           if user != nil {
-                               self?.toTodoListView()
-                           }
+    func setUp() {
+        setBind()
+    }
+    
+    func setBind() {
+        loginRelay
+            .flatMap { [weak self] (_) -> Single<Void> in
+                guard let weakSelf = self else { return Single<Void>.never() }
+                guard let email = weakSelf.emailRelay.value, let password = weakSelf.passwordRelay.value else {
+                    return Single<Void>.never()
+                }
+                return weakSelf.authUseCase.login(email: email, password: password)
+                    .andThen(Single<Void>.just(()))
+            }
+            .subscribe(onNext: { [weak self] _ in
+                           guard let weakSelf = self else { return }
+                           weakSelf.toTodoListView()
                        },
                        onError: { [weak self] error in
                            self?._showAPIErrorPopupRelay.accept(error)
                        })
             .disposed(by: bag)
-    }
-
-    func login(email: String, password: String) {
-        authUseCase.login(email: email, password: password)
-            .subscribe(onSuccess: { [weak self] _ in
-                           self?.toTodoListView()
+        
+        getSessionRelay
+            .flatMap { [weak self] (_) -> Single<Void> in
+                guard let weakSelf = self else { return Single<Void>.never() }
+                return weakSelf.authUseCase.getSessionUser()
+                    .andThen(Single<Void>.just(()))
+            }
+            .subscribe(onNext: { [weak self] _ in
+                           guard let weakSelf = self else { return }
+                           weakSelf.toTodoListView()
                        },
                        onError: { [weak self] error in
                            self?._showAPIErrorPopupRelay.accept(error)

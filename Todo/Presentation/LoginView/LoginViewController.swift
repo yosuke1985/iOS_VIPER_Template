@@ -31,7 +31,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        presenter.getSessionUser()
+        presenter.setUp()
         setBind()
     }
     
@@ -47,13 +47,16 @@ class LoginViewController: UIViewController {
             .bind(to: loginButton.rx.isEnabled)
             .disposed(by: bag)
         
+        emailInputFieldView.inputTextField.rx.text
+            .bind(to: presenter.emailRelay)
+            .disposed(by: bag)
+        
+        passInputFieldView.inputTextField.rx.text
+            .bind(to: presenter.passwordRelay)
+            .disposed(by: bag)
+        
         loginButton.rx.tap
-            .subscribe(onNext: { [weak self] _ in
-                guard let weakSelf = self else { return }
-                weakSelf.presenter.login(email: weakSelf.emailInputFieldView.inputTextField.text!,
-                                         password: weakSelf.passInputFieldView.inputTextField.text!)
-                
-            })
+            .bind(to: presenter.loginRelay)
             .disposed(by: bag)
         
         createUserButton.rx.tap
