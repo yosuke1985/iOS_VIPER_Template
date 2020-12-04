@@ -50,15 +50,24 @@ class AuthUseCaseTests: XCTestCase {
 //            .subscribe(createUser)
 //            .disposed(by: bag)
 //
-//        scheduler.createColdObservable([.next(10, "createdByTest@gmail.com")])
+//        scheduler.createHotObservable([
+//            Recorded.next(10, ""),
+//            Recorded.next(20, "createdByTest@gmail.com"),
+//            Recorded.next(30, "")
+//        ])
 //            .bind(to: presenter.emailRelay)
 //            .disposed(by: bag)
 //
-//        scheduler.createColdObservable([.next(10, "ijnOKM8080")])
+//        scheduler.createHotObservable([
+//            Recorded.next(10, ""),
+//            Recorded.next(20, "ijnOKM8080"),
+//            Recorded.next(30, ""),
+//
+//        ])
 //            .bind(to: presenter.passwordRelay)
 //            .disposed(by: bag)
 //
-//        scheduler.createColdObservable([.next(11, ())])
+//        scheduler.createHotObservable([Recorded.next(11, ())])
 //            .bind(to: presenter.createUserRelay)
 //            .disposed(by: bag)
 //
