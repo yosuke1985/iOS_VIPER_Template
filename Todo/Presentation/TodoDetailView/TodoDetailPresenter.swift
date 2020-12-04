@@ -55,7 +55,7 @@ final class TodoDetailPresenterImpl: TodoDetailPresenter {
 
         didBackToDetailRelay
             .flatMap { [weak self] _ -> Single<Void> in
-                guard let weakSelf = self else { return Single<Void>.never() }
+                guard let weakSelf = self else { return Single<Void>.error(CustomError.selfIsNil) }
                 if let todo = weakSelf.todoRelay.value {
                     return weakSelf.todoUseCase.update(todo: todo)
                         .andThen(Single<Void>.just(()))

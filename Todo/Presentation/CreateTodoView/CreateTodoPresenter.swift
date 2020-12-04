@@ -40,7 +40,7 @@ final class CreateTodoPresenterImpl: CreateTodoPresenter {
     func setBind() {
         requestCreateTodoRelay
             .flatMap { [weak self] _ -> Single<Void> in
-                guard let weakSelf = self else { return Single<Void>.never() }
+                guard let weakSelf = self else { return Single<Void>.error(CustomError.selfIsNil) }
                 return weakSelf.todoUseCase.add(title: weakSelf.titleInputtedText.value, description: weakSelf.descriptionInputtedText.value)
                     .andThen(Single<Void>.just(()))
             }

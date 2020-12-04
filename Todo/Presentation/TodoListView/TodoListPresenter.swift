@@ -86,7 +86,7 @@ final class TodoListPresenterImpl: TodoListPresenter {
         
         willDeleteTodoRelay
             .flatMap { [weak self] todo -> Single<Void> in
-                guard let weakSelf = self else { return Single<Void>.never() }
+                guard let weakSelf = self else { return Single<Void>.error(CustomError.selfIsNil)}
                 return weakSelf.todoUseCase.delete(todo: todo)
                     .andThen(Single<Void>.just(()))
             }
@@ -97,7 +97,7 @@ final class TodoListPresenterImpl: TodoListPresenter {
         
         updateIsCheckedRelay
             .flatMap { [weak self] (todo) -> Single<Void> in
-                guard let weakSelf = self else { return Single<Void>.just(()) }
+                guard let weakSelf = self else { return Single<Void>.error(CustomError.selfIsNil) }
                 return weakSelf.todoUseCase.update(todo: todo)
                     .andThen(Single<Void>.just(()))
             }

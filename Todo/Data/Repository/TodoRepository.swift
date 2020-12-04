@@ -41,7 +41,7 @@ class TodoRepositoryImpl: TodoRepository {
     private init() {}
 
     func startListenTodos() -> Completable {
-        guard let userId = Auth.auth().currentUser?.uid else { return Completable.empty() }
+        guard let userId = Auth.auth().currentUser?.uid else { return Completable.error(CustomError.noUser) }
         return Completable.create { [weak self] (observer) -> Disposable in
             guard let weakSelf = self else { return Disposables.create() }
             if weakSelf.snapshotListener == nil {
@@ -86,9 +86,7 @@ class TodoRepositoryImpl: TodoRepository {
     }
 
     func add(title: String, description: String = "") -> Completable {
-        guard let userId = Auth.auth().currentUser?.uid else { return Completable.empty() }
-        // TODO: need no user login Error
-
+        guard let userId = Auth.auth().currentUser?.uid else { return Completable.error(CustomError.noUser) }
         return Completable.create { (observer) -> Disposable in
             let ref = Firestore.firestore().collection("users/\(userId)/todos").document()
                 
@@ -112,7 +110,7 @@ class TodoRepositoryImpl: TodoRepository {
     }
 
     func update(todo: Todo) -> Completable {
-        guard let userId = Auth.auth().currentUser?.uid else { return Completable.empty() }
+        guard let userId = Auth.auth().currentUser?.uid else { return Completable.error(CustomError.noUser) }
         return Completable.create { (observer) -> Disposable in
 
             Firestore.firestore().collection("users/\(userId)/todos").document(todo.id)
@@ -135,15 +133,14 @@ class TodoRepositoryImpl: TodoRepository {
     }
 
     func delete(todo: Todo) -> Completable {
-        Completable.create { (observer) -> Disposable in
-            if let userId = Auth.auth().currentUser?.uid {
-                Firestore.firestore().collection("users/\(userId)/todos").document(todo.id).delete { error in
-                    if let error = error {
-                        observer(.error(error))
+        guard let userId = Auth.auth().currentUser?.uid else { return Completable.error(CustomError.noUser) }
+        return Completable.create { (observer) -> Disposable in
+            Firestore.firestore().collection("users/\(userId)/todos").document(todo.id).delete { error in
+                if let error = error {
+                    observer(.error(error))
 
-                    } else {
-                        observer(.completed)
-                    }
+                } else {
+                    observer(.completed)
                 }
             }
             return Disposables.create()

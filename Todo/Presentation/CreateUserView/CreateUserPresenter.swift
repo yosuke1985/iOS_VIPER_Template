@@ -20,6 +20,8 @@ protocol CreateUserPresenter {
     var createUserRelay: PublishRelay<Void> { get }
     var emailRelay: BehaviorRelay<String?> { get }
     var passwordRelay: BehaviorRelay<String?> { get }
+    var isEnableCreateButtonRelay: Driver<Bool> { get }
+
     var showAPIErrorPopupRelay: Signal<Error> { get }
 
     func toLoginView()
@@ -35,6 +37,10 @@ final class CreateUserPresenterImpl: CreateUserPresenter {
     var createUserRelay = PublishRelay<Void>()
     var emailRelay = BehaviorRelay<String?>(value: nil)
     var passwordRelay = BehaviorRelay<String?>(value: nil)
+    var _isEnableCreateButtonRelay = BehaviorRelay<Bool>(value: false)
+    var isEnableCreateButtonRelay: Driver<Bool> {
+        return _isEnableCreateButtonRelay.asDriver()
+    }
     
     private let _showAPIErrorPopupRelay = PublishRelay<Error>()
     var showAPIErrorPopupRelay: Signal<Error> {
@@ -46,10 +52,21 @@ final class CreateUserPresenterImpl: CreateUserPresenter {
     }
     
     private func setBind() {
+        Observable.combineLatest(emailRelay, passwordRelay)
+            .compactMap { (emailText, passText) -> Bool in
+                if emailText != nil, emailText != "", passText != nil, passText != "" {
+                    return false
+                } else {
+                    return true
+                }
+            }
+            .bind(to: _isEnableCreateButtonRelay)
+            .disposed(by: bag)
+        
         createUserRelay
             .flatMap { [weak self] (_) -> Single<Void> in
                 guard let weakSelf = self else { return Single<Void>.never() }
-                guard let email = weakSelf.emailRelay.value, let password = weakSelf.passwordRelay.value else { return Single<Void>.never() }
+                guard let email = weakSelf.emailRelay.value, let password = weakSelf.passwordRelay.value else { return Single<Void>.error(CustomError.selfIsNil) }
                 return weakSelf.authUseCase.createUser(email: email, password: password)
                     .andThen(Single<Void>.just(()))
             }

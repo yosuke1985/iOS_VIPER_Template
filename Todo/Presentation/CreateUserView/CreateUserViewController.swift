@@ -28,15 +28,8 @@ class CreateUserViewController: UIViewController {
     }
     
     private func setBind() {
-        Observable.combineLatest(emailTextField.rx.text, passTextField.rx.text)
-            .compactMap { (emailText, passText) -> Bool in
-                if emailText != nil, emailText != "", passText != nil, passText != "" {
-                    return false
-                } else {
-                    return true
-                }
-            }
-            .bind(to: createUserButton.rx.isHidden)
+        presenter.isEnableCreateButtonRelay
+            .drive(createUserButton.rx.isHidden)
             .disposed(by: bag)
         
         emailTextField.rx.text

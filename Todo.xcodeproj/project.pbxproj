@@ -48,6 +48,7 @@
 		C930669B2553B34600957493 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C930669A2553B34600957493 /* README.md */; };
 		C939C219257887700079DA35 /* CreateUserPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C939C218257887700079DA35 /* CreateUserPresenterTests.swift */; };
 		C94CADD32578B3B1002613BE /* AuthUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94CADD22578B3B1002613BE /* AuthUseCaseTests.swift */; };
+		C9A1332F257A0C1A0034152D /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A1332E257A0C1A0034152D /* CustomError.swift */; };
 		C9AA01F325678DEC00A5163E /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AA01F225678DEC00A5163E /* NavigationBar.swift */; };
 		C9AA021C2567A9A000A5163E /* CreateTodoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AA02172567A9A000A5163E /* CreateTodoRouter.swift */; };
 		C9AA021D2567A9A000A5163E /* CreateTodoBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AA02182567A9A000A5163E /* CreateTodoBuilder.swift */; };
@@ -135,6 +136,7 @@
 		C930669A2553B34600957493 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C939C218257887700079DA35 /* CreateUserPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserPresenterTests.swift; sourceTree = "<group>"; };
 		C94CADD22578B3B1002613BE /* AuthUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUseCaseTests.swift; sourceTree = "<group>"; };
+		C9A1332E257A0C1A0034152D /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
 		C9AA01F225678DEC00A5163E /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		C9AA02172567A9A000A5163E /* CreateTodoRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTodoRouter.swift; sourceTree = "<group>"; };
 		C9AA02182567A9A000A5163E /* CreateTodoBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTodoBuilder.swift; sourceTree = "<group>"; };
@@ -379,6 +381,7 @@
 			isa = PBXGroup;
 			children = (
 				C93066492552478100957493 /* Todo.swift */,
+				C9A1332E257A0C1A0034152D /* CustomError.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -728,6 +731,7 @@
 			files = (
 				C9D8BC9725676C0900CC11B0 /* NavigationController.swift in Sources */,
 				332FAD66255EBF5000BC64E3 /* TodoListPresenter.swift in Sources */,
+				C9A1332F257A0C1A0034152D /* CustomError.swift in Sources */,
 				C92BD4352555376B002A0DCA /* LoginViewController.swift in Sources */,
 				332FAD96255EBFF200BC64E3 /* TodoDetailBuilder.swift in Sources */,
 				C9D8BD0F25676F8600CC11B0 /* UIViewController+Extension.swift in Sources */,

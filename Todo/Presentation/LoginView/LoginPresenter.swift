@@ -53,7 +53,7 @@ final class LoginPresenterImpl: LoginPresenter {
     func setBind() {
         loginRelay
             .flatMap { [weak self] (_) -> Single<Void> in
-                guard let weakSelf = self else { return Single<Void>.never() }
+                guard let weakSelf = self else { return Single<Void>.error(CustomError.selfIsNil) }
                 guard let email = weakSelf.emailRelay.value, let password = weakSelf.passwordRelay.value else {
                     return Single<Void>.never()
                 }
@@ -71,7 +71,7 @@ final class LoginPresenterImpl: LoginPresenter {
         
         getSessionRelay
             .flatMap { [weak self] (_) -> Single<Void> in
-                guard let weakSelf = self else { return Single<Void>.never() }
+                guard let weakSelf = self else { return Single<Void>.error(CustomError.selfIsNil) }
                 return weakSelf.authUseCase.getSessionUser()
                     .andThen(Single<Void>.just(()))
             }
