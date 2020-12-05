@@ -20,10 +20,10 @@ extension AuthRepositoryInjectable {
 }
 
 protocol AuthRepository {
-    func getSessionUser() -> Single<Result<Void, AuthError>>
-    func login(email: String, password: String) -> Single<Result<Void, AuthError>>
-    func createUser(email: String, password: String) -> Single<Result<Void, AuthError>>
-    func logout() -> Single<Result<Void, AuthError>>
+    func getSessionUser() -> Single<Result<Void, APIError>>
+    func login(email: String, password: String) -> Single<Result<Void, APIError>>
+    func createUser(email: String, password: String) -> Single<Result<Void, APIError>>
+    func logout() -> Single<Result<Void, APIError>>
 }
 
 struct AuthRepositoryImpl: AuthRepository {
@@ -32,12 +32,12 @@ struct AuthRepositoryImpl: AuthRepository {
 
     let userRelay = BehaviorRelay<User?>(value: nil)
     
-    func getSessionUser() -> Single<Result<Void, AuthError>> {
-        Single<Result<Void, AuthError>>.create { (observer) -> Disposable in
+    func getSessionUser() -> Single<Result<Void, APIError>> {
+        Single<Result<Void, APIError>>.create { (observer) -> Disposable in
             Auth.auth().addStateDidChangeListener { _error, result in
                 if let error = _error as? Error {
-                    let authError = AuthError.authError(description: error.localizedDescription)
-                    return observer(.success(Result.failure(authError)))
+                    let apiError = APIError.response(description: error.localizedDescription)
+                    return observer(.success(Result.failure(apiError)))
                 } else if let uid = result?.uid {
                     let user = User(userId: uid)
                     AuthRepositoryImpl.shared.userRelay.accept(user)
@@ -50,12 +50,12 @@ struct AuthRepositoryImpl: AuthRepository {
         }
     }
 
-    func login(email: String, password: String) -> Single<Result<Void, AuthError>> {
-        Single<Result<Void, AuthError>>.create { (observer) -> Disposable in
+    func login(email: String, password: String) -> Single<Result<Void, APIError>> {
+        Single<Result<Void, APIError>>.create { (observer) -> Disposable in
             Auth.auth().signIn(withEmail: email, password: password) { result, errorOptional in
                 if let error = errorOptional {
-                    let authError = AuthError.authError(description: error.localizedDescription)
-                    return observer(.success(Result.failure(authError)))
+                    let apiError = APIError.response(description: error.localizedDescription)
+                    return observer(.success(Result.failure(apiError)))
                 } else if let uid = result?.user.uid {
                     let user = User(userId: uid)
                     AuthRepositoryImpl.shared.userRelay.accept(user)
@@ -68,12 +68,12 @@ struct AuthRepositoryImpl: AuthRepository {
         }
     }
     
-    func createUser(email: String, password: String) -> Single<Result<Void, AuthError>> {
-        Single<Result<Void, AuthError>>.create { (observer) -> Disposable in
+    func createUser(email: String, password: String) -> Single<Result<Void, APIError>> {
+        Single<Result<Void, APIError>>.create { (observer) -> Disposable in
             Auth.auth().createUser(withEmail: email, password: password) { result, errorOptional in
                 if let error = errorOptional {
-                    let authError = AuthError.authError(description: error.localizedDescription)
-                    return observer(.success(Result.failure(authError)))
+                    let apiError = APIError.response(description: error.localizedDescription)
+                    return observer(.success(Result.failure(apiError)))
                 } else if let uid = result?.user.uid {
                     let user = User(userId: uid)
                     AuthRepositoryImpl.shared.userRelay.accept(user)
@@ -86,15 +86,15 @@ struct AuthRepositoryImpl: AuthRepository {
         }
     }
         
-    func logout() -> Single<Result<Void, AuthError>> {
-        return Single<Result<Void, AuthError>>.create { observer -> Disposable in
+    func logout() -> Single<Result<Void, APIError>> {
+        return Single<Result<Void, APIError>>.create { observer -> Disposable in
             do {
                 try Auth.auth().signOut()
                 observer(.success(Result.success(())))
 
             } catch {
-                let authError = AuthError.authError(description: "failure logout")
-                observer(.success(Result.failure(authError)))
+                let apiError = APIError.response(description: "failure logout")
+                observer(.success(Result.failure(apiError)))
             }
             return Disposables.create()
         }

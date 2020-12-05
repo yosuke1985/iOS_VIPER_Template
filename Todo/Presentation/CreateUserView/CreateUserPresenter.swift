@@ -64,7 +64,7 @@ final class CreateUserPresenterImpl: CreateUserPresenter {
             .disposed(by: bag)
         
         createUserRelay
-            .flatMap { [weak self] (_) -> Single<Result<Void, AuthError>> in
+            .flatMap { [weak self] (_) -> Single<Result<Void, APIError>> in
                 guard let weakSelf = self else { return .never() }
                 guard let email = weakSelf.emailRelay.value, let password = weakSelf.passwordRelay.value else { return .error(CustomError.selfIsNil) }
                 return weakSelf.authUseCase.createUser(email: email, password: password)

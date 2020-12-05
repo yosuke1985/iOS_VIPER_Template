@@ -68,7 +68,7 @@ final class LoginPresenterImpl: LoginPresenter {
             .disposed(by: bag)
         
         loginRelay
-            .flatMap { [weak self] (_) -> Single<Result<Void, AuthError>> in
+            .flatMap { [weak self] (_) -> Single<Result<Void, APIError>> in
                 guard let weakSelf = self else { return .error(CustomError.selfIsNil) }
                 guard let email = weakSelf.emailRelay.value, let password = weakSelf.passwordRelay.value else {
                     return .never()
@@ -92,7 +92,7 @@ final class LoginPresenterImpl: LoginPresenter {
             .disposed(by: bag)
         
         getSessionRelay
-            .flatMap { [weak self] (_) -> Single<Result<Void, AuthError>> in
+            .flatMap { [weak self] (_) -> Single<Result<Void, APIError>> in
                 guard let weakSelf = self else { return .error(CustomError.selfIsNil) }
                 return weakSelf.authUseCase.getSessionUser()
             }
