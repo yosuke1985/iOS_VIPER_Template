@@ -73,7 +73,7 @@ struct AuthRepositoryImpl: AuthRepository {
             Auth.auth().createUser(withEmail: email, password: password) { result, errorOptional in
                 if let error = errorOptional {
                     let apiError = APIError.response(description: error.localizedDescription)
-                    return observer(.success(Result.failure(apiError)))
+                    return observer(.success(.failure(apiError)))
                 } else if let uid = result?.user.uid {
                     let user = User(userId: uid)
                     AuthRepositoryImpl.shared.userRelay.accept(user)
@@ -93,8 +93,8 @@ struct AuthRepositoryImpl: AuthRepository {
                 observer(.success(.success(())))
 
             } catch {
-                let apiError = APIError.response(description: "failure logout")
-                observer(.success(.failure(apiError)))
+                let appError = APIError.appError(description: error.localizedDescription)
+                observer(.success(.failure(appError)))
             }
             return Disposables.create()
         }

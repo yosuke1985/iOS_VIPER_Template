@@ -49,7 +49,8 @@ class TodoRepositoryImpl: TodoRepository {
                     { snapshot, error in
                         if let error = error {
                             weakSelf._todosTableViewRelay.accept([])
-                            observer(.error(error))
+                            let apiError = APIError.response(description: error.localizedDescription)
+                            observer(.success(.failure(apiError)))
                         } else if let docs = snapshot?.documents {
                             var todos: [Todo] = []
                             do {
@@ -61,7 +62,8 @@ class TodoRepositoryImpl: TodoRepository {
                                 weakSelf._todosTableViewRelay.accept(sectionTodo)
                                 observer(.success(.success(())))
                             } catch {
-                                observer(.error(error))
+                                let appError = APIError.appError(description: error.localizedDescription)
+                                observer(.success(.failure(appError)))
                             }
                         }
                     }
