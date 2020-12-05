@@ -64,18 +64,23 @@ final class CreateUserPresenterImpl: CreateUserPresenter {
             .disposed(by: bag)
         
         createUserRelay
-            .flatMap { [weak self] (_) -> Single<Void> in
-                guard let weakSelf = self else { return Single<Void>.never() }
-                guard let email = weakSelf.emailRelay.value, let password = weakSelf.passwordRelay.value else { return Single<Void>.error(CustomError.selfIsNil) }
+            .flatMap { [weak self] (_) -> Single<Result<Void, AuthError>> in
+                guard let weakSelf = self else { return .never() }
+                guard let email = weakSelf.emailRelay.value, let password = weakSelf.passwordRelay.value else { return .error(CustomError.selfIsNil) }
                 return weakSelf.authUseCase.createUser(email: email, password: password)
-                    .andThen(Single<Void>.just(()))
             }
-            .subscribe(onNext: { [weak self] _ in
+            .subscribe(onNext: { [weak self] result in
                            guard let weakSelf = self else { return }
-                           weakSelf.toLoginView()
+                           switch result {
+                           case .success:
+                               weakSelf.toLoginView()
+                           case let .failure(error):
+                               weakSelf._showAPIErrorPopupRelay.accept(error)
+                           }
+     
                        },
-                       onError: { [weak self] error in
-                           self?._showAPIErrorPopupRelay.accept(error)
+                       onError: { _ in
+                           fatalError("unexpected error")
                        })
             .disposed(by: bag)
     }

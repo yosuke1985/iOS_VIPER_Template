@@ -115,8 +115,14 @@ final class TodoListPresenterImpl: TodoListPresenter {
 
     func logout() {
         authUseCase.logout()
-            .subscribe { [weak self] in
-                self?.toLoginView()
+            .subscribe { [weak self] result in
+                guard let weakSelf = self else { return }
+                switch result {
+                case .success:
+                    weakSelf.toLoginView()
+                case let .error(error):
+                    weakSelf._showAPIErrorPopupRelay.accept(error)
+                }
             }
             .disposed(by: bag)
     }

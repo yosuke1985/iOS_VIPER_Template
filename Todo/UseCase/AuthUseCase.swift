@@ -17,29 +17,43 @@ extension AuthUseCaseInjectable {
     }
 }
 
+enum LoginResult {
+    case success
+    case failure(errorType: ErrorType, messages: [String])
+    
+    enum ErrorType {
+        case validateError
+        case apiError
+    }
+}
+
+enum AuthError: Error {
+    case authError(description: String)
+}
+
 protocol AuthUseCase {
-    func getSessionUser() -> Completable
-    func createUser(email: String, password: String) -> Completable
-    func login(email: String, password: String) -> Completable
-    func logout() -> Completable
+    func getSessionUser() -> Single<Result<Void, AuthError>>
+    func createUser(email: String, password: String) -> Single<Result<Void, AuthError>>
+    func login(email: String, password: String) -> Single<Result<Void, AuthError>>
+    func logout() -> Single<Result<Void, AuthError>>
 }
 
 struct AuthUseCaseImpl: AuthUseCase,
     AuthRepositoryInjectable
 {
-    func getSessionUser() -> Completable {
+    func getSessionUser() -> Single<Result<Void, AuthError>> {
         return authRepository.getSessionUser()
     }
 
-    func createUser(email: String, password: String) -> Completable {
+    func createUser(email: String, password: String) -> Single<Result<Void, AuthError>> {
         return authRepository.createUser(email: email, password: password)
     }
 
-    func login(email: String, password: String) -> Completable {
+    func login(email: String, password: String) -> Single<Result<Void, AuthError>> {
         return authRepository.login(email: email, password: password)
     }
     
-    func logout() -> Completable {
+    func logout() -> Single<Result<Void, AuthError>> {
         return authRepository.logout()
     }
 }

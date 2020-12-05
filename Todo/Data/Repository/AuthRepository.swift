@@ -20,10 +20,10 @@ extension AuthRepositoryInjectable {
 }
 
 protocol AuthRepository {
-    func getSessionUser() -> Completable
-    func login(email: String, password: String) -> Completable
-    func createUser(email: String, password: String) -> Completable
-    func logout() -> Completable
+    func getSessionUser() -> Single<Result<Void, AuthError>>
+    func login(email: String, password: String) -> Single<Result<Void, AuthError>>
+    func createUser(email: String, password: String) -> Single<Result<Void, AuthError>>
+    func logout() -> Single<Result<Void, AuthError>>
 }
 
 struct AuthRepositoryImpl: AuthRepository {
@@ -32,65 +32,69 @@ struct AuthRepositoryImpl: AuthRepository {
 
     let userRelay = BehaviorRelay<User?>(value: nil)
     
-    func getSessionUser() -> Completable {
-        Completable.create { (observer) -> Disposable in
+    func getSessionUser() -> Single<Result<Void, AuthError>> {
+        Single<Result<Void, AuthError>>.create { (observer) -> Disposable in
             Auth.auth().addStateDidChangeListener { _error, result in
-                
                 if let error = _error as? Error {
-                    observer(.error(error))
+                    let authError = AuthError.authError(description: error.localizedDescription)
+                    return observer(.success(Result.failure(authError)))
+                } else if let uid = result?.uid {
+                    let user = User(userId: uid)
+                    AuthRepositoryImpl.shared.userRelay.accept(user)
+                    return observer(.success(Result.success(())))
                 } else {
-                    if let uid = result?.uid {
-                        let user = User(userId: uid)
-                        self.userRelay.accept(user)
-                    }
-                    observer(.completed)
+                    return observer(.error(CustomError.unknown))
                 }
             }
             return Disposables.create()
         }
     }
 
-    func login(email: String, password: String) -> Completable {
-        Completable.create { (observer) -> Disposable in
+    func login(email: String, password: String) -> Single<Result<Void, AuthError>> {
+        Single<Result<Void, AuthError>>.create { (observer) -> Disposable in
             Auth.auth().signIn(withEmail: email, password: password) { result, errorOptional in
                 if let error = errorOptional {
-                    return observer(.error(error))
+                    let authError = AuthError.authError(description: error.localizedDescription)
+                    return observer(.success(Result.failure(authError)))
+                } else if let uid = result?.user.uid {
+                    let user = User(userId: uid)
+                    AuthRepositoryImpl.shared.userRelay.accept(user)
+                    return observer(.success(Result.success(())))
                 } else {
-                    if let uid = result?.user.uid {
-                        let user = User(userId: uid)
-                        AuthRepositoryImpl.shared.userRelay.accept(user)
-                    }
-                    return observer(.completed)
+                    return observer(.error(CustomError.unknown))
                 }
             }
             return Disposables.create()
         }
     }
     
-    func createUser(email: String, password: String) -> Completable {
-        Completable.create { (observer) -> Disposable in
+    func createUser(email: String, password: String) -> Single<Result<Void, AuthError>> {
+        Single<Result<Void, AuthError>>.create { (observer) -> Disposable in
             Auth.auth().createUser(withEmail: email, password: password) { result, errorOptional in
                 if let error = errorOptional {
-                    return observer(.error(error))
+                    let authError = AuthError.authError(description: error.localizedDescription)
+                    return observer(.success(Result.failure(authError)))
+                } else if let uid = result?.user.uid {
+                    let user = User(userId: uid)
+                    AuthRepositoryImpl.shared.userRelay.accept(user)
+                    return observer(.success(Result.success(())))
                 } else {
-                    if let uid = result?.user.uid {
-                        let user = User(userId: uid)
-                        AuthRepositoryImpl.shared.userRelay.accept(user)
-                    }
-                    return observer(.completed)
+                    return observer(.error(CustomError.unknown))
                 }
             }
             return Disposables.create()
         }
     }
         
-    func logout() -> Completable {
-        return Completable.create { observer -> Disposable in
+    func logout() -> Single<Result<Void, AuthError>> {
+        return Single<Result<Void, AuthError>>.create { observer -> Disposable in
             do {
                 try Auth.auth().signOut()
-                observer(.completed)
+                observer(.success(Result.success(())))
+
             } catch {
-                observer(.error(error))
+                let authError = AuthError.authError(description: "failure logout")
+                observer(.success(Result.failure(authError)))
             }
             return Disposables.create()
         }
