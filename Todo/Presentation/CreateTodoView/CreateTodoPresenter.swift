@@ -39,16 +39,21 @@ final class CreateTodoPresenterImpl: CreateTodoPresenter {
 
     func setBind() {
         requestCreateTodoRelay
-            .flatMap { [weak self] _ -> Single<Void> in
-                guard let weakSelf = self else { return Single<Void>.error(CustomError.selfIsNil) }
+            .flatMap { [weak self] _ -> Single<Result<Void, APIError>> in
+                guard let weakSelf = self else { return .error(CustomError.selfIsNil) }
                 return weakSelf.todoUseCase.add(title: weakSelf.titleInputtedText.value, description: weakSelf.descriptionInputtedText.value)
-                    .andThen(Single<Void>.just(()))
             }
-            .subscribe(onNext: { [weak self] in
-                           self?.toLoginView()
+            .subscribe(onNext: { [weak self] result in
+                           guard let weakSelf = self else { return }
+                           switch result {
+                           case .success:
+                               weakSelf.toLoginView()
+                           case let .failure(error):
+                               weakSelf._showAPIErrorPopupRelay.accept(error)
+                           }
                        },
-                       onError: { [weak self] error in
-                           self?._showAPIErrorPopupRelay.accept(error)
+                       onError: { _ in
+                           fatalError("unexpected error")
                        })
             .disposed(by: bag)
     }

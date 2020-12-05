@@ -85,25 +85,43 @@ final class TodoListPresenterImpl: TodoListPresenter {
             .disposed(by: bag)
         
         willDeleteTodoRelay
-            .flatMap { [weak self] todo -> Single<Void> in
-                guard let weakSelf = self else { return Single<Void>.error(CustomError.selfIsNil) }
+            .flatMap { [weak self] todo -> Single<Result<Void, APIError>> in
+                guard let weakSelf = self else { return .error(CustomError.selfIsNil) }
                 return weakSelf.todoUseCase.delete(todo: todo)
-                    .andThen(Single<Void>.just(()))
             }
-            .subscribe(onError: { [weak self] error in
-                self?._showAPIErrorPopupRelay.accept(error)
-            })
+            .subscribe(onNext: { [weak self] result in
+                           guard let weakSelf = self else { return }
+                           switch result {
+                           case .success:
+                               break
+                           case let .failure(error):
+                               weakSelf._showAPIErrorPopupRelay.accept(error)
+                           }
+
+                       },
+                       onError: { _ in
+                           fatalError("unexpected error")
+                       })
             .disposed(by: bag)
         
         updateIsCheckedRelay
-            .flatMap { [weak self] (todo) -> Single<Void> in
-                guard let weakSelf = self else { return Single<Void>.error(CustomError.selfIsNil) }
+            .flatMap { [weak self] (todo) -> Single<Result<Void, APIError>> in
+                guard let weakSelf = self else { return .error(CustomError.selfIsNil) }
                 return weakSelf.todoUseCase.update(todo: todo)
-                    .andThen(Single<Void>.just(()))
             }
-            .subscribe(onError: { [weak self] error in
-                self?._showAPIErrorPopupRelay.accept(error)
-            })
+            .subscribe(onNext: { [weak self] result in
+                           guard let weakSelf = self else { return }
+                           switch result {
+                           case .success:
+                               break
+                           case let .failure(error):
+                               weakSelf._showAPIErrorPopupRelay.accept(error)
+                           }
+     
+                       },
+                       onError: { _ in
+                           fatalError("unexpected error")
+                       })
             .disposed(by: bag)
     }
     

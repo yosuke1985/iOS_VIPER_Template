@@ -37,11 +37,11 @@ struct AuthRepositoryImpl: AuthRepository {
             Auth.auth().addStateDidChangeListener { _error, result in
                 if let error = _error as? Error {
                     let apiError = APIError.response(description: error.localizedDescription)
-                    return observer(.success(Result.failure(apiError)))
+                    return observer(.success(.failure(apiError)))
                 } else if let uid = result?.uid {
                     let user = User(userId: uid)
                     AuthRepositoryImpl.shared.userRelay.accept(user)
-                    return observer(.success(Result.success(())))
+                    return observer(.success(.success(())))
                 } else {
                     return observer(.error(CustomError.unknown))
                 }
@@ -55,11 +55,11 @@ struct AuthRepositoryImpl: AuthRepository {
             Auth.auth().signIn(withEmail: email, password: password) { result, errorOptional in
                 if let error = errorOptional {
                     let apiError = APIError.response(description: error.localizedDescription)
-                    return observer(.success(Result.failure(apiError)))
+                    return observer(.success(.failure(apiError)))
                 } else if let uid = result?.user.uid {
                     let user = User(userId: uid)
                     AuthRepositoryImpl.shared.userRelay.accept(user)
-                    return observer(.success(Result.success(())))
+                    return observer(.success(.success(())))
                 } else {
                     return observer(.error(CustomError.unknown))
                 }
@@ -77,7 +77,7 @@ struct AuthRepositoryImpl: AuthRepository {
                 } else if let uid = result?.user.uid {
                     let user = User(userId: uid)
                     AuthRepositoryImpl.shared.userRelay.accept(user)
-                    return observer(.success(Result.success(())))
+                    return observer(.success(.success(())))
                 } else {
                     return observer(.error(CustomError.unknown))
                 }
@@ -90,11 +90,11 @@ struct AuthRepositoryImpl: AuthRepository {
         return Single<Result<Void, APIError>>.create { observer -> Disposable in
             do {
                 try Auth.auth().signOut()
-                observer(.success(Result.success(())))
+                observer(.success(.success(())))
 
             } catch {
                 let apiError = APIError.response(description: "failure logout")
-                observer(.success(Result.failure(apiError)))
+                observer(.success(.failure(apiError)))
             }
             return Disposables.create()
         }

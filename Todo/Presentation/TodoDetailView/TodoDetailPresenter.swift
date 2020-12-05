@@ -54,18 +54,26 @@ final class TodoDetailPresenterImpl: TodoDetailPresenter {
             .disposed(by: bag)
 
         didBackToDetailRelay
-            .flatMap { [weak self] _ -> Single<Void> in
-                guard let weakSelf = self else { return Single<Void>.error(CustomError.selfIsNil) }
+            .flatMap { [weak self] _ -> Single<Result<Void, APIError>> in
+                guard let weakSelf = self else { return .error(CustomError.selfIsNil) }
                 if let todo = weakSelf.todoRelay.value {
                     return weakSelf.todoUseCase.update(todo: todo)
-                        .andThen(Single<Void>.just(()))
                 }
-                return Single<Void>.never()
+                return .never()
             }
-            .subscribe(onError: { [weak self] error in
-                self?._showAPIErrorPopupRelay.accept(error)
-            }
-            )
+            .subscribe(onNext: { [weak self] result in
+                           guard let weakSelf = self else { return }
+                           switch result {
+                           case .success:
+                               break
+                           case let .failure(error):
+                               weakSelf._showAPIErrorPopupRelay.accept(error)
+                           }
+
+                       },
+                       onError: { _ in
+                           fatalError("unexpected error")
+                       })
             .disposed(by: bag)
     }
 }

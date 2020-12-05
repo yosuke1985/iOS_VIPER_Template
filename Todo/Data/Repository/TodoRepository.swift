@@ -21,12 +21,12 @@ extension TodoRepositoryInjectable {
 }
 
 protocol TodoRepository {
-    func startListenTodos() -> Completable
+    func startListenTodos() -> Single<Result<Void, APIError>>
     func removeTodosListener()
     func todosRelay() -> Driver<[SectionTodo]>
-    func add(title: String, description: String) -> Completable
-    func update(todo: Todo) -> Completable
-    func delete(todo: Todo) -> Completable
+    func add(title: String, description: String) -> Single<Result<Void, APIError>>
+    func update(todo: Todo) -> Single<Result<Void, APIError>>
+    func delete(todo: Todo) -> Single<Result<Void, APIError>>
 }
 
 class TodoRepositoryImpl: TodoRepository {
@@ -40,9 +40,9 @@ class TodoRepositoryImpl: TodoRepository {
 
     private init() {}
 
-    func startListenTodos() -> Completable {
-        guard let userId = Auth.auth().currentUser?.uid else { return Completable.error(CustomError.noUser) }
-        return Completable.create { [weak self] (observer) -> Disposable in
+    func startListenTodos() -> Single<Result<Void, APIError>> {
+        guard let userId = Auth.auth().currentUser?.uid else { return .error(CustomError.noUser) }
+        return .create { [weak self] (observer) -> Disposable in
             guard let weakSelf = self else { return Disposables.create() }
             if weakSelf.snapshotListener == nil {
                 weakSelf.snapshotListener = Firestore.firestore().collection("users/\(userId)/todos").order(by: "updatedAt", descending: true).addSnapshotListener
@@ -59,7 +59,7 @@ class TodoRepositoryImpl: TodoRepository {
                                 }
                                 let sectionTodo = [SectionTodo(header: "", items: todos)]
                                 weakSelf._todosTableViewRelay.accept(sectionTodo)
-                                observer(.completed)
+                                observer(.success(.success(())))
                             } catch {
                                 observer(.error(error))
                             }
@@ -85,9 +85,9 @@ class TodoRepositoryImpl: TodoRepository {
         snapshotListener.remove()
     }
 
-    func add(title: String, description: String = "") -> Completable {
-        guard let userId = Auth.auth().currentUser?.uid else { return Completable.error(CustomError.noUser) }
-        return Completable.create { (observer) -> Disposable in
+    func add(title: String, description: String = "") -> Single<Result<Void, APIError>> {
+        guard let userId = Auth.auth().currentUser?.uid else { return .error(CustomError.noUser) }
+        return .create { (observer) -> Disposable in
             let ref = Firestore.firestore().collection("users/\(userId)/todos").document()
                 
             ref.setData([
@@ -99,9 +99,10 @@ class TodoRepositoryImpl: TodoRepository {
                 "createdAt": Date()
             ], completion: { error in
                 if let error = error {
-                    observer(.error(error))
+                    let apiError = APIError.response(description: error.localizedDescription)
+                    observer(.success(.failure(apiError)))
                 } else {
-                    observer(.completed)
+                    observer(.success(.success(())))
                 }
             })
 
@@ -109,9 +110,9 @@ class TodoRepositoryImpl: TodoRepository {
         }
     }
 
-    func update(todo: Todo) -> Completable {
-        guard let userId = Auth.auth().currentUser?.uid else { return Completable.error(CustomError.noUser) }
-        return Completable.create { (observer) -> Disposable in
+    func update(todo: Todo) -> Single<Result<Void, APIError>> {
+        guard let userId = Auth.auth().currentUser?.uid else { return .error(CustomError.noUser) }
+        return .create { (observer) -> Disposable in
 
             Firestore.firestore().collection("users/\(userId)/todos").document(todo.id)
                 .updateData([
@@ -123,24 +124,25 @@ class TodoRepositoryImpl: TodoRepository {
                 ],
                 completion: { error in
                     if let error = error {
-                        observer(.error(error))
+                        let apiError = APIError.response(description: error.localizedDescription)
+                        observer(.success(.failure(apiError)))
                     } else {
-                        observer(.completed)
+                        observer(.success(.success(())))
                     }
                 })
             return Disposables.create()
         }
     }
 
-    func delete(todo: Todo) -> Completable {
-        guard let userId = Auth.auth().currentUser?.uid else { return Completable.error(CustomError.noUser) }
-        return Completable.create { (observer) -> Disposable in
+    func delete(todo: Todo) -> Single<Result<Void, APIError>> {
+        guard let userId = Auth.auth().currentUser?.uid else { return .error(CustomError.noUser) }
+        return .create { (observer) -> Disposable in
             Firestore.firestore().collection("users/\(userId)/todos").document(todo.id).delete { error in
                 if let error = error {
-                    observer(.error(error))
-
+                    let apiError = APIError.response(description: error.localizedDescription)
+                    observer(.success(.failure(apiError)))
                 } else {
-                    observer(.completed)
+                    observer(.success(.success(())))
                 }
             }
             return Disposables.create()

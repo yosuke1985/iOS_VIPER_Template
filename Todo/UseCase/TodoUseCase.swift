@@ -19,18 +19,18 @@ extension TodoUseCaseInjectable {
 }
 
 protocol TodoUseCase {
-    func startListenTodos() -> Completable
+    func startListenTodos() -> Single<Result<Void, APIError>>
     func todosRelay() -> Driver<[SectionTodo]>
     func tearDown()
-    func add(title: String, description: String) -> Completable
-    func update(todo: Todo) -> Completable
-    func delete(todo: Todo) -> Completable
+    func add(title: String, description: String) -> Single<Result<Void, APIError>>
+    func update(todo: Todo) -> Single<Result<Void, APIError>>
+    func delete(todo: Todo) -> Single<Result<Void, APIError>>
 }
 
 struct TodoUseCaseImpl: TodoUseCase,
     TodoRepositoryInjectable
 {
-    func startListenTodos() -> Completable {
+    func startListenTodos() -> Single<Result<Void, APIError>> {
         return todoRepository.startListenTodos()
     }
 
@@ -42,15 +42,15 @@ struct TodoUseCaseImpl: TodoUseCase,
         return todoRepository.removeTodosListener()
     }
 
-    func add(title: String, description: String) -> Completable {
+    func add(title: String, description: String) -> Single<Result<Void, APIError>> {
         return todoRepository.add(title: title, description: description)
     }
     
-    func update(todo: Todo) -> Completable {
+    func update(todo: Todo) -> Single<Result<Void, APIError>> {
         return todoRepository.update(todo: todo)
     }
 
-    func delete(todo: Todo) -> Completable {
+    func delete(todo: Todo) -> Single<Result<Void, APIError>> {
         return todoRepository.delete(todo: todo)
     }
 }
