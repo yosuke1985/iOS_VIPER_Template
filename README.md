@@ -22,17 +22,17 @@
 - Firebase
 - Firestore
 
+
 ##　アーキテクチャ概要
-
-
-TODO:　クリーンアーキテクチャについて
-
 
 - Clean Architecture + Router　= VIPER
 - VIPERはView Interactor Presenter Entity Routerの頭文字を取ったものであるが、ここでは Interactorとは呼ばずUseCaseと呼ぶことにする。
 - 双方向バインディングにはRxSwiftを使用する。
 - レポジトリにはInterface Adapterは作成しない。
 
+## クリーンアーキテクチャについて
+
+TODO: 説明
 
 <img src="Images/CleanArchitecture.jpg" width = 90%>
 
