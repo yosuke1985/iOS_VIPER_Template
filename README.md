@@ -75,22 +75,87 @@ root/:
 |  Router | (ModuleName)Router<sup>[4](#note4)</sup> | (ModuleName)RouterImpl |
 |  Repository | (ModuleName)Repository | (ModuleName)RepositoryImpl |
 
+
+## VIPER実装解説
+
 ### Dependency Injection
+
+TODO:
 
 - DIの部分は、protocolの\\(ModuleName)Injectableを作成し、protocol extensionに実体を持つ。
 - Builderについて
   - 各画面に対し、1 ViewControleler, 1 storyboardで構成し、それに対応したBuilderが依存関係の注入しPresenter, UseCase, RouterにDIする。
 
-### 画面遷移を責務を持つRouter
+#### Protocol extensionでのDI
+
+TODO:
+
+#### BuilderパターンでのDI
+
+TODO:
+
+#### SingletonパターンでのDI
+
+TODO:
+
+## View, Presenter
+
+TODO:
+
+## UseCase
+
+TODO:
+
+## Repostiroy
+
+TODO:
+
+### Router
 
 - 画面遷移の責務を持つRouterパターン。
   - Routerは画面遷移の責務を持つ。画面遷移先のViewControllerをBuildし、遷移する。
   - 画面遷移部分を切り離す各Routerに対応したUIViewControllerの参照を持ち、Presenterから受けた入力によって画面遷移させる。
 - 各Transitionableは、buildして画面遷移する責務を持つ。各Transitionableに準拠したRouter(UIViewControllerの実体を持つ)は、その準拠した画面へ遷移することができるようになる。（遷移するための実装がそのTransitionableにあるので）
 
-- [ ] Routerについてコードを貼り付けて解説
+#### 例）TodoListViewの画面遷移
+
+- TodoListViewからTodoDetailViewへの画面遷移
+<img src="/Screenshots/TodoListView.png" height = 200px><font size="+6">➔</font><img src="/Screenshots/TodoDetailView.png" height = 200px>
 
 ``` swift
+
+protocol TodoListPresenter {
+    var router: TodoListRouter! { get set }
+}
+
+final class TodoListPresenterImpl: TodoListPresenter {
+    var router: TodoListRouter!
+}
+
+protocol TodoListRouter:
+    LoginViewTransitionable,
+    TodoDetailViewTransitionable,
+    CreateTodoViewTransitionable
+{
+    var viewController: UIViewController? { get set }
+}
+
+final class TodoListRouterImpl: TodoListRouter {
+    weak var viewController: UIViewController?
+}
+
+
+protocol TodoDetailViewTransitionable {
+    var viewController: UIViewController? { get set }
+    func toTodoDetailView(todo: Todo)
+}
+
+extension TodoDetailViewTransitionable {
+    func toTodoDetailView(todo: Todo) {
+        let vc = TodoDetailBuilder().build(todo: todo)
+        viewController?.navigationController?.pushViewController(vc, animated: true)
+    }
+}
 
 ```
 
