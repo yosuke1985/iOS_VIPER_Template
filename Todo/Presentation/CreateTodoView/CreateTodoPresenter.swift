@@ -52,8 +52,8 @@ final class CreateTodoPresenterImpl: CreateTodoPresenter {
                                weakSelf._showAPIErrorPopupRelay.accept(error)
                            }
                        },
-                       onError: { _ in
-                           fatalError("unexpected error")
+                       onError: { error in
+                           fatalError(error.localizedDescription)
                        })
             .disposed(by: bag)
     }

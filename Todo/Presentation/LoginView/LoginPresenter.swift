@@ -86,8 +86,8 @@ final class LoginPresenterImpl: LoginPresenter {
                            }
                 
                        },
-                       onError: { _ in
-                           fatalError("unexpected error")
+                       onError: { error in
+                           fatalError(error.localizedDescription)
                        })
             .disposed(by: bag)
         
@@ -106,9 +106,8 @@ final class LoginPresenterImpl: LoginPresenter {
                            }
      
                        },
-                       onError: { _ in
-                           fatalError("unexpected error")
-
+                       onError: { error in
+                           fatalError(error.localizedDescription)
                        })
             .disposed(by: bag)
         

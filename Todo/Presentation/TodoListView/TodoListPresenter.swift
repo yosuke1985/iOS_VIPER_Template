@@ -102,8 +102,8 @@ final class TodoListPresenterImpl: TodoListPresenter {
                            }
 
                        },
-                       onError: { _ in
-                           fatalError("unexpected error")
+                       onError: { error in
+                           fatalError(error.localizedDescription)
                        })
             .disposed(by: bag)
         
@@ -122,8 +122,8 @@ final class TodoListPresenterImpl: TodoListPresenter {
                            }
      
                        },
-                       onError: { _ in
-                           fatalError("unexpected error")
+                       onError: { error in
+                           fatalError(error.localizedDescription)
                        })
             .disposed(by: bag)
         

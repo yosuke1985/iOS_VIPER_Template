@@ -73,8 +73,8 @@ final class TodoDetailPresenterImpl: TodoDetailPresenter {
                            }
 
                        },
-                       onError: { _ in
-                           fatalError("unexpected error")
+                       onError: { error in
+                           fatalError(error.localizedDescription)
                        })
             .disposed(by: bag)
     }
