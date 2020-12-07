@@ -7,7 +7,9 @@
 
 import UIKit
 
-struct TodoListBuilder: TodoUseCaseInjectable {
+struct TodoListBuilder: TodoUseCaseInjectable,
+    AuthUseCaseInjectable
+{
     func build() -> UIViewController {
         let vc = TodoListViewController.instantiate()
         let router = TodoListRouterImpl()
@@ -16,7 +18,7 @@ struct TodoListBuilder: TodoUseCaseInjectable {
         router.viewController = vc
         presenter.router = router
         presenter.todoUseCase = todoUseCaseImpl
-        presenter.authUseCase = AuthUseCaseImpl()
+        presenter.authUseCase = authUseCaseImpl
         vc.presenter = presenter
         
         return vc

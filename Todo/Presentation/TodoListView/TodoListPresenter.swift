@@ -35,7 +35,8 @@ extension SectionTodo: AnimatableSectionModelType {
 protocol TodoListPresenter {
     var router: TodoListRouter! { get set }
     var todoUseCase: TodoUseCase! { get set }
-    
+    var authUseCase: AuthUseCase! { get set }
+
     var todoTableViewRelay: BehaviorRelay<[SectionTodo]> { get }
     var willDeleteTodoRelay: PublishRelay<Todo> { get }
     
