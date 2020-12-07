@@ -68,12 +68,62 @@ root/:
 
 |  役割 | 抽象型 | 具象型 |
 | --- | --- | --- |
-|  View | | (ModuleName)View, (ModuleName)ViewController |
-|  Presenter | (ModuleName)Presenter <sup>[2](#note2)</sup>| (ModuleName)PresenterImpl |
-|  UseCase| (ModuleName)UseCase<sup>[3](#note3)</sup>  | (ModuleName)UseCaseImpl |
+|  View | | \\(ModuleName)View, \\(ModuleName)ViewController |
+|  Presenter | \\(ModuleName)Presenter <sup>[2](#note2)</sup>| \\(ModuleName)PresenterImpl |
+|  UseCase| \\(ModuleName)UseCase<sup>[3](#note3)</sup>  | \\(ModuleName)UseCaseImpl |
 |  Entity |  | Entity |
-|  Router | (ModuleName)Router<sup>[4](#note4)</sup> | (ModuleName)RouterImpl |
-|  Repository | (ModuleName)Repository | (ModuleName)RepositoryImpl |
+|  Router | \\(ModuleName)Router<sup>[4](#note4)</sup> | \\(ModuleName)RouterImpl |
+|  Repository | \\(ModuleName)Repository | \\(ModuleName)RepositoryImpl |
+
+#### View, ViewController
+
+``` swift
+class ModuleName: UIView {
+}
+
+class ModuleNameViewController: UIViewController {
+}
+```
+
+#### Presenter
+
+``` swift
+protocol ModuleNamePresenter {
+}
+
+struct ModuleNamePresenterImpl: ModuleNamePresenter {
+}
+```
+
+#### UseCase
+
+``` swift
+protocol ModuleNameUseCase {
+}
+
+struct ModuleNameUseCaseImpl: ModuleNameUseCase {
+}
+```
+
+#### Router
+
+``` swift
+protocol ModuleNameRouter {
+}
+
+struct ModuleNameRouterImpl: ModuleNameRouter {
+}
+```
+
+#### Repository
+
+``` swift
+protocol ModuleNameRepository {
+}
+
+struct ModuleNameRepositoryImpl: ModuleNameRepository {
+}
+```
 
 ## VIPER実装解説
 
