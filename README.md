@@ -200,8 +200,8 @@ struct TodoListBuilder:
 Viewはpresenterを持ち、Viewからの入力をpresenterを通じてすべて流し込む。
 ないしは、Presenterからの入力を受けて、それをViewに反映させる。
 
-Input: PresenterからのアクションをViewに反映させる。
-Output: ユーザーからのアクションをPresenterにわたす。
+### Input: PresenterからのアクションをViewに反映させる。
+### Output: ユーザーからのアクションをPresenterにわたす。
 
 ``` swift
 class LoginViewController: UIViewController {
@@ -212,8 +212,9 @@ class LoginViewController: UIViewController {
 
 ## Presenterの役割
 
-Input: Viewからのアクションをもらう
-Output: UseCaseにアクションを起こす
+### Input: Viewからのアクションをもらう
+
+### Output: UseCaseにアクションを起こす
 
 ``` swift
 
@@ -233,8 +234,9 @@ final class TodoListPresenterImpl: TodoListPresenter {
 
 ## UseCaseの役割
 
-Input: Presenterからのアクションをもらう
-Output: Repositoryからデータを取り出したり、ビジネスロジックであるEntityを使用し処理した結果を返す。
+### Input: Presenterからのアクションをもらう
+
+### Output: Repositoryからデータを取り出したり、ビジネスロジックであるEntityを使用し処理した結果を返す
 
 ``` swift
 protocol AuthUseCase {
@@ -267,7 +269,13 @@ struct AuthUseCaseImpl: AuthUseCase,
 
 ## Repostiroyの役割
 
-TODO:
+### Input: UseCaseからのアクションをもらう
+
+### Output: UseCaseのアクションに基づいて、APIを叩いたり、ローカルDBを操作したりする。
+
+以下の実装の例ではAPIを叩いた結果はResult型で返すようにしている。
+
+Presenterで受けたResult型でsubscribeの中でAPIの結果をsuccess, failureで分岐させている。
 
 ``` swift
 protocol AuthRepository {
@@ -298,9 +306,47 @@ struct AuthRepositoryImpl: AuthRepository {
         }
     }
 }
+
+final class LoginPresenterImpl: LoginPresenter {
+
+    func setBind() {
+
+        loginRelay
+            .flatMap { [weak self] (_) -> Single<Result<Void, APIError>> in
+                guard let weakSelf = self else { return .error(CustomError.selfIsNil) }
+                guard let email = weakSelf.emailRelay.value,
+                      let password = weakSelf.passwordRelay.value
+                else {
+                    return .never()
+                }
+                return weakSelf.authUseCase.login(email: email, password: password)
+            }
+            .subscribe(onNext: { [weak self] result in
+                           guard let weakSelf = self else { return }
+                           switch result {
+                           case .success:
+                               weakSelf.router.toTodoListView()
+                           case let .failure(error):
+                               weakSelf._showAPIErrorPopupRelay.accept(error)
+                           }
+                
+                       },
+                       onError: { error in
+                           fatalError(error.localizedDescription)
+                       })
+            .disposed(by: bag)
+    }
+}
+
 ```
 
 ### Routerの役割
+
+### Input: Presenterからのアクションをもらう
+
+### Output:
+
+TODO:
 
 - 画面遷移の責務を持つRouterパターン。
   - Routerは画面遷移の責務を持つ。画面遷移先のViewControllerをBuildし、遷移する。

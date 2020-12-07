@@ -75,7 +75,6 @@ final class LoginPresenterImpl: LoginPresenter {
                 }
                 return weakSelf.authUseCase.login(email: email, password: password)
             }
-            .debug()
             .subscribe(onNext: { [weak self] result in
                            guard let weakSelf = self else { return }
                            switch result {
