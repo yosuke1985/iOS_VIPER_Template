@@ -11,6 +11,7 @@ disabled_rules:
 - trailing_comma
 - opening_brace
 - colon
+- identifier_name
 
 identifier_name:
   min_length:
