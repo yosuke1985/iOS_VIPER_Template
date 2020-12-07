@@ -3,6 +3,7 @@
 ## 残
 
 - [ ] VIPERについての解説
+- [ ] router部分の実装の解説
 - [ ] アプリリリース
   - [ ] アイコンの準備
   - [ ] スクリーンショット
@@ -100,11 +101,11 @@ View入力、アクションがトリガーとなって行う処理に使用す�
 
 ``` swift
 protocol ViewPresenter {
-    var loginRequest: PublishRelay<Void> { get }
+    var loginRequestRelay: PublishRelay<Void> { get }
 }
 
 class ViewPresenterImpl: ViewNamePresenter {
-    let loginRequest = PublishRelay<Void>()
+    let loginRequestRelay = PublishRelay<Void>()
 }
 
 class ViewController {
@@ -116,13 +117,13 @@ class ViewController {
         loginButton.rx.tap
             .subscribe(onNext: { [weak self] _ in
                 guard let weakSelf = self else { return }
-                weakSelf.presenter.loginRequest.accept(())
+                weakSelf.presenter.loginRequestRelay.accept(())
             })
             .disposed(by: bag)
 
         // Abbreviation / 省略形
         loginButton.rx.tap
-            .bind(to: presener.loginRequest)
+            .bind(to: presener.loginRequestRelay)
             .disposed(by: bag)
     }
 }
@@ -152,10 +153,10 @@ class ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        presenter.nextSereen
+        presenter.toNextViewRelay
             .emit(onNext: { [weak self] _ in
                 guard let weakSelf = self else { return }
-                weakSelf.presenter.moveToNextSereen()
+                weakSelf.router.moveToNextSereen()
             })
             .disposed(by: bag)
     }
