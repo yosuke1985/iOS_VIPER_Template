@@ -209,8 +209,9 @@ struct TodoListBuilder:
 Viewはpresenterを持ち、Viewからの入力をpresenterを通じてすべて流し込む。
 ないしは、Presenterからの入力を受けて、それをViewに反映させる。
 
-### Input: PresenterからのアクションをViewに反映させる。
-### Output: ユーザーからのアクションをPresenterにわたす。
+<b>Input: PresenterからのアクションをViewに反映させる。</b>
+
+<b>Output: ユーザーからのアクションをPresenterにわたす。</b>
 
 ``` swift
 class LoginViewController: UIViewController {
@@ -221,9 +222,9 @@ class LoginViewController: UIViewController {
 
 ## Presenterの役割
 
-### Input: Viewからのアクションをもらう
+<b>Input: Viewからのアクションをもらう</b>
 
-### Output: UseCaseにアクションを起こす
+<b>Output: UseCaseにアクションを起こす</b>
 
 ``` swift
 
@@ -243,9 +244,9 @@ final class TodoListPresenterImpl: TodoListPresenter {
 
 ## UseCaseの役割
 
-### Input: Presenterからのアクションをもらう
+<b>Input: Presenterからのアクションをもらう</b>
 
-### Output: Repositoryからデータを取り出したり、ビジネスロジックであるEntityを使用し処理した結果を返す
+<b>Output: Repositoryからデータを取り出したり、ビジネスロジックであるEntityを使用し処理した結果を返す</b>
 
 ``` swift
 protocol AuthUseCase {
@@ -278,9 +279,9 @@ struct AuthUseCaseImpl: AuthUseCase,
 
 ## Repostiroyの役割
 
-### Input: UseCaseからのアクションをもらう
+<b>Input: UseCaseからのアクションをもらう</b>
 
-### Output: UseCaseのアクションに基づいて、APIを叩いたり、ローカルDBを操作したりする。
+<b>Output: UseCaseのアクションに基づいて、APIを叩いたり、ローカルDBを操作したりする。</b>
 
 以下の実装の例ではAPIを叩いた結果はResult型で返すようにしている。
 
@@ -351,9 +352,9 @@ final class LoginPresenterImpl: LoginPresenter {
 
 ### Routerの役割
 
-### Input: Presenterからのアクションをもらう
+<b>Input: Presenterからのアクションをもらう</b>
 
-### Output:
+<b>Output:</b>
 
 TODO:
 
