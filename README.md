@@ -79,16 +79,16 @@
 ## Firestore
 
 ``` yml
-users:
-  documentID: userID
-  
-  todos:
-    documentID: auto
-    title: String
-    description: String
-    isChecked: Bool
-    createdAt: Date
-    updatedAt: Date
+root:
+  users:
+    userID: userID
+      todos:
+        documentID: auto
+        title: String
+        description: String
+        isChecked: Bool
+        createdAt: Date
+        updatedAt: Date
 ```
 
 ### データバインディング
