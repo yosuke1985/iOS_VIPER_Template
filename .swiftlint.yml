@@ -12,6 +12,8 @@ disabled_rules:
 - opening_brace
 - colon
 - identifier_name
+- cyclomatic_complexity
+- function_body_length
 
 identifier_name:
   min_length:
