@@ -2,7 +2,7 @@
 
 ## 残
 
-- [ ] RxSwiftのバインディングについて（別枠？Gist?）
+- [ ] RxSwiftのバインディングについて
 - [ ] アプリリリース
   - [ ] アイコンの準備
   - [ ] スクリーンショット
@@ -91,6 +91,121 @@ users:
     updatedAt: Date
 ```
 
+### データバインディング
+
+#### ViewController -> Presenter Event (Ex: button tap)
+
+``` swift
+protocol ViewPresenter {
+    var loginRequest: PublishRelay<Void> { get }
+}
+
+class ViewPresenterImpl: ViewNamePresenter {
+    let loginRequest = PublishRelay<Void>()
+}
+
+class ViewController {
+    var presenter: ViewPresenter!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        loginButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                guard let weakSelf = self else { return }
+                weakSelf.presenter.loginRequest.accept(())
+            }).disposed(by: self.disposeBag)
+
+        // Abbreviation / 省略形
+        loginButton.rx.tap
+            .bind(to: presener.loginRequest)
+            .disposed(by: bag)
+    }
+}
+```
+
+#### Presenter -> ViewController Event (Ex: tap Event)
+
+Signal: エラーが発生しない, main スレッドで実行, subscribe してから発生した event を受け取る。
+ゆえに、画面遷移などや一度だけ実行されるものに向いている。
+
+``` swift
+protocol ViewPresenter {
+    var nextSereen: Signal<Void> { get }
+}
+
+class ViewPresenterImpl: ViewPresenter {
+    private let _nextSereen = PublishRelay<Void>()
+    var nextSereen: Signal<Void> {
+        return _nextSereen.asSignal()
+    }
+}
+
+class ViewController {
+    var presenter: ViewPresenter!
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        presenter.nextSereen
+            .emit(onNext: { [weak self] _ in
+                guard let weakSelf = self else { return }
+                weakSelf.presenter.moveToNextSereen()
+            })
+            .disposed(by: bag)
+    }
+}
+```
+
+#### Presenter -> ViewController One-way Bind property (Ex: String -> UILabel)
+
+Driver: エラーが発生しない, main スレッドで実行, 一つ前の event を受け取れる.
+初期表示でセットされる場合などを考慮すると、tapした瞬間しか受け取れないSignalよりもDriverが適している。
+
+``` swift
+protocol ViewPresenter {
+    var labelText: Driver<String> { get }
+}
+
+class ViewPresenterImpl: ViewPresenter {
+    private let _labelText = BehaviorRelay<String>(value: "")
+    var labelText: Driver<String> {
+        return _labelText.asDriver()
+    }
+}
+
+class ViewController {
+    var presenter: ViewPresenter!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        presenter.labelText
+            .drive(onNext: { [weak self] value in
+                guard let weakSelf = self else { return }
+                weakSelf.testLabel.text = value
+            })
+            .disposed(by: bag)
+
+        // Abbreviation / 省略形
+        presenter.labelText
+            .drive(testLabel.rx.text)
+            .disposed(by: bag)
+    }
+}
+```
+
+#### Presenter -> ViewController One-way Bind property (Ex: Button Enable/Disable)
+
+TODO:
+
+#### Presenter <-> ViewController Two-way Bind property (Ex: String <-> UITextField)
+
+TODO:
+
+#### Presenter -> ViewController One-way Bind property (Ex: [Struct] -> UITableView)
+
+TODO:
+
 ## 注釈
 
 1. <p id="note1">Clean Architecture + Routerのアーキテクチャ　＝　VIPERであり、VIPERはView Interactor Presenter Entity Routerの頭文字を取ったもの。</p>
@@ -113,7 +228,11 @@ users:
   - <https://peaks.cc/books/iOS_architecture>
 
 - infinum/iOS-VIPER-Xcode-Templates
-  - https://github.com/infinum/iOS-VIPER-Xcode-Templates
+  - <https://github.com/infinum/iOS-VIPER-Xcode-Templates>
   
-  - 本気でやりたい人のためのFirestore設計入門 - 超シンプルなTODOアプリ編
-    - https://www.youtube.com/watch?v=fHFoqJpkbJg
+- 本気でやりたい人のためのFirestore設計入門 - 超シンプルなTODOアプリ編
+  - <https://www.youtube.com/watch?v=fHFoqJpkbJg>
+
+- mironal/RxSwift&MVVM.md
+  - <https://gist.github.com/mironal/9eead7a5d812174cec238d68615f1dd6>
+
