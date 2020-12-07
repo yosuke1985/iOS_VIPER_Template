@@ -24,9 +24,11 @@
 
 ##　アーキテクチャ概要
 
+TODO:
+
 - Clean Architecture + Router　= VIPER
 - VIPERはView Interactor Presenter Entity Routerの頭文字を取ったものであるが、ここでは Interactorとは呼ばずUseCaseと呼ぶことにする。
-- 双方向バインディングにはRxSwiftを使用している。
+- 双方向バインディングにはRxSwiftを使用する。
 - レポジトリにはInterface Adapterは作成しない。
 
 ## Class Chart
@@ -43,7 +45,8 @@
 
 <img src="/Screenshots/TodoListView.png" height = 400px><img src="/Screenshots/TodoDetailView.png" height = 400px><img src="/Screenshots/CreateTodoView.png" height = 400px>
 
-## Firestore
+
+## Firestore Data Model
 
 ``` yml
 root/:
@@ -58,7 +61,7 @@ root/:
         updatedAt: Date
 ```
 
-### Naming conventions
+### 命名規則 Naming conventions
 
 - protocolとそれを準拠したクラスないしは構造体は、protocolの名称 + Implと命名する。
 - DIの部分は、protocolの\\(ModuleName)Injectableと命名する。
@@ -75,7 +78,7 @@ root/:
 |  Router | \\(ModuleName)Router<sup>[4](#note4)</sup> | \\(ModuleName)RouterImpl |
 |  Repository | \\(ModuleName)Repository | \\(ModuleName)RepositoryImpl |
 
-#### View, ViewController
+#### View, ViewController命名
 
 ``` swift
 class ModuleName: UIView {
@@ -85,7 +88,7 @@ class ModuleNameViewController: UIViewController {
 }
 ```
 
-#### Presenter
+#### Presenter命名
 
 ``` swift
 protocol ModuleNamePresenter {
@@ -95,7 +98,7 @@ struct ModuleNamePresenterImpl: ModuleNamePresenter {
 }
 ```
 
-#### UseCase
+#### UseCase命名
 
 ``` swift
 protocol ModuleNameUseCase {
@@ -105,7 +108,7 @@ struct ModuleNameUseCaseImpl: ModuleNameUseCase {
 }
 ```
 
-#### Router
+#### Router命名
 
 ``` swift
 protocol ModuleNameRouter {
@@ -115,7 +118,7 @@ struct ModuleNameRouterImpl: ModuleNameRouter {
 }
 ```
 
-#### Repository
+#### Repository命名
 
 ``` swift
 protocol ModuleNameRepository {
@@ -125,38 +128,13 @@ struct ModuleNameRepositoryImpl: ModuleNameRepository {
 }
 ```
 
-## VIPER実装解説
+## VIPER各コンポーネント(= View Interactor Presenter Entity Router)<sup>[3](#note3)</sup>
 
 ### Dependency Injection
 
-TODO:
-
-- DIの部分は、protocolの\\(ModuleName)Injectableを作成し、protocol extensionに実体を持つ。
-- Builderについて
-  - 各画面に対し、1 ViewControleler, 1 storyboardで構成し、それに対応したBuilderが依存関係の注入しPresenter, UseCase, RouterにDIする。
-
 #### Protocol extensionでのDI
 
-##### SingletonパターンでのDI
-
-TODO:
-
-```swift
-protocol TodoRepositoryInjectable {
-    var todoRepository: TodoRepository { get }
-}
-
-extension TodoRepositoryInjectable {
-    var todoRepository: TodoRepository {
-        return TodoRepositoryImpl.shared
-    }
-}
-
-```
-
-##### SingletonパターンでのDIa
-
-TODO:
+DIの部分は、protocolの\\(ModuleName)Injectableを作成し、protocol extensionに実体を持つ。
 
 ```swift
 protocol TodoUseCaseInjectable {
@@ -170,9 +148,32 @@ extension TodoUseCaseInjectable {
 }
 ```
 
+##### SingletonパターンでのDI
+
+```swift
+protocol TodoRepositoryInjectable {
+    var todoRepository: TodoRepository { get }
+}
+
+extension TodoRepositoryInjectable {
+    var todoRepository: TodoRepository {
+        return TodoRepositoryImpl.shared
+    }
+}
+
+protocol TodoRepository {
+}
+
+class TodoRepositoryImpl: TodoRepository {
+    static var shared = TodoRepositoryImpl() // Singleton
+}
+
+```
+
 #### BuilderパターンでのDI
 
-TODO:
+- Builderについて
+  - 各画面に対し、1 ViewControleler, 1 storyboardで構成し、それに対応したBuilderが依存関係の注入しPresenter, UseCase, RouterにDIする。
 
 ``` swift
 struct TodoListBuilder: 
@@ -194,9 +195,25 @@ struct TodoListBuilder:
 }
 ```
 
-## View, Presenter
+## View, ViewControllerの役割
 
-TODO:
+Viewはpresenterを持ち、Viewからの入力をpresenterを通じてすべて流し込む。
+ないしは、Presenterからの入力を受けて、それをViewに反映させる。
+
+Input: PresenterからのアクションをViewに反映させる。
+Output: ユーザーからのアクションをPresenterにわたす。
+
+``` swift
+class LoginViewController: UIViewController {
+    var presenter: LoginPresenter!
+    var bag = DisposeBag()
+}
+```
+
+## Presenterの役割
+
+Input: Viewからのアクションをもらう
+Output: UseCaseにアクションを起こす
 
 ``` swift
 
@@ -214,9 +231,10 @@ final class TodoListPresenterImpl: TodoListPresenter {
 }
 ```
 
-## UseCase
+## UseCaseの役割
 
-TODO:
+Input: Presenterからのアクションをもらう
+Output: Repositoryからデータを取り出したり、ビジネスロジックであるEntityを使用し処理した結果を返す。
 
 ``` swift
 protocol AuthUseCase {
@@ -247,7 +265,7 @@ struct AuthUseCaseImpl: AuthUseCase,
 }
 ```
 
-## Repostiroy
+## Repostiroyの役割
 
 TODO:
 
@@ -282,7 +300,7 @@ struct AuthRepositoryImpl: AuthRepository {
 }
 ```
 
-### Router
+### Routerの役割
 
 - 画面遷移の責務を持つRouterパターン。
   - Routerは画面遷移の責務を持つ。画面遷移先のViewControllerをBuildし、遷移する。
@@ -334,7 +352,7 @@ extension TodoDetailViewTransitionable {
 
 ### データバインディング
 
-#### ViewController -> Presenter Event (Ex: button tap)
+#### ViewController -> Presenter Event
 
 View入力、アクションがトリガーとなって行う処理に使用する。
 例）Authentication周りのログイン処理、セッションがあるかどうかAPI経由で確認
@@ -444,7 +462,7 @@ class ViewController {
 }
 ```
 
-#### Presenter <-> ViewController Two-way Bind property (Ex: String <-> UITextField)
+#### Presenter <-> ViewController Two-way Bind property
 
 双方向バインディング
 Viewでの入力とPresenterの処理の結果が互いに影響を及ぼす場合。
