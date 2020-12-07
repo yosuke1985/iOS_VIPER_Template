@@ -196,15 +196,115 @@ class ViewController {
 
 #### Presenter -> ViewController One-way Bind property (Ex: Button Enable/Disable)
 
-TODO:
+``` swift
+protocol ViewPresenter {
+    var canSearch: Driver<Bool> { get }
+}
+
+class ViewPresenterImpl: ViewPresenter {
+    private let inputtedText = BehaviorRelay<String>(value: "")
+    private let inputtedErrorText = BehaviorRelay<String>(value: "") 
+
+    var canSearch: Driver<Bool> {
+        return Driver.combineLatest(inputtedText.asDriver(), inputtedErrorText.asDriver()) { iText, iErrorText in
+            return iText && !iErrorText
+        }
+    }
+}
+
+class ViewController {
+    var presenter: ViewPresenter!
+    @IBOutlet weak var searchButton: UIButton!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        presenter.canSearch
+            .drive(onNext: { [weak self] value in
+                guard let weakSelf = self else { return }
+                weakSelf.searchButton.isEnabled = value
+            })
+            .disposed(by: bag)
+
+        // Abbreviation / 省略形
+        presenter.labelText
+            .drive(searchButton.rx.isEnabled)
+            .disposed(by: bag)
+    }
+}
+```
 
 #### Presenter <-> ViewController Two-way Bind property (Ex: String <-> UITextField)
 
-TODO:
+``` swift
+protocol ViewPresenter {
+    var testText: BehaviorRelay<String> { get }
+}
+
+class ViewPresenterImpl: ViewPresenter {
+    let testText = BehaviorRelay<String>(value: "")
+}
+
+class ViewController {
+    var presenter: ViewPresenter!
+    @IBOutlet weak var testTextField: UITextField!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        presenter.testText.asDriver()
+            .drive(onNext: { [weak self] value in
+                guard let weakSelf = self else { return }
+                weakSelf.testTextField.text = value
+            })
+            .disposed(by: bag)
+        testTextField.rx.text.orEmpty
+            .subscribe(onNext: { [weak self] value in
+                guard let weakSelf = self else { return }
+                weakSelf.presenter.testText.accept(value)
+            })
+            .disposed(by: bag)
+
+        // Abbreviation / 省略形
+        presenter.testText.asDriver()
+            .drive(testTextField.rx.text)
+            .disposed(by: self.disposeBag)
+        testTextField.rx.text.orEmpty
+            .bind(to: presenter.testText)
+            .disposed(by: bag)
+    }
+}
+```
 
 #### Presenter -> ViewController One-way Bind property (Ex: [Struct] -> UITableView)
 
-TODO:
+``` swift
+protocol ViewPresenter {
+    var items: Driver<[Struct]> { get }
+}
+
+class ViewPresenterImpl: ViewPresenter {
+    private let _items = BehaviorRelay<[Struct]>(value: [])
+    var items: Driver<[Struct]> {
+        return _items.asDriver()
+    }
+}
+
+class ViewController {
+    var presenter: ViewPresenter!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        presenter.items
+            .drive(tableView.rx.items) { tableView, row, element in
+                let cell = tableView.dequeueReusableCell(withIdentifier: "DummyId") as! DummyCell
+                return cell
+            }
+            .disposed(by: bag)
+    }
+}
+```
 
 ## 注釈
 
