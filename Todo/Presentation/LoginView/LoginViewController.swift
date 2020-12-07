@@ -59,9 +59,7 @@ class LoginViewController: UIViewController {
             .disposed(by: bag)
         
         createUserButton.rx.tap
-            .subscribe(onNext: { [weak self] _ in
-                self?.presenter.toCreateUserView()
-            })
+            .bind(to: presenter.toCreateUserViewRelay)
             .disposed(by: bag)
         
         presenter.showAPIErrorPopupRelay

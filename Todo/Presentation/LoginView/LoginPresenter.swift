@@ -23,11 +23,8 @@ protocol LoginPresenter {
     var passwordRelay: BehaviorRelay<String?> { get }
     var isEnableLoginButtonRelay: Driver<Bool> { get }
 
+    var toCreateUserViewRelay: PublishRelay<Void> { get }
     var showAPIErrorPopupRelay: Signal<Error> { get }
-
-    func toTodoListView()
-
-    func toCreateUserView()
 }
 
 // MARK: - LoginPresenterImpl
@@ -45,7 +42,7 @@ final class LoginPresenterImpl: LoginPresenter {
     var isEnableLoginButtonRelay: Driver<Bool> {
         return _isEnableLoginButtonRelay.asDriver()
     }
-    
+    var toCreateUserViewRelay = PublishRelay<Void>()
     private let _showAPIErrorPopupRelay = PublishRelay<Error>()
     var showAPIErrorPopupRelay: Signal<Error> {
         return _showAPIErrorPopupRelay.asSignal()
@@ -80,7 +77,7 @@ final class LoginPresenterImpl: LoginPresenter {
                            guard let weakSelf = self else { return }
                            switch result {
                            case .success:
-                               weakSelf.toTodoListView()
+                               weakSelf.router.toTodoListView()
                            case let .failure(error):
                                weakSelf._showAPIErrorPopupRelay.accept(error)
                            }
@@ -100,7 +97,7 @@ final class LoginPresenterImpl: LoginPresenter {
                            guard let weakSelf = self else { return }
                            switch result {
                            case .success:
-                               weakSelf.toTodoListView()
+                               weakSelf.router.toTodoListView()
                            case let .failure(error):
                                weakSelf._showAPIErrorPopupRelay.accept(error)
                            }
@@ -111,13 +108,11 @@ final class LoginPresenterImpl: LoginPresenter {
 
                        })
             .disposed(by: bag)
-    }
-
-    func toTodoListView() {
-        router.toTodoListView()
-    }
-    
-    func toCreateUserView() {
-        router.toCreateUserView()
+        
+        toCreateUserViewRelay
+            .subscribe(onNext: { [weak self] _ in
+                self?.router.toCreateUserView()
+            })
+            .disposed(by: bag)
     }
 }

@@ -23,8 +23,6 @@ protocol CreateUserPresenter {
     var isEnableCreateButtonRelay: Driver<Bool> { get }
 
     var showAPIErrorPopupRelay: Signal<Error> { get }
-
-    func toLoginView()
 }
 
 // MARK: - CreateUserPresenterImpl
@@ -73,19 +71,14 @@ final class CreateUserPresenterImpl: CreateUserPresenter {
                            guard let weakSelf = self else { return }
                            switch result {
                            case .success:
-                               weakSelf.toLoginView()
+                               weakSelf.router.dismiss(animated: true, completion: nil)
                            case let .failure(error):
                                weakSelf._showAPIErrorPopupRelay.accept(error)
                            }
-     
                        },
                        onError: { _ in
                            fatalError("unexpected error")
                        })
             .disposed(by: bag)
-    }
-    
-    func toLoginView() {
-        router.dismiss(animated: true, completion: nil)
     }
 }

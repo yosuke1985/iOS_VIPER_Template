@@ -43,12 +43,9 @@ protocol TodoListPresenter {
     func tearDown()
     
     var updateIsCheckedRelay: PublishRelay<Todo> { get }
-    
-    func logout()
-    func toLoginView()
-    func toTodoDetailView(todo: Todo)
-    func toCreateTodoView()
-    
+    var logoutRelay: PublishRelay<Void> { get }
+    var toTodoDetailViewRelay: PublishRelay<Todo> { get }
+    var toCreateTodoViewRelay: PublishRelay<Void> { get }
     var showAPIErrorPopupRelay: Signal<Error> { get }
 }
 
@@ -61,6 +58,11 @@ final class TodoListPresenterImpl: TodoListPresenter {
     var authUseCase: AuthUseCase!
     
     var todoTableViewRelay = BehaviorRelay<[SectionTodo]>(value: [])
+    
+    var logoutRelay = PublishRelay<Void>()
+    var toTodoDetailViewRelay = PublishRelay<Todo>()
+    var toCreateTodoViewRelay = PublishRelay<Void>()
+
     private let _showAPIErrorPopupRelay = PublishRelay<Error>()
     var showAPIErrorPopupRelay: Signal<Error> {
         return _showAPIErrorPopupRelay.asSignal()
@@ -123,37 +125,37 @@ final class TodoListPresenterImpl: TodoListPresenter {
                            fatalError("unexpected error")
                        })
             .disposed(by: bag)
+        
+        logoutRelay
+            .flatMap { [weak self] (_) -> Single<Result<Void, APIError>> in
+                guard let weakSelf = self else { return .error(CustomError.selfIsNil) }
+                return weakSelf.authUseCase.logout()
+            }
+            .subscribe(onNext: { [weak self] result in
+                guard let weakSelf = self else { return }
+                switch result {
+                case .success:
+                    weakSelf.router.toLoginView()
+                case let .failure(error):
+                    weakSelf._showAPIErrorPopupRelay.accept(error)
+                }
+            })
+            .disposed(by: bag)
+        
+        toTodoDetailViewRelay
+            .subscribe(onNext: { [weak self] todo in
+                self?.router.toTodoDetailView(todo: todo)
+            })
+            .disposed(by: bag)
+        
+        toCreateTodoViewRelay
+            .subscribe(onNext: { [weak self] _ in
+                self?.router.toCreateTodoView()
+            })
+            .disposed(by: bag)
     }
     
     func tearDown() {
         todoUseCase.tearDown()
-    }
-    
-    func isChecked(todoId: String, isChecked: Bool) {}
-
-    func logout() {
-        authUseCase.logout()
-            .subscribe { [weak self] result in
-                guard let weakSelf = self else { return }
-                switch result {
-                case .success:
-                    weakSelf.toLoginView()
-                case let .error(error):
-                    weakSelf._showAPIErrorPopupRelay.accept(error)
-                }
-            }
-            .disposed(by: bag)
-    }
-
-    func toLoginView() {
-        router.toLoginView()
-    }
-    
-    func toTodoDetailView(todo: Todo) {
-        router.toTodoDetailView(todo: todo)
-    }
-    
-    func toCreateTodoView() {
-        router.toCreateTodoView()
     }
 }

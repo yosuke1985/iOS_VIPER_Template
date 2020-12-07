@@ -36,7 +36,7 @@ class TodoListViewController: UIViewController {
     }
     
     @objc private func logout() {
-        presenter.logout()
+        presenter.logoutRelay.accept(())
     }
 }
 
@@ -49,7 +49,7 @@ extension TodoListViewController {
     private func setBind() {
         toCreateTodoButton.rx.tap
             .subscribe { [weak self] _ in
-                self?.presenter.toCreateTodoView()
+                self?.presenter.toCreateTodoViewRelay.accept(())
             }
             .disposed(by: bag)
         
@@ -74,7 +74,7 @@ extension TodoListViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let todo = presenter.todoTableViewRelay.value.first?.items[indexPath.row] {
-            presenter.toTodoDetailView(todo: todo)
+            presenter.toTodoDetailViewRelay.accept(todo)
         }
     }
     

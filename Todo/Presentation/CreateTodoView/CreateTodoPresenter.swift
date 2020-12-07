@@ -47,7 +47,7 @@ final class CreateTodoPresenterImpl: CreateTodoPresenter {
                            guard let weakSelf = self else { return }
                            switch result {
                            case .success:
-                               weakSelf.toLoginView()
+                               weakSelf.router.dismiss(animated: true, completion: nil)
                            case let .failure(error):
                                weakSelf._showAPIErrorPopupRelay.accept(error)
                            }
@@ -56,9 +56,5 @@ final class CreateTodoPresenterImpl: CreateTodoPresenter {
                            fatalError("unexpected error")
                        })
             .disposed(by: bag)
-    }
-            
-    func toLoginView() {
-        router.dismiss(animated: true, completion: nil)
     }
 }
