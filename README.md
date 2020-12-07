@@ -2,7 +2,7 @@
 
 ## 残
 
-- [ ] VIPERについての解説
+- [ ] VIPERについての実装の解説
 - [ ] router部分の実装の解説
 - [ ] アプリリリース
   - [ ] アイコンの準備
@@ -12,7 +12,15 @@
 - [ ] 記事の計画
 - [ ] 英語バージョンのREADME
 
-## 概要
+## Requirements
+
+- Clean Architecture + Router a.k.a VIPER<sup>[1](#note1)</sup>
+- Xcode 12.x
+- Swift 5.x
+- iOS14
+- RxSwift
+- Firebase
+- Firestore
 
 ##　アーキテクチャ概要
 
@@ -34,16 +42,6 @@
 ### Todo List Page, Todo Detail Page, Create Todo Page
 
 <img src="/Screenshots/TodoListView.png" height = 400px><img src="/Screenshots/TodoDetailView.png" height = 400px><img src="/Screenshots/CreateTodoView.png" height = 400px>
-
-## Requirements
-
-- Clean Architecture + Router a.k.a VIPER<sup>[1](#note1)</sup>
-- Xcode 12.x
-- Swift 5.x
-- iOS14
-- RxSwift
-- Firebase
-- Firestore
 
 ## Firestore
 
@@ -68,7 +66,6 @@ root/:
 - UseCaseは、Interactorではなく、\\(ModuleName)Usecase
 - Interface Adapterには、ViewModelではなく、\\(ModuleName)Presenter
 
-
 |  役割 | 抽象型 | 具象型 |
 | --- | --- | --- |
 |  View | | (ModuleName)View, (ModuleName)ViewController |
@@ -90,6 +87,12 @@ root/:
   - Routerは画面遷移の責務を持つ。画面遷移先のViewControllerをBuildし、遷移する。
   - 画面遷移部分を切り離す各Routerに対応したUIViewControllerの参照を持ち、Presenterから受けた入力によって画面遷移させる。
 - 各Transitionableは、buildして画面遷移する責務を持つ。各Transitionableに準拠したRouter(UIViewControllerの実体を持つ)は、その準拠した画面へ遷移することができるようになる。（遷移するための実装がそのTransitionableにあるので）
+
+- [ ] Routerについてコードを貼り付けて解説
+
+``` swift
+
+```
 
 ### データバインディング
 

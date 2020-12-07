@@ -42,6 +42,7 @@ final class LoginPresenterImpl: LoginPresenter {
     var isEnableLoginButtonRelay: Driver<Bool> {
         return _isEnableLoginButtonRelay.asDriver()
     }
+
     var toCreateUserViewRelay = PublishRelay<Void>()
     private let _showAPIErrorPopupRelay = PublishRelay<Error>()
     var showAPIErrorPopupRelay: Signal<Error> {
