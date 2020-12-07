@@ -34,9 +34,11 @@ final class TodoDetailPresenterImpl: TodoDetailPresenter {
     var todoRelay = BehaviorRelay<Todo?>(value: nil)
     var todoDescriptionDidChangeRelay = BehaviorRelay<String?>(value: nil)
     var didBackToDetailRelay = PublishRelay<Void>()
+    var initialTodo: Todo
 
     init(todo: Todo) {
         todoRelay.accept(todo)
+        initialTodo = todo
     }
     
     func setUp() {
@@ -56,7 +58,7 @@ final class TodoDetailPresenterImpl: TodoDetailPresenter {
         didBackToDetailRelay
             .flatMap { [weak self] _ -> Single<Result<Void, APIError>> in
                 guard let weakSelf = self else { return .error(CustomError.selfIsNil) }
-                if let todo = weakSelf.todoRelay.value {
+                if let todo = weakSelf.todoRelay.value, weakSelf.initialTodo.description != todo.description {
                     return weakSelf.todoUseCase.update(todo: todo)
                 }
                 return .never()

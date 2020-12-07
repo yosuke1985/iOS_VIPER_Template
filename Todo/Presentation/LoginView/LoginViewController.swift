@@ -21,9 +21,15 @@ class LoginViewController: UIViewController {
 
     @IBOutlet weak var createUserButton: UIButton!
     
-    @IBOutlet weak var emailInputFieldView: InputFieldView!
+    @IBOutlet weak var emailInputFieldView: InputFieldView! {
+        didSet {
+            emailInputFieldView.inputTextField.keyboardType = .emailAddress
+        }
+    }
+
     @IBOutlet weak var passInputFieldView: InputFieldView! {
         didSet {
+            passInputFieldView.inputTextField.keyboardType = .alphabet
             passInputFieldView.inputTextField.isSecureTextEntry = true
         }
     }
