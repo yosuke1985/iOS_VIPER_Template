@@ -242,6 +242,7 @@ struct AuthRepositoryImpl: AuthRepository {
 #### 例）TodoListViewの画面遷移
 
 - TodoListViewからTodoDetailViewへの画面遷移
+
 <img src="/Screenshots/TodoListView.png" height = 200px><font size="+6">➔</font><img src="/Screenshots/TodoDetailView.png" height = 200px>
 
 ``` swift
