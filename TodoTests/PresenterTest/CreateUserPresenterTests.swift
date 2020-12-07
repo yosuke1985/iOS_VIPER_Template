@@ -86,12 +86,12 @@ class CreateUserPresenterTests: XCTestCase {
     }
 }
 
-extension CreateUserPresenterTests {
-    enum TestDouble {
-        struct CreateUserRouterTestImpl: CreateUserRouter {
-            var viewController: UIViewController?
-        }
-        
-        class CreateUserTestViewController: UIViewController {}
-    }
-}
+// extension CreateUserPresenterTests {
+//    enum TestDouble {
+//        struct CreateUserRouterTestImpl: CreateUserRouter {
+//            var viewController: UIViewController?
+//        }
+//
+//        class CreateUserTestViewController: UIViewController {}
+//    }
+// }

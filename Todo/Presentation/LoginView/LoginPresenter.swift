@@ -68,7 +68,9 @@ final class LoginPresenterImpl: LoginPresenter {
         loginRelay
             .flatMap { [weak self] (_) -> Single<Result<Void, APIError>> in
                 guard let weakSelf = self else { return .error(CustomError.selfIsNil) }
-                guard let email = weakSelf.emailRelay.value, let password = weakSelf.passwordRelay.value else {
+                guard let email = weakSelf.emailRelay.value,
+                      let password = weakSelf.passwordRelay.value
+                else {
                     return .never()
                 }
                 return weakSelf.authUseCase.login(email: email, password: password)
