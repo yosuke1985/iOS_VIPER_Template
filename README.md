@@ -114,3 +114,6 @@ users:
 
 - infinum/iOS-VIPER-Xcode-Templates
   - https://github.com/infinum/iOS-VIPER-Xcode-Templates
+  
+  - 本気でやりたい人のためのFirestore設計入門 - 超シンプルなTODOアプリ編
+    - https://www.youtube.com/watch?v=fHFoqJpkbJg
