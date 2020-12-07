@@ -95,6 +95,9 @@ root:
 
 #### ViewController -> Presenter Event (Ex: button tap)
 
+View入力、アクションがトリガーとなって行う処理に使用する。
+例）Authentication周りのログイン処理、セッションがあるかどうかAPI経由で確認
+
 ``` swift
 protocol ViewPresenter {
     var loginRequest: PublishRelay<Void> { get }
@@ -114,7 +117,8 @@ class ViewController {
             .subscribe(onNext: { [weak self] _ in
                 guard let weakSelf = self else { return }
                 weakSelf.presenter.loginRequest.accept(())
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: bag)
 
         // Abbreviation / 省略形
         loginButton.rx.tap
@@ -124,10 +128,12 @@ class ViewController {
 }
 ```
 
-#### Presenter -> ViewController Event (Ex: tap Event)
+#### Presenter -> ViewController Event
 
+Presenterで処理した結果をアクションとして渡し、それが描画に関連する場合に使用する。Viewに描画する目的で一度だけ流れる。
 Signal: エラーが発生しない, main スレッドで実行, subscribe してから発生した event を受け取る。
-ゆえに、画面遷移などや一度だけ実行されるものに向いている。
+
+例として、タップイベント。画面遷移など。
 
 ``` swift
 protocol ViewPresenter {
@@ -156,10 +162,13 @@ class ViewController {
 }
 ```
 
-#### Presenter -> ViewController One-way Bind property (Ex: String -> UILabel)
+#### Presenter -> ViewController One-way Bind property
 
+Presenterで処理した結果を、描画する目的で流す。
 Driver: エラーが発生しない, main スレッドで実行, 一つ前の event を受け取れる.
 初期表示でセットされる場合などを考慮すると、tapした瞬間しか受け取れないSignalよりもDriverが適している。
+
+例として、テキストの表示、画像の表示などUIの表示、UIの表示のEnable, Hiddenなど
 
 ``` swift
 protocol ViewPresenter {
@@ -194,47 +203,10 @@ class ViewController {
 }
 ```
 
-#### Presenter -> ViewController One-way Bind property (Ex: Button Enable/Disable)
-
-``` swift
-protocol ViewPresenter {
-    var canSearch: Driver<Bool> { get }
-}
-
-class ViewPresenterImpl: ViewPresenter {
-    private let inputtedText = BehaviorRelay<String>(value: "")
-    private let inputtedErrorText = BehaviorRelay<String>(value: "") 
-
-    var canSearch: Driver<Bool> {
-        return Driver.combineLatest(inputtedText.asDriver(), inputtedErrorText.asDriver()) { iText, iErrorText in
-            return iText && !iErrorText
-        }
-    }
-}
-
-class ViewController {
-    var presenter: ViewPresenter!
-    @IBOutlet weak var searchButton: UIButton!
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        presenter.canSearch
-            .drive(onNext: { [weak self] value in
-                guard let weakSelf = self else { return }
-                weakSelf.searchButton.isEnabled = value
-            })
-            .disposed(by: bag)
-
-        // Abbreviation / 省略形
-        presenter.labelText
-            .drive(searchButton.rx.isEnabled)
-            .disposed(by: bag)
-    }
-}
-```
-
 #### Presenter <-> ViewController Two-way Bind property (Ex: String <-> UITextField)
+
+双方向バインディング
+Viewでの入力とPresenterの処理の結果が互いに影響を及ぼす場合。
 
 ``` swift
 protocol ViewPresenter {
@@ -268,7 +240,7 @@ class ViewController {
         // Abbreviation / 省略形
         presenter.testText.asDriver()
             .drive(testTextField.rx.text)
-            .disposed(by: self.disposeBag)
+            .disposed(by: bag)
         testTextField.rx.text.orEmpty
             .bind(to: presenter.testText)
             .disposed(by: bag)
@@ -277,6 +249,9 @@ class ViewController {
 ```
 
 #### Presenter -> ViewController One-way Bind property (Ex: [Struct] -> UITableView)
+
+PresenterにてUseCaseから得た結果をもとに、Viewに返す。
+RxDataSourcesを使用する。
 
 ``` swift
 protocol ViewPresenter {
@@ -329,10 +304,9 @@ class ViewController {
 
 - infinum/iOS-VIPER-Xcode-Templates
   - <https://github.com/infinum/iOS-VIPER-Xcode-Templates>
-  
+
 - 本気でやりたい人のためのFirestore設計入門 - 超シンプルなTODOアプリ編
   - <https://www.youtube.com/watch?v=fHFoqJpkbJg>
 
 - mironal/RxSwift&MVVM.md
   - <https://gist.github.com/mironal/9eead7a5d812174cec238d68615f1dd6>
-
