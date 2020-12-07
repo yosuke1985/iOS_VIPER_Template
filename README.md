@@ -14,33 +14,16 @@
 
 ## 概要
 
-### アーキテクチャ
+##　アーキテクチャ概要
 
 - Clean Architecture + Router　= VIPER
 - VIPERはView Interactor Presenter Entity Routerの頭文字を取ったものであるが、ここでは Interactorとは呼ばずUseCaseと呼ぶことにする。
 - 双方向バインディングにはRxSwiftを使用している。
 - レポジトリにはInterface Adapterは作成しない。
 
-### 命名規則
+## Class Chart
 
-- protocolとそれを準拠したクラスないしは構造体は、protocolの名称 + Implと命名する。
-- DIの部分は、protocolの\\(ModuleName)Injectableと命名する。
-- 画面遷移の責務を持つものをWireframeではなく、\\(ModuleName)Routerと命名する。
-- UseCaseは、Interactorではなく、\\(ModuleName)Usecase
-- Interface Adapterには、ViewModelではなく、\\(ModuleName)Presenter
-
-### DIの注入
-
-- DIの部分は、protocolの\\(ModuleName)Injectableを作成し、protocol extensionに実体を持つ。
-- Builderについて
-  - 各画面に対し、1 ViewControleler, 1 storyboardで構成し、それに対応したBuilderが依存関係の注入しPresenter, UseCase, RouterにDIする。
-
-### 画面遷移
-
-- 画面遷移の責務を持つRouterパターン。
-  - Routerは画面遷移の責務を持つ。画面遷移先のViewControllerをBuildし、遷移する。
-  - 画面遷移部分を切り離す各Routerに対応したUIViewControllerの参照を持ち、Presenterから受けた入力によって画面遷移させる。
-- 各Transitionableは、buildして画面遷移する責務を持つ。各Transitionableに準拠したRouter(UIViewControllerの実体を持つ)は、その準拠した画面へ遷移することができるようになる。（遷移するための実装がそのTransitionableにあるので）
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vSgHoUQDGKzsEiM8oaBD5dv5hGxEjHILlpnIOmOni308qQD79W35BrA6kxwEhBwugF1GkaJ81hF8meF/pub?w=960&amp;h=720">
 
 ## UI
 
@@ -62,11 +45,29 @@
 - Firebase
 - Firestore
 
-## Class Chart
+## Firestore
 
-<img src="https://docs.google.com/drawings/d/e/2PACX-1vSgHoUQDGKzsEiM8oaBD5dv5hGxEjHILlpnIOmOni308qQD79W35BrA6kxwEhBwugF1GkaJ81hF8meF/pub?w=960&amp;h=720">
+``` yml
+root/:
+  users/:
+    userID/: userID
+      todos/:
+        documentID: auto
+        title: String
+        description: String
+        isChecked: Bool
+        createdAt: Date
+        updatedAt: Date
+```
 
-## Naming conventions
+### Naming conventions
+
+- protocolとそれを準拠したクラスないしは構造体は、protocolの名称 + Implと命名する。
+- DIの部分は、protocolの\\(ModuleName)Injectableと命名する。
+- 画面遷移の責務を持つものをWireframeではなく、\\(ModuleName)Routerと命名する。
+- UseCaseは、Interactorではなく、\\(ModuleName)Usecase
+- Interface Adapterには、ViewModelではなく、\\(ModuleName)Presenter
+
 
 |  役割 | 抽象型 | 具象型 |
 | --- | --- | --- |
@@ -77,20 +78,18 @@
 |  Router | (ModuleName)Router<sup>[4](#note4)</sup> | (ModuleName)RouterImpl |
 |  Repository | (ModuleName)Repository | (ModuleName)RepositoryImpl |
 
-## Firestore
+### Dependency Injection
 
-``` yml
-root:
-  users:
-    userID: userID
-      todos:
-        documentID: auto
-        title: String
-        description: String
-        isChecked: Bool
-        createdAt: Date
-        updatedAt: Date
-```
+- DIの部分は、protocolの\\(ModuleName)Injectableを作成し、protocol extensionに実体を持つ。
+- Builderについて
+  - 各画面に対し、1 ViewControleler, 1 storyboardで構成し、それに対応したBuilderが依存関係の注入しPresenter, UseCase, RouterにDIする。
+
+### 画面遷移を責務を持つRouter
+
+- 画面遷移の責務を持つRouterパターン。
+  - Routerは画面遷移の責務を持つ。画面遷移先のViewControllerをBuildし、遷移する。
+  - 画面遷移部分を切り離す各Routerに対応したUIViewControllerの参照を持ち、Presenterから受けた入力によって画面遷移させる。
+- 各Transitionableは、buildして画面遷移する責務を持つ。各Transitionableに準拠したRouter(UIViewControllerの実体を持つ)は、その準拠した画面へ遷移することができるようになる。（遷移するための実装がそのTransitionableにあるので）
 
 ### データバインディング
 
