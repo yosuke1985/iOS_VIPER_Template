@@ -2,7 +2,7 @@
 
 ## 残
 
-- [ ] RxSwiftのバインディングについて
+- [ ] VIPERについての解説
 - [ ] アプリリリース
   - [ ] アイコンの準備
   - [ ] スクリーンショット
@@ -137,13 +137,13 @@ Signal: エラーが発生しない, main スレッドで実行, subscribe し�
 
 ``` swift
 protocol ViewPresenter {
-    var nextSereen: Signal<Void> { get }
+    var toNextViewRelay: Signal<Void> { get }
 }
 
 class ViewPresenterImpl: ViewPresenter {
-    private let _nextSereen = PublishRelay<Void>()
-    var nextSereen: Signal<Void> {
-        return _nextSereen.asSignal()
+    private let _toNextViewRelay = PublishRelay<Void>()
+    var toNextViewRelay: Signal<Void> {
+        return _toNextViewRelay.asSignal()
     }
 }
 
@@ -176,9 +176,9 @@ protocol ViewPresenter {
 }
 
 class ViewPresenterImpl: ViewPresenter {
-    private let _labelText = BehaviorRelay<String>(value: "")
-    var labelText: Driver<String> {
-        return _labelText.asDriver()
+    private let _labelTextRelay = BehaviorRelay<String>(value: "")
+    var labelTextRelay: Driver<String> {
+        return _labelTextRelay.asDriver()
     }
 }
 
