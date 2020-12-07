@@ -24,26 +24,35 @@
 
 ##　アーキテクチャ概要
 
-TODO:
+
+TODO:　クリーンアーキテクチャについて
+
 
 - Clean Architecture + Router　= VIPER
 - VIPERはView Interactor Presenter Entity Routerの頭文字を取ったものであるが、ここでは Interactorとは呼ばずUseCaseと呼ぶことにする。
 - 双方向バインディングにはRxSwiftを使用する。
 - レポジトリにはInterface Adapterは作成しない。
 
-## Class Chart
+
+<img src="Images/CleanArchitecture.jpg" width = 90%>
+
+TODO: クラス図の説明
 
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vSgHoUQDGKzsEiM8oaBD5dv5hGxEjHILlpnIOmOni308qQD79W35BrA6kxwEhBwugF1GkaJ81hF8meF/pub?w=960&amp;h=720">
 
 ## UI
 
+
+TODO: Gifの作成
+
+
 ### Login Page, Create User Page
 
-<img src="/Screenshots/LoginView.png" height = 400px><img src="/Screenshots/CreateUser.png" height = 400px>
+<img src="/Images/LoginView.png" height = 400px><img src="/Images/CreateUser.png" height = 400px>
 
 ### Todo List Page, Todo Detail Page, Create Todo Page
 
-<img src="/Screenshots/TodoListView.png" height = 400px><img src="/Screenshots/TodoDetailView.png" height = 400px><img src="/Screenshots/CreateTodoView.png" height = 400px>
+<img src="/Images/TodoListView.png" height = 400px><img src="/Images/TodoDetailView.png" height = 400px><img src="/v/CreateTodoView.png" height = 400px>
 
 
 ## Firestore Data Model
@@ -357,7 +366,7 @@ TODO:
 
 - TodoListViewからTodoDetailViewへの画面遷移
 
-<img src="/Screenshots/TodoListView.png" height = 200px><font size="+6">➔</font><img src="/Screenshots/TodoDetailView.png" height = 200px>
+<img src="/Images/TodoListView.png" height = 200px><font size="+6">➔</font><img src="/Images/TodoDetailView.png" height = 200px>
 
 ``` swift
 
@@ -594,6 +603,9 @@ class ViewController {
 4. <p id="note4">Routerは、Wireframeと名付けることもある</p>
 
 ## Reference
+
+- The Clean Architecture
+   - <https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html>
 
 - 実装クリーンアーキテクチャ
   - nrslib氏
