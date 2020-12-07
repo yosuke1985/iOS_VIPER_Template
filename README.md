@@ -17,8 +17,8 @@
 - Clean Architecture + Router a.k.a VIPER<sup>[1](#note1)</sup>
 - Xcode 12.x
 - Swift 5.x
-- iOS14
-- RxSwift
+- iOS14.x
+- RxSwift 5
 - Firebase
 - Firestore
 
@@ -75,7 +75,6 @@ root/:
 |  Router | (ModuleName)Router<sup>[4](#note4)</sup> | (ModuleName)RouterImpl |
 |  Repository | (ModuleName)Repository | (ModuleName)RepositoryImpl |
 
-
 ## VIPER実装解説
 
 ### Dependency Injection
@@ -88,27 +87,150 @@ TODO:
 
 #### Protocol extensionでのDI
 
+##### SingletonパターンでのDI
+
 TODO:
+
+```swift
+protocol TodoRepositoryInjectable {
+    var todoRepository: TodoRepository { get }
+}
+
+extension TodoRepositoryInjectable {
+    var todoRepository: TodoRepository {
+        return TodoRepositoryImpl.shared
+    }
+}
+
+```
+
+##### SingletonパターンでのDIa
+
+TODO:
+
+```swift
+protocol TodoUseCaseInjectable {
+    var todoUseCaseImpl: TodoUseCase { get }
+}
+
+extension TodoUseCaseInjectable {
+    var todoUseCaseImpl: TodoUseCase {
+        return TodoUseCaseImpl()
+    }
+}
+```
 
 #### BuilderパターンでのDI
 
 TODO:
 
-#### SingletonパターンでのDI
-
-TODO:
+``` swift
+struct TodoListBuilder: 
+    TodoUseCaseInjectable,
+    AuthUseCaseInjectable {
+    func build() -> UIViewController {
+        let vc = TodoListViewController.instantiate()
+        let router = TodoListRouterImpl()
+        let presenter = TodoListPresenterImpl()
+        
+        router.viewController = vc
+        presenter.router = router
+        presenter.todoUseCase = todoUseCaseImpl
+        presenter.authUseCase = authUseCaseImpl
+        vc.presenter = presenter
+        
+        return vc
+    }
+}
+```
 
 ## View, Presenter
 
 TODO:
 
+``` swift
+
+protocol TodoListPresenter {
+    var router: TodoListRouter! { get set }
+    var todoUseCase: TodoUseCase! { get set }
+
+}
+
+final class TodoListPresenterImpl: TodoListPresenter {
+    let bag = DisposeBag()
+    var router: TodoListRouter!
+    var todoUseCase: TodoUseCase!
+    var authUseCase: AuthUseCase!
+}
+```
+
 ## UseCase
 
 TODO:
 
+``` swift
+protocol AuthUseCase {
+    func getSessionUser() -> Single<Result<Void, APIError>>
+    func createUser(email: String, password: String) -> Single<Result<Void, APIError>>
+    func login(email: String, password: String) -> Single<Result<Void, APIError>>
+    func logout() -> Single<Result<Void, APIError>>
+}
+
+struct AuthUseCaseImpl: AuthUseCase,
+    AuthRepositoryInjectable
+{
+    func getSessionUser() -> Single<Result<Void, APIError>> {
+        return authRepository.getSessionUser()
+    }
+
+    func createUser(email: String, password: String) -> Single<Result<Void, APIError>> {
+        return authRepository.createUser(email: email, password: password)
+    }
+
+    func login(email: String, password: String) -> Single<Result<Void, APIError>> {
+        return authRepository.login(email: email, password: password)
+    }
+    
+    func logout() -> Single<Result<Void, APIError>> {
+        return authRepository.logout()
+    }
+}
+```
+
 ## Repostiroy
 
 TODO:
+
+``` swift
+protocol AuthRepository {
+    func login(email: String, password: String) -> Single<Result<Void, APIError>>
+}
+
+struct AuthRepositoryImpl: AuthRepository {
+    static var shared = AuthRepositoryImpl()
+    private init() {}
+
+    let userRelay = BehaviorRelay<User?>(value: nil)
+
+    func login(email: String, password: String) -> Single<Result<Void, APIError>> {
+        Single<Result<Void, APIError>>.create { (observer) -> Disposable in
+            Auth.auth().signIn(withEmail: email, password: password) { result, errorOptional in
+                if let error = errorOptional {
+                    let apiError = APIError.response(description: error.localizedDescription)
+                    return observer(.success(.failure(apiError)))
+                } else if let uid = result?.user.uid {
+                    let user = User(userId: uid)
+                    AuthRepositoryImpl.shared.userRelay.accept(user)
+                    return observer(.success(.success(())))
+                } else {
+                    return observer(.error(CustomError.unknown))
+                }
+            }
+            return Disposables.create()
+        }
+    }
+}
+```
 
 ### Router
 
