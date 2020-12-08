@@ -14,12 +14,12 @@
 ## 概要
 
 SwiftでTodoアプリをクリーンアーキテクチャであるVIPER, View Interactor Presenter Entity Routerでつくりました！
-各レイヤーのデータの受け渡しはRxSwiftで行っております。
-自分の考えうるベストプラクティスとして作ったものですが、ツッコミどころなどあればissueやプルリクを投げてもらえば議論させていただきたいです！
+VIPERと一口にいっても、複数のパターンのクリーンアーキテクチャのパターンがあり、基本的にはClean Architectureと画面遷移の責務をもつRouter(Wireframeとも読んだりする？)を組み合わせたものをVIPERと呼ばれていると認識しています。命名なども、Protocol(Interface)と実装で完全に異なるパターンなどもありますが、シンプルさを心がけてあります。
+複数の現場を経験してきて自分の考えうるベストプラクティスとして作ったものですが、ツッコミどころなどあればissueやプルリクを投げてもらえば議論させていただきたいです！
 
 ## UI
 
-TODO: Gifの作成
+<img src="/Images/ui.gif" height = 400px>
 
 ### Login Page, Create User Page
 
@@ -61,7 +61,7 @@ root/:
 pod insatall
 ```
 
-## アーキテクチャ概要
+## VIPERアーキテクチャ概要
 
 - Clean Architecture + Router　= VIPER
 - VIPERはView Interactor Presenter Entity Routerの頭文字を取ったものであるが、ここでは Interactorとは呼ばずUseCaseと呼ぶことにする。
@@ -409,11 +409,7 @@ extension TodoDetailViewTransitionable {
 
 ```
 
-## データバインディング
-
-View <-> Presenter
-Presenter <-> UseCase
-UseCase <-> Repository
+## データバインディング View <-> Presenter <-> UseCase <-> Repository
 
 これらの通信にデータをどう渡すかのデータバインディングについて
 
