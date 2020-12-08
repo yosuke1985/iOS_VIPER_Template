@@ -628,8 +628,11 @@ class ViewController {
 - infinum/iOS-VIPER-Xcode-Templates
   - <https://github.com/infinum/iOS-VIPER-Xcode-Templates>
 
-- 本気でやりたい人のためのFirestore設計入門 - 超シンプルなTODOアプリ編
-  - <https://www.youtube.com/watch?v=fHFoqJpkbJg>
-
 - mironal/RxSwift&MVVM.md
   - <https://gist.github.com/mironal/9eead7a5d812174cec238d68615f1dd6>
+
+- Firestore Security Rules の書き方と守るべき原則
+  - <https://qiita.com/KosukeSaigusa/items/18217958c581eac9b245>
+
+- 本気でやりたい人のためのFirestore設計入門 - 超シンプルなTODOアプリ編
+  - <https://www.youtube.com/watch?v=fHFoqJpkbJg>
