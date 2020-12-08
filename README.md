@@ -232,7 +232,7 @@ Viewはpresenterを持ち、Viewからの入力をpresenterを通じてすべて
 ``` swift
 class LoginViewController: UIViewController {
     var presenter: LoginPresenter!
-    var bag = DisposeBag()
+    @IBOutlet weak var loginButton: UIButton!
 }
 ```
 
@@ -244,17 +244,43 @@ class LoginViewController: UIViewController {
 
 ``` swift
 
-protocol TodoListPresenter {
+protocol LoginPresenter {
     var router: TodoListRouter! { get set }
     var todoUseCase: TodoUseCase! { get set }
 
 }
 
-final class TodoListPresenterImpl: TodoListPresenter {
+final class LoginPresenterImpl: LoginPresenter {
     let bag = DisposeBag()
     var router: TodoListRouter!
-    var todoUseCase: TodoUseCase!
     var authUseCase: AuthUseCase!
+
+       func setBind() {
+        loginRelay
+            .flatMap { [weak self] (_) -> Single<Result<Void, APIError>> in
+                guard let weakSelf = self else { return .error(CustomError.selfIsNil) }
+                guard let email = weakSelf.emailRelay.value,
+                      let password = weakSelf.passwordRelay.value
+                else {
+                    return .never()
+                }
+                return weakSelf.authUseCase.login(email: email, password: password)
+            }
+            .subscribe(onNext: { [weak self] result in
+                           guard let weakSelf = self else { return }
+                           switch result {
+                           case .success:
+                               weakSelf.router.toTodoListView()
+                           case let .failure(error):
+                               weakSelf._showAPIErrorPopupRelay.accept(error)
+                           }
+                
+                       },
+                       onError: { error in
+                           fatalError(error.localizedDescription)
+                       })
+            .disposed(by: bag)
+    }
 }
 ```
 
@@ -266,29 +292,14 @@ final class TodoListPresenterImpl: TodoListPresenter {
 
 ``` swift
 protocol AuthUseCase {
-    func getSessionUser() -> Single<Result<Void, APIError>>
-    func createUser(email: String, password: String) -> Single<Result<Void, APIError>>
     func login(email: String, password: String) -> Single<Result<Void, APIError>>
-    func logout() -> Single<Result<Void, APIError>>
 }
 
 struct AuthUseCaseImpl: AuthUseCase,
     AuthRepositoryInjectable
 {
-    func getSessionUser() -> Single<Result<Void, APIError>> {
-        return authRepository.getSessionUser()
-    }
-
-    func createUser(email: String, password: String) -> Single<Result<Void, APIError>> {
-        return authRepository.createUser(email: email, password: password)
-    }
-
     func login(email: String, password: String) -> Single<Result<Void, APIError>> {
         return authRepository.login(email: email, password: password)
-    }
-    
-    func logout() -> Single<Result<Void, APIError>> {
-        return authRepository.logout()
     }
 }
 ```
@@ -330,37 +341,6 @@ struct AuthRepositoryImpl: AuthRepository {
             }
             return Disposables.create()
         }
-    }
-}
-
-final class LoginPresenterImpl: LoginPresenter {
-
-    func setBind() {
-
-        loginRelay
-            .flatMap { [weak self] (_) -> Single<Result<Void, APIError>> in
-                guard let weakSelf = self else { return .error(CustomError.selfIsNil) }
-                guard let email = weakSelf.emailRelay.value,
-                      let password = weakSelf.passwordRelay.value
-                else {
-                    return .never()
-                }
-                return weakSelf.authUseCase.login(email: email, password: password)
-            }
-            .subscribe(onNext: { [weak self] result in
-                           guard let weakSelf = self else { return }
-                           switch result {
-                           case .success:
-                               weakSelf.router.toTodoListView()
-                           case let .failure(error):
-                               weakSelf._showAPIErrorPopupRelay.accept(error)
-                           }
-                
-                       },
-                       onError: { error in
-                           fatalError(error.localizedDescription)
-                       })
-            .disposed(by: bag)
     }
 }
 
