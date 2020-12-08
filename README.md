@@ -3,7 +3,6 @@
 ## 残
 
 - [ ] VIPERについての実装の解説
-- [ ] router部分の実装の解説
 - [ ] アプリリリース
   - [ ] アイコンの準備
   - [ ] スクリーンショット
@@ -11,6 +10,40 @@
 - [ ] GIFの追加
 - [ ] 記事の計画
 - [ ] 英語バージョンのREADME
+
+## 概要
+
+SwiftでTodoアプリをクリーンアーキテクチャであるVIPER, View Interactor Presenter Entity Routerでつくりました！
+各レイヤーのデータの受け渡しはRxSwiftで行っております。
+自分の考えうるベストプラクティスとして作ったものですが、ツッコミどころなどあればissueやプルリクを投げてもらえば議論させていただきたいです！
+
+## UI
+
+TODO: Gifの作成
+
+### Login Page, Create User Page
+
+<img src="/Images/LoginView.png" height = 400px><img src="/Images/CreateUser.png" height = 400px>
+
+### Todo List Page, Todo Detail Page, Create Todo Page
+
+<img src="/Images/TodoListView.png" height = 400px><img src="/Images/TodoDetailView.png" height = 400px><img src="/v/CreateTodoView.png" height = 400px>
+
+
+## Firestore Data Model
+
+``` yml
+root/:
+  users/:
+    userID/: userID
+      todos/:
+        documentID: auto
+        title: String
+        description: String
+        isChecked: Bool
+        createdAt: Date
+        updatedAt: Date
+```
 
 ## Requirements
 
@@ -21,6 +54,12 @@
 - RxSwift 5
 - Firebase
 - Firestore
+
+## Installation instructions
+
+``` bash
+pod insatall
+```
 
 ## アーキテクチャ概要
 
@@ -55,36 +94,6 @@ Todoをリスト表示させるTodoListViewを例にとると、
 
 これをよく見るクリーンアーキテクチャの図に置き換えると以下のようになる。
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vSgHoUQDGKzsEiM8oaBD5dv5hGxEjHILlpnIOmOni308qQD79W35BrA6kxwEhBwugF1GkaJ81hF8meF/pub?w=960&amp;h=720">
-
-## UI
-
-
-TODO: Gifの作成
-
-
-### Login Page, Create User Page
-
-<img src="/Images/LoginView.png" height = 400px><img src="/Images/CreateUser.png" height = 400px>
-
-### Todo List Page, Todo Detail Page, Create Todo Page
-
-<img src="/Images/TodoListView.png" height = 400px><img src="/Images/TodoDetailView.png" height = 400px><img src="/v/CreateTodoView.png" height = 400px>
-
-
-## Firestore Data Model
-
-``` yml
-root/:
-  users/:
-    userID/: userID
-      todos/:
-        documentID: auto
-        title: String
-        description: String
-        isChecked: Bool
-        createdAt: Date
-        updatedAt: Date
-```
 
 ### 命名規則 Naming conventions
 
