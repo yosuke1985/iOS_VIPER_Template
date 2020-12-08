@@ -31,7 +31,7 @@
 
 ## クリーンアーキテクチャについて
 
-TODO: 説明
+TODO: 説明　クリーンアーキテクチャの解釈
 
 <img src="Images/CleanArchitecture.jpg" width = 90%>
 
@@ -400,9 +400,15 @@ extension TodoDetailViewTransitionable {
 
 ```
 
-### データバインディング
+## データバインディング
 
-#### ViewController -> Presenter Event
+View <-> Presenter
+Presenter <-> UseCase
+UseCase <-> Repository
+
+これらの通信にデータをどう渡すかのデータバインディングについて
+
+### ViewController -> Presenter Event
 
 View入力、アクションがトリガーとなって行う処理に使用する。
 例）Authentication周りのログイン処理、セッションがあるかどうかAPI経由で確認
@@ -437,7 +443,7 @@ class ViewController {
 }
 ```
 
-#### Presenter -> ViewController Event
+### Presenter -> ViewController Event
 
 Presenterで処理した結果をアクションとして渡し、それが描画に関連する場合に使用する。Viewに描画する目的で一度だけ流れる。
 Signal: エラーが発生しない, main スレッドで実行, subscribe してから発生した event を受け取る。
@@ -471,7 +477,7 @@ class ViewController {
 }
 ```
 
-#### Presenter -> ViewController One-way Bind property
+### Presenter -> ViewController One-way Bind property
 
 Presenterで処理した結果を、描画する目的で流す。
 Driver: エラーが発生しない, main スレッドで実行, 一つ前の event を受け取れる.
@@ -512,7 +518,7 @@ class ViewController {
 }
 ```
 
-#### Presenter <-> ViewController Two-way Bind property
+### Presenter <-> ViewController Two-way Bind property
 
 双方向バインディング
 Viewでの入力とPresenterの処理の結果が互いに影響を及ぼす場合。
@@ -557,7 +563,7 @@ class ViewController {
 }
 ```
 
-#### Presenter -> ViewController One-way Bind property (Ex: [Struct] -> UITableView)
+### Presenter -> ViewController One-way Bind property (Ex: [Struct] -> UITableView)
 
 PresenterにてUseCaseから得た結果をもとに、Viewに返す。
 RxDataSourcesを使用する。
