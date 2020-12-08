@@ -50,7 +50,7 @@ Todoをリスト表示させるTodoListViewを例にとると、
 取得したデータは、RxSwiftのデータバインディングによって渡します。（図の点線部分）
 この例では一つのAPIしか使用していないので助長なコードになっているとは思いますが、開発が進むにつれて責務を分けることによって変更に対応しやすい設計になってきます。
 
-<img src="https://docs.google.com/drawings/d/e/2PACX-1vSxELUJhD45EOTJUcPS-B8EAOUwfaA6txalQD_VrtfQJsSRO2HfZxKdQPUX8NamVL-3tvMZFwFOkigd/pub?w=500&amp;h=252">
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vSxELUJhD45EOTJUcPS-B8EAOUwfaA6txalQD_VrtfQJsSRO2HfZxKdQPUX8NamVL-3tvMZFwFOkigd/pub?w=1121&amp;h=379">
 
 
 これをよく見るクリーンアーキテクチャの図に置き換えると以下のようになる。
