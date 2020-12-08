@@ -22,8 +22,7 @@
 - Firebase
 - Firestore
 
-
-##　アーキテクチャ概要
+## アーキテクチャ概要
 
 - Clean Architecture + Router　= VIPER
 - VIPERはView Interactor Presenter Entity Routerの頭文字を取ったものであるが、ここでは Interactorとは呼ばずUseCaseと呼ぶことにする。
@@ -36,8 +35,25 @@ TODO: 説明
 
 <img src="Images/CleanArchitecture.jpg" width = 90%>
 
-TODO: クラス図の説明
+各層へはプロトコル（インターフェイス）を介して、通信している。
+Todoをリスト表示させるTodoListViewを例にとると、
+- TodoListViewControllerはTodoListPresenterプロトコルを介して、TodoListPresenterImplと通信している。
+- TodoListPresenterImplは TodoUseCaseプロトコルを介して、TodoUseCaseImplと通信している。
+- TodoUseCaseImplはTodoRepositoryプロトコルを介して、TodoRepositoryImplと通信している。
 
+
+例えば、Todoのリストを表示させる場合、
+1. TodoListViewControllerが、TodoListPresenterプロトコルを介してTodoListPresenterImplに[Todo]を要求。　TodoListViewControllerはTodoListPresenterプロトコルしかしらない。
+2. TodoListPresenterImplはTodoListViewControllerからのInputを受けて、TodoUseCaseプロトコルを介したTodoUseCaseImplはTodoRepositoryを介してTodoRepositoryImplにアクセスする。
+3. TodoRepositoryImplはAPIにアクセスしTodoのリストを取得する。
+
+取得したデータは、RxSwiftのデータバインディングによって渡します。（図の点線部分）
+この例では一つのAPIしか使用していないので助長なコードになっているとは思いますが、開発が進むにつれて責務を分けることによって変更に対応しやすい設計になってきます。
+
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vSxELUJhD45EOTJUcPS-B8EAOUwfaA6txalQD_VrtfQJsSRO2HfZxKdQPUX8NamVL-3tvMZFwFOkigd/pub?w=500&amp;h=252">
+
+
+これをよく見るクリーンアーキテクチャの図に置き換えると以下のようになる。
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vSgHoUQDGKzsEiM8oaBD5dv5hGxEjHILlpnIOmOni308qQD79W35BrA6kxwEhBwugF1GkaJ81hF8meF/pub?w=960&amp;h=720">
 
 ## UI
@@ -354,9 +370,7 @@ final class LoginPresenterImpl: LoginPresenter {
 
 <b>Input: Presenterからのアクションをもらう</b>
 
-<b>Output:</b>
-
-TODO:
+<b>Output: Presenterからのアクションをうけて、RouterはViewControllerの参照を持っているので、アクションに基づいて別のViewControllerへ画面遷移を行う。</b>
 
 - 画面遷移の責務を持つRouterパターン。
   - Routerは画面遷移の責務を持つ。画面遷移先のViewControllerをBuildし、遷移する。
