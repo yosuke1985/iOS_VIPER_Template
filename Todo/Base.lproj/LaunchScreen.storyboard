@@ -16,9 +16,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1iH-CN-BtE">
-                                <rect key="frame" x="125" y="405" width="164.5" height="86"/>
+                                <rect key="frame" x="65.5" y="405" width="283" height="86"/>
                                 <attributedString key="attributedText">
-                                    <fragment content="Todo">
+                                    <fragment content="NotTodo">
                                         <attributes>
                                             <color key="NSColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <font key="NSFont" size="72" name="HelveticaNeue-Medium"/>
