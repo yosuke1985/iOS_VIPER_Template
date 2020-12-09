@@ -78,9 +78,19 @@ final class TodoListPresenterImpl: TodoListPresenter {
     
     func setBind() {
         todoUseCase.startListenTodos()
-            .subscribe(onError: { [weak self] error in
-                self?._showAPIErrorPopupRelay.accept(error)
-            })
+            .subscribe(onSuccess: { [weak self] result in
+                           guard let weakSelf = self else { return }
+                           switch result {
+                           case .success:
+                               break
+                           case let .failure(error):
+                               weakSelf._showAPIErrorPopupRelay.accept(error)
+                           }
+
+                       },
+                       onError: { error in
+                           fatalError(error.localizedDescription)
+                       })
             .disposed(by: bag)
                 
         todoUseCase.todosRelay()
@@ -132,6 +142,16 @@ final class TodoListPresenterImpl: TodoListPresenter {
                 guard let weakSelf = self else { return .error(CustomError.selfIsNil) }
                 return weakSelf.authUseCase.logout()
             }
+            .do(onNext: { [weak self] result in
+                guard let weakSelf = self else { return }
+                switch result {
+                case .success:
+                    weakSelf.todoUseCase.tearDown()
+
+                case .failure:
+                    break
+                }
+            })
             .subscribe(onNext: { [weak self] result in
                 guard let weakSelf = self else { return }
                 switch result {

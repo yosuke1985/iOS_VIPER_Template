@@ -67,12 +67,6 @@ class TodoRepositoryImpl: TodoRepository {
                             }
                         }
                     }
-            } else {
-                if weakSelf.snapshotListener != nil {
-                    weakSelf.snapshotListener.remove()
-                    weakSelf.snapshotListener = nil
-                    weakSelf._todosTableViewRelay.accept([])
-                }
             }
             
             return Disposables.create()
@@ -85,6 +79,8 @@ class TodoRepositoryImpl: TodoRepository {
 
     func removeTodosListener() {
         snapshotListener.remove()
+        snapshotListener = nil
+        _todosTableViewRelay.accept([])
     }
 
     func add(title: String, description: String = "") -> Single<Result<Void, APIError>> {
