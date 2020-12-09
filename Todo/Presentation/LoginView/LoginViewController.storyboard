@@ -47,20 +47,6 @@
                                     </view>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pbz-Hx-fiJ">
-                                <rect key="frame" x="81.5" y="147.5" width="251.5" height="76.5"/>
-                                <color key="tintColor" red="0.064483858640000002" green="0.0" blue="0.96084100009999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="NotTodo">
-                                        <attributes>
-                                            <color key="NSColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" size="64" name="HelveticaNeue-Medium"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <color key="highlightedColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QfU-SL-9Zy">
                                 <rect key="frame" x="182" y="428" width="50" height="55"/>
                                 <state key="normal">
@@ -87,6 +73,13 @@
                                     </attributedString>
                                 </state>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="App_store" translatesAutoresizingMaskIntoConstraints="NO" id="iqe-2v-hMU">
+                                <rect key="frame" x="107" y="60" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="6lf-eV-l8p"/>
+                                    <constraint firstAttribute="width" constant="200" id="eyh-VT-RD0"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="qWA-c4-irv"/>
                         <color key="backgroundColor" systemColor="tertiaryLabelColor"/>
@@ -95,12 +88,12 @@
                             <constraint firstItem="Sj4-dU-1kj" firstAttribute="top" secondItem="QfU-SL-9Zy" secondAttribute="bottom" constant="25" id="G6L-5C-OV6"/>
                             <constraint firstItem="QfU-SL-9Zy" firstAttribute="top" secondItem="ojb-Se-Ujd" secondAttribute="bottom" constant="20" id="G9e-Qz-IL6"/>
                             <constraint firstItem="qWA-c4-irv" firstAttribute="trailing" secondItem="ojb-Se-Ujd" secondAttribute="trailing" constant="50" id="Jn2-Qu-lCK"/>
+                            <constraint firstItem="iqe-2v-hMU" firstAttribute="centerX" secondItem="Aqv-eT-dIJ" secondAttribute="centerX" id="KxG-lK-eMy"/>
                             <constraint firstItem="QfU-SL-9Zy" firstAttribute="centerX" secondItem="ojb-Se-Ujd" secondAttribute="centerX" id="bGM-DU-RqW"/>
-                            <constraint firstItem="ojb-Se-Ujd" firstAttribute="top" secondItem="pbz-Hx-fiJ" secondAttribute="bottom" constant="70" id="caJ-4Q-gyf"/>
                             <constraint firstItem="ojb-Se-Ujd" firstAttribute="centerX" secondItem="Aqv-eT-dIJ" secondAttribute="centerX" id="eBj-9O-nSN"/>
                             <constraint firstItem="Sj4-dU-1kj" firstAttribute="centerX" secondItem="Aqv-eT-dIJ" secondAttribute="centerX" id="q8n-Xk-J9Q"/>
                             <constraint firstItem="ojb-Se-Ujd" firstAttribute="leading" secondItem="qWA-c4-irv" secondAttribute="leading" constant="50" id="rwM-0N-fiF"/>
-                            <constraint firstItem="pbz-Hx-fiJ" firstAttribute="centerX" secondItem="Aqv-eT-dIJ" secondAttribute="centerX" id="y3c-fu-glE"/>
+                            <constraint firstItem="ojb-Se-Ujd" firstAttribute="top" secondItem="iqe-2v-hMU" secondAttribute="bottom" constant="34" id="uBT-gT-e1X"/>
                             <constraint firstItem="ojb-Se-Ujd" firstAttribute="top" secondItem="Aqv-eT-dIJ" secondAttribute="topMargin" constant="250" id="zcF-1e-AvP"/>
                         </constraints>
                     </view>
@@ -119,6 +112,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="App_store" width="1024" height="1024"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
