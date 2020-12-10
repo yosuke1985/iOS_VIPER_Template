@@ -12,11 +12,11 @@ VIPERと一口にいっても、複数のパターンのクリーンアーキテ
 
 ### Login Page, Create User Page
 
-<img src="https://raw.githubusercontent.com/yosuke1985/iOS_VIPER_Template/main//Images/LoginView.png" height = 400px><img src="https://raw.githubusercontent.com/yosuke1985/iOS_VIPER_Template/main//Images/CreateUser.png" height = 400px>
+<img src="https://raw.githubusercontent.com/yosuke1985/iOS_VIPER_Template/main//Images/LoginView.png" height = 400px><img src="https://raw.githubusercontent.com/yosuke1985/iOS_VIPER_Template/main/Images/CreateUser.png" height = 400px>
 
 ### Todo List Page, Todo Detail Page, Create Todo Page
 
-<img src="https://raw.githubusercontent.com/yosuke1985/iOS_VIPER_Template/main//Images/TodoListView.png" height = 400px><img src="https://raw.githubusercontent.com/yosuke1985/iOS_VIPER_Template/main//Images/TodoDetailView.png" height = 400px><img src="https://raw.githubusercontent.com/yosuke1985/iOS_VIPER_Template/main/Images/CreateTodoView.png" height = 400px>
+<img src="https://raw.githubusercontent.com/yosuke1985/iOS_VIPER_Template/main/Images/TodoListView.png" height = 400px><img src="https://raw.githubusercontent.com/yosuke1985/iOS_VIPER_Template/main/Images/TodoDetailView.png" height = 400px><img src="https://raw.githubusercontent.com/yosuke1985/iOS_VIPER_Template/main/Images/CreateTodoView.png" height = 400px>
 
 
 ## Firestore Data Model
@@ -358,7 +358,7 @@ struct AuthRepositoryImpl: AuthRepository {
 
 - TodoListViewからTodoDetailViewへの画面遷移
 
-<img src="https://raw.githubusercontent.com/yosuke1985/iOS_VIPER_Template/main//Images/TodoListView.png" height = 200px><font size="+6">➔</font><img src="https://raw.githubusercontent.com/yosuke1985/iOS_VIPER_Template/main//Images/TodoDetailView.png" height = 200px>
+<img src="https://raw.githubusercontent.com/yosuke1985/iOS_VIPER_Template/main/Images/TodoListView.png" height = 200px><font size="+6">➔</font><img src="https://raw.githubusercontent.com/yosuke1985/iOS_VIPER_Template/main/Images/TodoDetailView.png" height = 200px>
 
 ``` swift
 
