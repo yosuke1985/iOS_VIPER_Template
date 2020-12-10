@@ -8,15 +8,15 @@ VIPERと一口にいっても、複数のパターンのクリーンアーキテ
 
 ## UI
 
-<img src="/Images/ui.gif" height = 400px>
+<img src="https://raw.githubusercontent.com/yosuke1985/iOS_VIPER_Template/main//Images/ui.gif" height = 400px>
 
 ### Login Page, Create User Page
 
-<img src="/Images/LoginView.png" height = 400px><img src="/Images/CreateUser.png" height = 400px>
+<img src="https://raw.githubusercontent.com/yosuke1985/iOS_VIPER_Template/main//Images/LoginView.png" height = 400px><img src="https://raw.githubusercontent.com/yosuke1985/iOS_VIPER_Template/main//Images/CreateUser.png" height = 400px>
 
 ### Todo List Page, Todo Detail Page, Create Todo Page
 
-<img src="/Images/TodoListView.png" height = 400px><img src="/Images/TodoDetailView.png" height = 400px><img src="/v/CreateTodoView.png" height = 400px>
+<img src="https://raw.githubusercontent.com/yosuke1985/iOS_VIPER_Template/main//Images/TodoListView.png" height = 400px><img src="https://raw.githubusercontent.com/yosuke1985/iOS_VIPER_Template/main//Images/TodoDetailView.png" height = 400px><img src="https://raw.githubusercontent.com/yosuke1985/iOS_VIPER_Template/main/Images/CreateTodoView.png" height = 400px>
 
 
 ## Firestore Data Model
@@ -61,7 +61,7 @@ pod insatall
 
 TODO: 説明　クリーンアーキテクチャの解釈
 
-<img src="Images/CleanArchitecture.jpg" width = 90%>
+<img src="https://raw.githubusercontent.com/yosuke1985/iOS_VIPER_Template/main/Images/CleanArchitecture.jpg" width = 90%>
 
 各層へはプロトコル（インターフェイス）を介して、通信している。
 Todoをリスト表示させるTodoListViewを例にとると、
@@ -79,7 +79,6 @@ Todoをリスト表示させるTodoListViewを例にとると、
 この例では一つのAPIしか使用していないので助長なコードになっているとは思いますが、開発が進むにつれて責務を分けることによって変更に対応しやすい設計になってきます。
 
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vSxELUJhD45EOTJUcPS-B8EAOUwfaA6txalQD_VrtfQJsSRO2HfZxKdQPUX8NamVL-3tvMZFwFOkigd/pub?w=1121&amp;h=379">
-
 
 これをよく見るクリーンアーキテクチャの図に置き換えると以下のようになる。
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vSgHoUQDGKzsEiM8oaBD5dv5hGxEjHILlpnIOmOni308qQD79W35BrA6kxwEhBwugF1GkaJ81hF8meF/pub?w=960&amp;h=720">
@@ -359,7 +358,7 @@ struct AuthRepositoryImpl: AuthRepository {
 
 - TodoListViewからTodoDetailViewへの画面遷移
 
-<img src="/Images/TodoListView.png" height = 200px><font size="+6">➔</font><img src="/Images/TodoDetailView.png" height = 200px>
+<img src="https://raw.githubusercontent.com/yosuke1985/iOS_VIPER_Template/main//Images/TodoListView.png" height = 200px><font size="+6">➔</font><img src="https://raw.githubusercontent.com/yosuke1985/iOS_VIPER_Template/main//Images/TodoDetailView.png" height = 200px>
 
 ``` swift
 
