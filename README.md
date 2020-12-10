@@ -1,21 +1,10 @@
 # iOS Todo app build with Clean Architecture + Router a.k.a VIPER<sup>[1](#note1)</sup>
 
-## 残
-
-- [ ] 説明　クリーンアーキテクチャの解釈
-- [ ] presenterの役割
-- [ ] usecaseの役割
-- [ ] 英語バージョンのREADME
-
 ## 概要
 
 SwiftでTodoアプリをクリーンアーキテクチャであるVIPER, View Interactor Presenter Entity Routerでつくりました！
 VIPERと一口にいっても、複数のパターンのクリーンアーキテクチャのパターンがあり、基本的にはClean Architectureと画面遷移の責務をもつRouter(Wireframeとも読んだりする？)を組み合わせたものをVIPERと呼ばれていると認識しています。命名なども、Protocol(Interface)と実装で完全に異なるパターンなどもありますが、シンプルさを心がけてあります。
 複数の現場を経験してきて自分の考えうるベストプラクティスとして作ったものですが、ツッコミどころなどあればissueやプルリクを投げてもらえば議論させていただきたいです！
-
-アプリリリースしました！
-面白かったという方は購入してくれたらうれしいです
-https://apps.apple.com/jp/app/line/id1544030890
 
 ## UI
 
@@ -601,6 +590,18 @@ class ViewController {
 }
 ```
 
+## アプリリリースしました！
+
+面白かったという方は購入してくれたらうれしいです。
+NOTTODOというアプリ名にしようかとおもいましたが、
+名称がかぶっていたのでNOTTOD0（最後がゼロ）でリリースしました。
+<https://apps.apple.com/jp/app/line/id1544030890>
+
+## お仕事依頼も募集中です
+
+お仕事も募集中です。
+ihatenonoildressing@gmail.comにご連絡ください！
+
 ## 注釈
 
 1. <p id="note1">Clean Architecture + Routerのアーキテクチャ　＝　VIPERであり、VIPERはView Interactor Presenter Entity Routerの頭文字を取ったもの。</p>
@@ -636,3 +637,10 @@ class ViewController {
 
 - 本気でやりたい人のためのFirestore設計入門 - 超シンプルなTODOアプリ編
   - <https://www.youtube.com/watch?v=fHFoqJpkbJg>
+
+## 残
+
+- [ ] 説明　クリーンアーキテクチャの解釈
+- [ ] presenterの役割
+- [ ] usecaseの役割
+- [ ] 英語バージョンのREADME
