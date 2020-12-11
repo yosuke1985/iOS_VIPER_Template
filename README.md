@@ -8,15 +8,18 @@ VIPERと一口にいっても、複数のパターンのクリーンアーキテ
 
 ## UI
 
-<img src="/Images/ui.gif" witdh = 150>
+<img src="/Images/ui.gif" width = 150>
 
 ### Login Page, Create User Page
 
-<img src="/Images/LoginView.png" witdh = 150><img src="Images/CreateUser.png" witdh = 150>
+<img src="/Images/LoginView.png" width = 150><img src="Images/CreateUser.png" width = 150>
 
 ### Todo List Page, Todo Detail Page, Create Todo Page
 
-<img witdh = "150" src="/Images/TodoListView.png"><img src="/Images/TodoDetailView.png" witdh = "150"><img src="/Images/CreateTodoView.png" witdh = "150">
+<img src="/Images/TodoListView.png" width ="150px">
+<img src="/Images/TodoDetailView.png" width ="150px">
+<img src="/Images/CreateTodoView.png" width="150px">
+
 
 
 ## Firestore Data Model
