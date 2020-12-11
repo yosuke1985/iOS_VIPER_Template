@@ -58,11 +58,32 @@ pod insatall
 - 双方向バインディングにはRxSwiftを使用する。
 - レポジトリにはInterface Adapterは作成しない。
 
-## クリーンアーキテクチャについて
+## クリーンアーキテクチャ
 
-TODO: 説明　クリーンアーキテクチャの解釈
+### クリーンアーキテクチャの図
 
 <img src="https://raw.githubusercontent.com/yosuke1985/iOS_VIPER_Template/main/Images/CleanArchitecture.jpg" width = 90% >
+
+クリーンアーキテクチャの有名な図についてオレオレで解釈して解説したいとおもいます。
+
+この図にさりげなく円の縁にある影があると思うんですが、見えますか？
+この円形は私は立体にするとピラミッド状になっていると思っています。
+この一番上に君臨するのがEntity, その次にUseCase, その次にControllers, Presenters, Gateways,　その下に、 DB, UI, Web, Device, External Interfaceがあります。
+これは各レイヤーとの上下関係を示しております。
+
+まず、Entityを頂点として捉えます。Entityはアプリに依存しないビジネスロジックを表現し、UseCaseはEntityを用いて、アプリに依存するロジックを作り、View, DB, Web、Deviceに指示を送ります。
+
+iOSアプリだと、ユーザーの入力やiOSの本体に関わるのが図でいうところのFramework & Driverで、
+Firebase, SQliteなどデータの永続化に関わるところも青色のFramework & Driverに該当します。
+
+例えば、Viewにてユーザーがログインボタンを押すと、PresenterからUseCaseを介し、FirebaseのAuthenticationにアクセスする流れでUseCase,Entityを中心に考えると、
+ViewからログインのアクションをPresenterを介して受け取り、FirebaseのログインのAPIをたたいている。という流れになります。
+
+### 依存関係逆転の法則
+
+TODO:
+
+###　当該アプリとクリーンアーキテクチャとの対応
 
 各層へはプロトコル（インターフェイス）を介して、通信している。
 Todoをリスト表示させるTodoListViewを例にとると、
@@ -81,7 +102,7 @@ Todoをリスト表示させるTodoListViewを例にとると、
 
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vSxELUJhD45EOTJUcPS-B8EAOUwfaA6txalQD_VrtfQJsSRO2HfZxKdQPUX8NamVL-3tvMZFwFOkigd/pub?w=1121&amp;h=379">
 
-これをよく見るクリーンアーキテクチャの図に置き換えると以下のようになる。
+これをよく見るクリーンアーキテクチャの図に置き換えると以下のようなピラミッド型になっている。
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vSgHoUQDGKzsEiM8oaBD5dv5hGxEjHILlpnIOmOni308qQD79W35BrA6kxwEhBwugF1GkaJ81hF8meF/pub?w=960&amp;h=720">
 
 ### 命名規則 Naming conventions
