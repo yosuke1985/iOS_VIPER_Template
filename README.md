@@ -81,9 +81,61 @@ ViewからログインのアクションをPresenterを介して受け取り、F
 
 ### 依存関係逆転の法則
 
-TODO:
+依存性関係逆転の法則というと、Entityをピラミッドの頂点とし、それ以下のもの
 
-###　当該アプリとクリーンアーキテクチャとの対応
+クリーンアーキテクチャを語る上で文脈上必ずでてくるのが、この依存関係逆転の法則なんですが、
+これは例えば、UseCaseがログイン・ログアウト・ユーザー作成の責務を持つAuthRepositoryからログインするとして、UseCaseはそのAuthRepositoryのプロトコル、EmailPass情報を持ってログインする関数のみを知っている状態にします。つまり、UseCaseは具体的処理は知らず、ここでいうところのFirebase Authenticationのクラスのことなどは一切知らないということになります。
+
+``` swift
+struct AuthUseCaseImpl: AuthUseCase,
+    AuthRepositoryInjectable
+{
+    func login(email: String, password: String) -> Single<Result<Void, APIError>> {
+        return authRepository.login(email: email, password: password)
+    }
+}
+
+protocol AuthRepository {
+    func logout() -> Single<Result<Void, APIError>>
+}
+```
+
+そのAuthRepositoryに準拠したクラスが以下のような具体的な実装になります。
+
+``` swift
+struct AuthRepositoryImpl: AuthRepository {
+
+}
+```
+
+依存関係の逆転をさせずに書くと以下のように, AuthUseCaseはログインの具体的な実装を知っていることになり、例えば、FirebaseのAuth.auth().signIn(withEmail: email, password: password)の関数名が変更したときには、AuthUseCaseを修正する必要がありますが、依存性逆転の法則で書かれていれば、AuthRepositoryImplの修正だけで済みます。
+
+``` swift
+struct AuthUseCaseImpl:
+{
+    func login(email: String, password: String) -> Single<Result<Void, APIError>> {
+        Single<Result<Void, APIError>>.create { (observer) -> Disposable in
+            Auth.auth().signIn(withEmail: email, password: password) { result, errorOptional in
+                if let error = errorOptional {
+                    let apiError = APIError.response(description: error.localizedDescription)
+                    return observer(.success(.failure(apiError)))
+                } else if let uid = result?.user.uid {
+                    let user = User(userId: uid)
+                    AuthRepositoryImpl.shared.userRelay.accept(user)
+                    return observer(.success(.success(())))
+                } else {
+                    return observer(.error(CustomError.unknown))
+                }
+            }
+            return Disposables.create()
+        }
+    }
+}
+```
+
+以上のように、プロトコルに依存することによって疎結合な状態を保つことによって、柔軟に変更が可能な状態を保つことができます。
+
+### 当該アプリとクリーンアーキテクチャとの対応
 
 各層へはプロトコル（インターフェイス）を介して、通信している。
 Todoをリスト表示させるTodoListViewを例にとると、
