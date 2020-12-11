@@ -143,7 +143,6 @@ Todoをリスト表示させるTodoListViewを例にとると、
 - TodoListPresenterImplは TodoUseCaseプロトコルを介して、TodoUseCaseImplと通信している。
 - TodoUseCaseImplはTodoRepositoryプロトコルを介して、TodoRepositoryImplと通信している。
 
-
 例えば、Todoのリストを表示させる場合、
 1. TodoListViewControllerが、TodoListPresenterプロトコルを介してTodoListPresenterImplに[Todo]を要求。　TodoListViewControllerはTodoListPresenterプロトコルしかしらない。
 2. TodoListPresenterImplはTodoListViewControllerからのInputを受けて、TodoUseCaseプロトコルを介したTodoUseCaseImplはTodoRepositoryを介してTodoRepositoryImplにアクセスする。
@@ -158,6 +157,10 @@ Todoをリスト表示させるTodoListViewを例にとると、
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vSgHoUQDGKzsEiM8oaBD5dv5hGxEjHILlpnIOmOni308qQD79W35BrA6kxwEhBwugF1GkaJ81hF8meF/pub?w=960&amp;h=720">
 
 ### 命名規則 Naming conventions
+
+Clean Archtectureにわかりにくいところで、MVC, MVP, MVVMなど今まではその責務をもつモジュールの名称が名付けられていましたが、
+Clean Architectureを作る人によって命名がまちまちです。
+本家のVIPERにおいても、プロトコル（インターフェイス）と実装の名前が違っていたり、とてもややこしいです。ですので、できるだけシンプルさを心がけた名称を採用しました。
 
 - protocolとそれを準拠したクラスないしは構造体は、protocolの名称 + Implと命名する。
 - DIの部分は、protocolの\\(ModuleName)Injectableと命名する。
@@ -737,8 +740,3 @@ ihatenonoildressing@gmail.comにご連絡ください！
 
 - 本気でやりたい人のためのFirestore設計入門 - 超シンプルなTODOアプリ編
   - <https://www.youtube.com/watch?v=fHFoqJpkbJg>
-
-## 残
-
-- [ ] 説明　クリーンアーキテクチャの解釈
-- [ ] 英語バージョンのREADME
