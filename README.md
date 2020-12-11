@@ -8,17 +8,15 @@ VIPERと一口にいっても、複数のパターンのクリーンアーキテ
 
 ## UI
 
-<img src="/Images/ui.gif" width = 150>
+<img src="/Images/ui.gif" height = 400>
 
 ### Login Page, Create User Page
 
-<img src="/Images/LoginView.png" width = 150><img src="Images/CreateUser.png" width = 150>
+<img src="/Images/LoginView.png" height = 400><img src="Images/CreateUser.png" height = 400>
 
 ### Todo List Page, Todo Detail Page, Create Todo Page
 
-<img src="/Images/TodoListView.png" width ="150px">
-<img src="/Images/TodoDetailView.png" width ="150px">
-<img src="/Images/CreateTodoView.png" width="150px">
+<img src="/Images/TodoListView.png" height = 400><img src="/Images/TodoDetailView.png" height = 400><img src="/Images/CreateTodoView.png" height = 400>
 
 
 
