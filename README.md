@@ -8,15 +8,15 @@ VIPERと一口にいっても、複数のパターンのクリーンアーキテ
 
 ## UI
 
-<img src="https://raw.githubusercontent.com/yosuke1985/iOS_VIPER_Template/main//Images/ui.gif" height = 400px>
+<img src="/Images/ui.gif" witdh = 150>
 
 ### Login Page, Create User Page
 
-<img src="https://raw.githubusercontent.com/yosuke1985/iOS_VIPER_Template/main//Images/LoginView.png" height = 400px><img src="https://raw.githubusercontent.com/yosuke1985/iOS_VIPER_Template/main/Images/CreateUser.png" height = 400px>
+<img src="/Images/LoginView.png" witdh = 150><img src="Images/CreateUser.png" witdh = 150>
 
 ### Todo List Page, Todo Detail Page, Create Todo Page
 
-<img src="https://raw.githubusercontent.com/yosuke1985/iOS_VIPER_Template/main/Images/TodoListView.png" height = 400px><img src="https://raw.githubusercontent.com/yosuke1985/iOS_VIPER_Template/main/Images/TodoDetailView.png" height = 400px><img src="https://raw.githubusercontent.com/yosuke1985/iOS_VIPER_Template/main/Images/CreateTodoView.png" height = 400px>
+<img witdh = "150" src="/Images/TodoListView.png"><img src="/Images/TodoDetailView.png" witdh = "150"><img src="/Images/CreateTodoView.png" witdh = "150">
 
 
 ## Firestore Data Model
@@ -61,7 +61,7 @@ pod insatall
 
 TODO: 説明　クリーンアーキテクチャの解釈
 
-<img src="https://raw.githubusercontent.com/yosuke1985/iOS_VIPER_Template/main/Images/CleanArchitecture.jpg" width = 90%>
+<img src="https://raw.githubusercontent.com/yosuke1985/iOS_VIPER_Template/main/Images/CleanArchitecture.jpg" width = 90% >
 
 各層へはプロトコル（インターフェイス）を介して、通信している。
 Todoをリスト表示させるTodoListViewを例にとると、
@@ -219,8 +219,10 @@ struct TodoListBuilder:
 
 ## View, ViewControllerの役割
 
-Viewはpresenterを持ち、Viewからの入力をpresenterを通じてすべて流し込む。
+ViewはPresenterのことのみを知っています。
+つまりViewControllerはPresenterを持ち、イベントをpresenterへ渡す
 ないしは、Presenterからの入力を受けて、それをViewに反映させる。
+UIViewControllerの持つUIViewやUITableViewは直接参照してデータの受け渡しをするようにしています。
 
 <b>Input: PresenterからのアクションをViewに反映させる。</b>
 
@@ -238,6 +240,10 @@ class LoginViewController: UIViewController {
 <b>Input: Viewからのアクションをもらう</b>
 
 <b>Output: UseCaseにアクションを起こす</b>
+
+PresenterはUseCaseのことのみを知っています。
+Viewから得た入力をもとに、PresenterではどうするかをUseCaseに出力します。
+以下では、UseCaseから帰ってきた結果をもとにViewに流し込むという処理をしています。
 
 ``` swift
 
@@ -287,6 +293,10 @@ final class LoginPresenterImpl: LoginPresenter {
 
 <b>Output: Repositoryからデータを取り出したり、ビジネスロジックであるEntityを使用し処理した結果を返す</b>
 
+クリーンアーキテクチャの中心的役割ともいえるUseCaseで、UseCaseはEntityのことのみを知っています。
+UseCaseが
+
+
 ``` swift
 protocol AuthUseCase {
     func login(email: String, password: String) -> Single<Result<Void, APIError>>
@@ -310,6 +320,23 @@ struct AuthUseCaseImpl: AuthUseCase,
 以下の実装の例ではAPIを叩いた結果はResult型で返すようにしている。
 
 Presenterで受けたResult型でsubscribeの中でAPIの結果をsuccess, failureで分岐させている。
+
+### 戻り値の型をSingle<Result<Void, APIError>>
+
+まずRxSwiftのSingleはSuccessとErrorしか流れないObservableです。
+このSuccessが流れるときは、必ずAPIとの通信に成功した場合に流れます。ここではVoidですので、APIを叩くのは成功したが何も流れてこないという状態です。
+そのAPIから帰ってきた結果に対し、Relult型の.success, .failureで分岐させています。
+つまり、ここで考えうる返却されるパターンは、３パターンで、
+
+- observer(.success(.failure(apiError)))
+APIを叩くのは成功したが、パラメータとして渡した値に問題があったかなどの、なんらかの原因でエラーがAPIから返された。
+
+- observer(.success(.success(())))
+APIを叩くのは成功し、処理としても成功した。APIから返却されたものもないのでVoid ()を返却している。
+
+- observer(.error(CustomError.unknown))
+APIから返却されていない、何らかのエラーが発生している。
+
 
 ``` swift
 protocol AuthRepository {
@@ -640,6 +667,4 @@ ihatenonoildressing@gmail.comにご連絡ください！
 ## 残
 
 - [ ] 説明　クリーンアーキテクチャの解釈
-- [ ] presenterの役割
-- [ ] usecaseの役割
 - [ ] 英語バージョンのREADME
