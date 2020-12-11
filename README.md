@@ -83,7 +83,7 @@ ViewからログインのアクションをPresenterを介して受け取り、F
 
 依存性関係逆転の法則というと、Entityをピラミッドの頂点とし、それ以下のもの
 
-クリーンアーキテクチャを語る上で文脈上必ずでてくるのが、この依存関係逆転の法則なんですが、
+クリーンアーキテクチャを語る上で文脈上必ずてくるのが、この依存関係逆転の法則なんですが、
 これは例えば、UseCaseがログイン・ログアウト・ユーザー作成の責務を持つAuthRepositoryからログインするとして、UseCaseはそのAuthRepositoryのプロトコル、EmailPass情報を持ってログインする関数のみを知っている状態にします。つまり、UseCaseは具体的処理は知らず、ここでいうところのFirebase Authenticationのクラスのことなどは一切知らないということになります。
 
 ``` swift
@@ -395,7 +395,7 @@ struct AuthUseCaseImpl: AuthUseCase,
 
 Presenterで受けたResult型でsubscribeの中でAPIの結果をsuccess, failureで分岐させている。
 
-### 戻り値の型をSingle<Result<Void, APIError>>
+### 戻り値の型をSingle\<Result\<Void, APIError>>
 
 まずRxSwiftのSingleはSuccessとErrorしか流れないObservableです。
 このSuccessが流れるときは、必ずAPIとの通信に成功した場合に流れます。ここではVoidですので、APIを叩くのは成功したが何も流れてこないという状態です。
