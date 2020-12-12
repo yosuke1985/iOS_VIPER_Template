@@ -4,13 +4,14 @@
 
 iOSで中大規模のアプリを作成する上で、クリーンアーキテクチャの採用する上でどういった実装がベストプラクティスなのかということをメモと勉強を兼ねて残したいと思います。
 自分が考えているオレオレな解釈でクリーンアーキテクチャを理解したつもりでいるので、間違っているところが多々あるかもしれないです！
+複数の現場を経験してきて自分の考えうるベストプラクティスとして作ったものですが、ツッコミどころなどあればissueやプルリクを投げてもらえば議論させていただきたいです！
+
+## プロジェクト概要
 
 SwiftでTodoアプリをクリーンアーキテクチャであるVIPER, View Interactor Presenter Entity Routerでつくりました。
 クリーンアーキテクチャと一口にいっても、細かくいろんな書き方があり、データバインディングにReactive ExtensionsのRxSwiftを採用しないパターン、データ通信周りだけRxSwiftを採用するパターン、命名がインターフェイス（Protocol）と実装が異なるパターンなど、微妙な違いがあります。
 
 ここでは、Clean Architectureと画面遷移の責務をもつRouter(Wireframeとも読んだりする？)を組み合わせたものをVIPERと呼ばれているものをRxSwfitを使って実装していきます。命名なども、Protocol(Interface)と実装で完全に異なるパターンなどもありますが、シンプルさを心がけてあります。
-
-複数の現場を経験してきて自分の考えうるベストプラクティスとして作ったものですが、ツッコミどころなどあればissueやプルリクを投げてもらえば議論させていただきたいです！
 
 ## UI
 
@@ -50,14 +51,14 @@ root/:
 - Firebase
 - Firestore
 
-## VIPERアーキテクチャ概要
+## クリーンアーキテクチャの解説
+
+### VIPERアーキテクチャ概要
 
 - Clean Architecture + Router　= VIPER
 - VIPERはView Interactor Presenter Entity Routerの頭文字を取ったものであるが、ここでは Interactorとは呼ばずUseCaseと呼ぶことにする。
 - 双方向バインディングにはRxSwiftを使用する。
 - レポジトリにはInterface Adapterは作成しない。
-
-## クリーンアーキテクチャ
 
 ### クリーンアーキテクチャの図
 
@@ -70,20 +71,23 @@ root/:
 この一番上に君臨するのがEntity, その次にUseCase, その次にControllers, Presenters, Gateways,　その下に、 DB, UI, Web, Device, External Interfaceがあります。
 これは各レイヤーとの上下関係を示しております。
 
-まず、Entityを頂点として捉えます。Entityはアプリに依存しないビジネスロジックを表現し、UseCaseはEntityを用いて、アプリに依存するロジックを作り、View, DB, Web、Deviceに指示を送ります。
+まず、Entityを頂点として捉えます。Entityはアプリに依存しないビジネスロジックを表現し、UseCaseはEntityを用いて、アプリに依存するロジックを作り、View, DB, Web、Deviceに指示を送っています。
 
-iOSアプリだと、ユーザーの入力やiOSの本体に関わるのが図でいうところのFramework & Driverで、
-Firebase, SQliteなどデータの永続化に関わるところも青色のFramework & Driverに該当します。
+### iOSアプリとの対応
+
+iOSアプリだと、ユーザーの入力やiOSの本体に関わるのが図でいうところのFramework & Driverで、Firebase, SQliteなどデータの永続化に関わるところも青色のFramework & Driverに該当します。
 
 例えば、Viewにてユーザーがログインボタンを押すと、PresenterからUseCaseを介し、FirebaseのAuthenticationにアクセスする流れでUseCase,Entityを中心に考えると、
 ViewからログインのアクションをPresenterを介して受け取り、FirebaseのログインのAPIをたたいている。という流れになります。
 
-### 依存関係逆転の法則
+### 依存関係逆転の法則とは何か？
 
 クリーンアーキテクチャを語る上で文脈上必ずてくるのが、この依存関係逆転の法則で、これを理解しないとクリーンアーキテクチャが作れません。そもそもなにが何に依存が逆転しているのかが分かりにくいです。
 ここでは事例を用いて解説します。例えば、ログインするUseCaseがあります。そのログインするUseCaseから、ログイン・ログアウト・ユーザー作成の責務を持つAuthRepositoryを使ってログインを行います。
+
+#### プロトコルと実装の分離させて依存性を分離させる具体例
+
 UseCaseはそのAuthRepositoryを使ってログインするわけですが、ここでの役割分担は、UseCaseは文字通り使用するユースケースと、実際にログインする処理をAuthRepositoryとに責務を分けています。
-ログインする処理では、LoginPresenter -> LoginUseCase -> AuthRepository.login(email:pass:)　と経由しているので、ただただ助長になっているように見えますが、複雑なアプリだとUseCaseが複数のRepositoryを使用してPresenterに結果を返すというシチュエーションが出てきます。要件がある程度シンプルだとClean Architectureなどではなく、MVVMなどの他のアーキテクチャを検討して良いのかもしれません。
 
 ログインUseCaseは、EmailPass情報を持ってログインする関数のみを知っている状態で、UseCaseは具体的処理は知らず、ここでいうところのFirebase Authenticationのクラスのことなどは一切知らないというのはどういうことかというと、
 
@@ -105,11 +109,29 @@ protocol AuthRepository {
 
 ``` swift
 struct AuthRepositoryImpl: AuthRepository {
-
+    func login(email: String, password: String) -> Single<Result<Void, APIError>> {
+        Single<Result<Void, APIError>>.create { (observer) -> Disposable in
+            Auth.auth().signIn(withEmail: email, password: password) { result, errorOptional in
+                if let error = errorOptional {
+                    let apiError = APIError.response(description: error.localizedDescription)
+                    return observer(.success(.failure(apiError)))
+                } else if let uid = result?.user.uid {
+                    let user = User(userId: uid)
+                    AuthRepositoryImpl.shared.userRelay.accept(user)
+                    return observer(.success(.success(())))
+                } else {
+                    return observer(.error(CustomError.unknown))
+                }
+            }
+            return Disposables.create()
+        }
+    }
 }
 ```
 
-依存関係の逆転をさせずに書くと以下のように, AuthUseCaseはログインの具体的な実装を知っていることになり、例えば、FirebaseのAuth.auth().signIn(withEmail: email, password: password)の関数名が変更したときには、AuthUseCaseを修正する必要がありますが、依存性逆転の法則で書かれていれば、AuthRepositoryImplの修正だけで済みます。
+##### 依存性の分離させずに書くと、
+
+依存関係の逆転をさせずに書くと以下のように, AuthUseCaseはログインの具体的な実装を知っている状態になります。
 
 ``` swift
 struct AuthUseCaseImpl:
@@ -135,6 +157,15 @@ struct AuthUseCaseImpl:
 ```
 
 以上のように、プロトコルに依存することによって疎結合な状態を保つことによって、柔軟に変更が可能な状態を保つことができます。
+
+#### クリーンアーキテクチャが必要ない場合は？
+
+以上のログインする処理では、LoginPresenter -> LoginUseCase -> AuthRepository.login(email:pass:)　と経由しているので、ただただ助長になっているように見えます。
+
+この例ではシンプルなのでただ助長になっているだけですが、中大規模のアプリ開発においては、一つのUseCaseの中で複数のRepositoryを参照するというようなことがよくあります。
+この例ではFirestoreを採用しており、Firestoreのデータモデルの作成する特性上、複数のRepositoryを参照するということが発生しにくいかもしれないですが、通常バックエンド開発者がいる場合では、顧客情報を取得した上でさらに購入履歴を取得し、さらにその商品の詳細を取得しなどというケースがあるかと思います。
+
+要件がある程度シンプルだとClean Architectureなどではなく、MVVMなどの他のアーキテクチャを検討して良いのかもしれません。
 
 ### 当該アプリとクリーンアーキテクチャとの対応
 
