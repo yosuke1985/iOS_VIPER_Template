@@ -1,9 +1,15 @@
 # iOS Todo app build with Clean Architecture + Router a.k.a VIPER<sup>[1](#note1)</sup>
 
-## 概要
+## 動機
 
-SwiftでTodoアプリをクリーンアーキテクチャであるVIPER, View Interactor Presenter Entity Routerでつくりました！
-VIPERと一口にいっても、複数のパターンのクリーンアーキテクチャのパターンがあり、基本的にはClean Architectureと画面遷移の責務をもつRouter(Wireframeとも読んだりする？)を組み合わせたものをVIPERと呼ばれていると認識しています。命名なども、Protocol(Interface)と実装で完全に異なるパターンなどもありますが、シンプルさを心がけてあります。
+iOSで中大規模のアプリを作成する上で、クリーンアーキテクチャの採用する上でどういった実装がベストプラクティスなのかということをメモと勉強を兼ねて残したいと思います。
+自分が考えているオレオレな解釈でクリーンアーキテクチャを理解したつもりでいるので、間違っているところが多々あるかもしれないです！
+
+SwiftでTodoアプリをクリーンアーキテクチャであるVIPER, View Interactor Presenter Entity Routerでつくりました。
+クリーンアーキテクチャと一口にいっても、細かくいろんな書き方があり、データバインディングにReactive ExtensionsのRxSwiftを採用しないパターン、データ通信周りだけRxSwiftを採用するパターン、命名がインターフェイス（Protocol）と実装が異なるパターンなど、微妙な違いがあります。
+
+ここでは、Clean Architectureと画面遷移の責務をもつRouter(Wireframeとも読んだりする？)を組み合わせたものをVIPERと呼ばれているものをRxSwfitを使って実装していきます。命名なども、Protocol(Interface)と実装で完全に異なるパターンなどもありますが、シンプルさを心がけてあります。
+
 複数の現場を経験してきて自分の考えうるベストプラクティスとして作ったものですが、ツッコミどころなどあればissueやプルリクを投げてもらえば議論させていただきたいです！
 
 ## UI
