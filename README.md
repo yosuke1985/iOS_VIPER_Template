@@ -132,7 +132,7 @@ struct AuthUseCaseImpl:
 
 ### 当該アプリとクリーンアーキテクチャとの対応
 
-各層へはプロトコル（インターフェイス）を介して、通信している。
+各層へはプロトコル（インターフェイス）を介して、通信しています。
 Todoをリスト表示させるTodoListViewを例にとると、
 - TodoListViewControllerはTodoListPresenterプロトコルを介して、TodoListPresenterImplと通信している。
 - TodoListPresenterImplは TodoUseCaseプロトコルを介して、TodoUseCaseImplと通信している。
@@ -389,9 +389,9 @@ struct AuthUseCaseImpl: AuthUseCase,
 
 <b>Output: UseCaseのアクションに基づいて、APIを叩いたり、ローカルDBを操作したりする。</b>
 
-以下の実装の例ではAPIを叩いた結果はResult型で返すようにしている。
+以下の実装の例ではAPIを叩いた結果はResult型で返すようにしています。
 
-Presenterで受けたResult型でsubscribeの中でAPIの結果をsuccess, failureで分岐させている。
+Presenterで受けたResult型でsubscribeの中でAPIの結果をsuccess, failureで分岐させています。
 
 ### 戻り値の型をSingle\<Result\<Void, APIError>>
 
@@ -404,10 +404,10 @@ Presenterで受けたResult型でsubscribeの中でAPIの結果をsuccess, failu
 APIを叩くのは成功したが、パラメータとして渡した値に問題があったかなどの、なんらかの原因でエラーがAPIから返された。
 
 - observer(.success(.success(())))
-APIを叩くのは成功し、処理としても成功した。APIから返却されたものもないのでVoid ()を返却している。
+APIを叩くのは成功し、処理としても成功した。APIから返却されたものもないのでVoid ()を返却しています。
 
 - observer(.error(CustomError.unknown))
-APIから返却されていない、何らかのエラーが発生している。
+APIから返却されていない、何らかのエラーが発生しています。
 
 
 ``` swift
@@ -573,7 +573,7 @@ class ViewController {
 
 Presenterで処理した結果を、描画する目的で流す。
 Driver: エラーが発生しない, main スレッドで実行, 一つ前の event を受け取れる.
-初期表示でセットされる場合などを考慮すると、tapした瞬間しか受け取れないSignalよりもDriverが適している。
+初期表示でセットされる場合などを考慮すると、tapした瞬間しか受け取れないSignalよりもDriverが適しています。
 
 例として、テキストの表示、画像の表示などUIの表示、UIの表示のEnable, Hiddenなど
 
@@ -704,7 +704,7 @@ ihatenonoildressing@gmail.comにご連絡ください！
 
 1. <p id="note1">Clean Architecture + Routerのアーキテクチャ　＝　VIPERであり、VIPERはView Interactor Presenter Entity Routerの頭文字を取ったもの。</p>
 2. <p id="note2">Presenterは、MVVMでいうところのViewModel</p>
-3. <p id="note3">VIPERでは UseCaseのことをInteractorと名付けている。</p>
+3. <p id="note3">VIPERでは UseCaseのことをInteractorと名付けています。</p>
 4. <p id="note4">Routerは、Wireframeと名付けることもある</p>
 
 ## Reference
