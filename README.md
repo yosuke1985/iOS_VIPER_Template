@@ -13,20 +13,19 @@ SwiftでTodoアプリをクリーンアーキテクチャであるVIPER, View In
 
 ここでは、Clean Architectureと画面遷移の責務をもつRouter(Wireframeとも読んだりする？)を組み合わせたものをVIPERと呼ばれているものをRxSwfitを使って実装していきます。命名なども、Protocol(Interface)と実装で完全に異なるパターンなどもありますが、シンプルさを心がけてあります。
 
-## UI
+### 画面のスクリーンショット
 
 <img src="/Images/ui.gif" height = 400>
 
-### Login Page, Create User Page
+#### ログインページ, ユーザー作成画面
 
 <img src="/Images/LoginView.png" height = 400><img src="Images/CreateUser.png" height = 400>
 
-### Todo List Page, Todo Detail Page, Create Todo Page
+#### TODO一覧表示画面、TODO詳細画面、TODO編集画面
 
 <img src="/Images/TodoListView.png" height = 400><img src="/Images/TodoDetailView.png" height = 400><img src="/Images/CreateTodoView.png" height = 400>
 
-
-## Firestore Data Model
+#### Firestore
 
 ``` yml
 root/:
@@ -41,7 +40,7 @@ root/:
         updatedAt: Date
 ```
 
-## Requirements
+#### Requirements
 
 - Clean Architecture + Router a.k.a VIPER<sup>[1](#note1)</sup>
 - Xcode 12.x
@@ -259,11 +258,11 @@ struct ModuleNameRepositoryImpl: ModuleNameRepository {
 }
 ```
 
-## VIPER各コンポーネント(= View Interactor Presenter Entity Router)<sup>[3](#note3)</sup>
+### VIPER各コンポーネント(= View Interactor Presenter Entity Router)<sup>[3](#note3)</sup>についての詳細
 
-### Dependency Injection
+#### Dependency Injection
 
-#### Protocol extensionでのDI
+##### Protocol extensionでのDI
 
 DIの部分は、protocolの\\(ModuleName)Injectableを作成し、protocol extensionに実体を持つ。
 
@@ -301,7 +300,7 @@ class TodoRepositoryImpl: TodoRepository {
 
 ```
 
-#### BuilderパターンでのDI
+##### BuilderパターンでのDI
 
 - Builderについて
   - 各画面に対し、1 ViewControleler, 1 storyboardで構成し、それに対応したBuilderが依存関係の注入しPresenter, UseCase, RouterにDIする。
@@ -326,7 +325,7 @@ struct TodoListBuilder:
 }
 ```
 
-## View, ViewControllerの役割
+##### View, ViewControllerの役割
 
 ViewはPresenterのことのみを知っています。
 つまりViewControllerはPresenterを持ち、イベントをpresenterへ渡す
@@ -344,7 +343,7 @@ class LoginViewController: UIViewController {
 }
 ```
 
-## Presenterの役割
+#### Presenterの役割
 
 <b>Input: Viewからのアクションをもらう</b>
 
@@ -396,7 +395,7 @@ final class LoginPresenterImpl: LoginPresenter {
 }
 ```
 
-## UseCaseの役割
+#### UseCaseの役割
 
 <b>Input: Presenterからのアクションをもらう</b>
 
@@ -420,7 +419,7 @@ struct AuthUseCaseImpl: AuthUseCase,
 }
 ```
 
-## Repostiroyの役割
+#### Repostiroyの役割
 
 <b>Input: UseCaseからのアクションをもらう</b>
 
@@ -430,7 +429,61 @@ struct AuthUseCaseImpl: AuthUseCase,
 
 Presenterで受けたResult型でsubscribeの中でAPIの結果をsuccess, failureで分岐させています。
 
-### 戻り値の型をSingle\<Result\<Void, APIError>>
+##### Routerの役割
+
+<b>Input: Presenterからのアクションをもらう</b>
+
+<b>Output: Presenterからのアクションをうけて、RouterはViewControllerの参照を持っているので、アクションに基づいて別のViewControllerへ画面遷移を行う。</b>
+
+- 画面遷移の責務を持つRouterパターン。
+  - Routerは画面遷移の責務を持つ。画面遷移先のViewControllerをBuildし、遷移する。
+  - 画面遷移部分を切り離す各Routerに対応したUIViewControllerの参照を持ち、Presenterから受けた入力によって画面遷移させる。
+- 各Transitionableは、buildして画面遷移する責務を持つ。各Transitionableに準拠したRouter(UIViewControllerの実体を持つ)は、その準拠した画面へ遷移することができるようになる。（遷移するための実装がそのTransitionableにあるので）
+
+###### 例）TodoListViewの画面遷移
+
+- TodoListViewからTodoDetailViewへの画面遷移
+
+<img src="https://raw.githubusercontent.com/yosuke1985/iOS_VIPER_Template/main/Images/TodoListView.png" width=150><font size="+6">➔</font><img src="https://raw.githubusercontent.com/yosuke1985/iOS_VIPER_Template/main/Images/TodoDetailView.png" width=150>
+
+``` swift
+
+protocol TodoListPresenter {
+    var router: TodoListRouter! { get set }
+}
+
+final class TodoListPresenterImpl: TodoListPresenter {
+    var router: TodoListRouter!
+}
+
+protocol TodoListRouter:
+    LoginViewTransitionable,
+    TodoDetailViewTransitionable,
+    CreateTodoViewTransitionable
+{
+    var viewController: UIViewController? { get set }
+}
+
+final class TodoListRouterImpl: TodoListRouter {
+    weak var viewController: UIViewController?
+}
+
+
+protocol TodoDetailViewTransitionable {
+    var viewController: UIViewController? { get set }
+    func toTodoDetailView(todo: Todo)
+}
+
+extension TodoDetailViewTransitionable {
+    func toTodoDetailView(todo: Todo) {
+        let vc = TodoDetailBuilder().build(todo: todo)
+        viewController?.navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+```
+
+#### 戻り値の型をSingle【Result【Void, APIError】】
 
 まずRxSwiftのSingleはSuccessとErrorしか流れないObservableです。
 このSuccessが流れるときは、必ずAPIとの通信に成功した場合に流れます。ここではVoidですので、APIを叩くのは成功したが何も流れてこないという状態です。
@@ -479,65 +532,11 @@ struct AuthRepositoryImpl: AuthRepository {
 
 ```
 
-### Routerの役割
-
-<b>Input: Presenterからのアクションをもらう</b>
-
-<b>Output: Presenterからのアクションをうけて、RouterはViewControllerの参照を持っているので、アクションに基づいて別のViewControllerへ画面遷移を行う。</b>
-
-- 画面遷移の責務を持つRouterパターン。
-  - Routerは画面遷移の責務を持つ。画面遷移先のViewControllerをBuildし、遷移する。
-  - 画面遷移部分を切り離す各Routerに対応したUIViewControllerの参照を持ち、Presenterから受けた入力によって画面遷移させる。
-- 各Transitionableは、buildして画面遷移する責務を持つ。各Transitionableに準拠したRouter(UIViewControllerの実体を持つ)は、その準拠した画面へ遷移することができるようになる。（遷移するための実装がそのTransitionableにあるので）
-
-#### 例）TodoListViewの画面遷移
-
-- TodoListViewからTodoDetailViewへの画面遷移
-
-<img src="https://raw.githubusercontent.com/yosuke1985/iOS_VIPER_Template/main/Images/TodoListView.png" height = 200px><font size="+6">➔</font><img src="https://raw.githubusercontent.com/yosuke1985/iOS_VIPER_Template/main/Images/TodoDetailView.png" height = 200px>
-
-``` swift
-
-protocol TodoListPresenter {
-    var router: TodoListRouter! { get set }
-}
-
-final class TodoListPresenterImpl: TodoListPresenter {
-    var router: TodoListRouter!
-}
-
-protocol TodoListRouter:
-    LoginViewTransitionable,
-    TodoDetailViewTransitionable,
-    CreateTodoViewTransitionable
-{
-    var viewController: UIViewController? { get set }
-}
-
-final class TodoListRouterImpl: TodoListRouter {
-    weak var viewController: UIViewController?
-}
-
-
-protocol TodoDetailViewTransitionable {
-    var viewController: UIViewController? { get set }
-    func toTodoDetailView(todo: Todo)
-}
-
-extension TodoDetailViewTransitionable {
-    func toTodoDetailView(todo: Todo) {
-        let vc = TodoDetailBuilder().build(todo: todo)
-        viewController?.navigationController?.pushViewController(vc, animated: true)
-    }
-}
-
-```
-
-## データバインディング View <-> Presenter <-> UseCase <-> Repository
+#### データバインディング View <-> Presenter <-> UseCase <-> Repository
 
 これらの通信にデータをどう渡すかのデータバインディングについて
 
-### ViewController -> Presenter Event
+##### ViewController -> Presenter Event
 
 View入力、アクションがトリガーとなって行う処理に使用する。
 例）Authentication周りのログイン処理、セッションがあるかどうかAPI経由で確認
@@ -572,7 +571,7 @@ class ViewController {
 }
 ```
 
-### Presenter -> ViewController Event
+##### Presenter -> ViewController Event
 
 Presenterで処理した結果をアクションとして渡し、それが描画に関連する場合に使用する。Viewに描画する目的で一度だけ流れる。
 Signal: エラーが発生しない, main スレッドで実行, subscribe してから発生した event を受け取る。
@@ -606,7 +605,7 @@ class ViewController {
 }
 ```
 
-### Presenter -> ViewController One-way Bind property
+##### Presenter -> ViewController One-way Bind property
 
 Presenterで処理した結果を、描画する目的で流す。
 Driver: エラーが発生しない, main スレッドで実行, 一つ前の event を受け取れる.
@@ -647,7 +646,7 @@ class ViewController {
 }
 ```
 
-### Presenter <-> ViewController Two-way Bind property
+##### Presenter <-> ViewController Two-way Bind property
 
 双方向バインディング
 Viewでの入力とPresenterの処理の結果が互いに影響を及ぼす場合。
@@ -692,7 +691,7 @@ class ViewController {
 }
 ```
 
-### Presenter -> ViewController One-way Bind property (Ex: [Struct] -> UITableView)
+##### Presenter -> ViewController One-way Bind property (Ex: [Struct] -> UITableView)
 
 PresenterにてUseCaseから得た結果をもとに、Viewに返す。
 RxDataSourcesを使用する。
@@ -734,7 +733,7 @@ NOTTODOというアプリ名にしようかとおもいましたが、
 
 ## お仕事依頼も募集中です
 
-お仕事も募集中です。
+現在私は、フリーランスでお仕事も募集中です。
 ihatenonoildressing@gmail.comにご連絡ください！
 
 ## 注釈
