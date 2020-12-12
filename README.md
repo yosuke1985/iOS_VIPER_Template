@@ -19,7 +19,6 @@ VIPERと一口にいっても、複数のパターンのクリーンアーキテ
 <img src="/Images/TodoListView.png" height = 400><img src="/Images/TodoDetailView.png" height = 400><img src="/Images/CreateTodoView.png" height = 400>
 
 
-
 ## Firestore Data Model
 
 ``` yml
@@ -44,12 +43,6 @@ root/:
 - RxSwift 5
 - Firebase
 - Firestore
-
-## Installation instructions
-
-``` bash
-pod insatall
-```
 
 ## VIPERアーキテクチャ概要
 
@@ -81,10 +74,12 @@ ViewからログインのアクションをPresenterを介して受け取り、F
 
 ### 依存関係逆転の法則
 
-依存性関係逆転の法則というと、Entityをピラミッドの頂点とし、それ以下のもの
+クリーンアーキテクチャを語る上で文脈上必ずてくるのが、この依存関係逆転の法則で、これを理解しないとクリーンアーキテクチャが作れません。そもそもなにが何に依存が逆転しているのかが分かりにくいです。
+ここでは事例を用いて解説します。例えば、ログインするUseCaseがあります。そのログインするUseCaseから、ログイン・ログアウト・ユーザー作成の責務を持つAuthRepositoryを使ってログインを行います。
+UseCaseはそのAuthRepositoryを使ってログインするわけですが、ここでの役割分担は、UseCaseは文字通り使用するユースケースと、実際にログインする処理をAuthRepositoryとに責務を分けています。
+ログインする処理では、LoginPresenter -> LoginUseCase -> AuthRepository.login(email:pass:)　と経由しているので、ただただ助長になっているように見えますが、複雑なアプリだとUseCaseが複数のRepositoryを使用してPresenterに結果を返すというシチュエーションが出てきます。要件がある程度シンプルだとClean Architectureなどではなく、MVVMなどの他のアーキテクチャを検討して良いのかもしれません。
 
-クリーンアーキテクチャを語る上で文脈上必ずてくるのが、この依存関係逆転の法則なんですが、
-これは例えば、UseCaseがログイン・ログアウト・ユーザー作成の責務を持つAuthRepositoryからログインするとして、UseCaseはそのAuthRepositoryのプロトコル、EmailPass情報を持ってログインする関数のみを知っている状態にします。つまり、UseCaseは具体的処理は知らず、ここでいうところのFirebase Authenticationのクラスのことなどは一切知らないということになります。
+ログインUseCaseは、EmailPass情報を持ってログインする関数のみを知っている状態で、UseCaseは具体的処理は知らず、ここでいうところのFirebase Authenticationのクラスのことなどは一切知らないというのはどういうことかというと、
 
 ``` swift
 struct AuthUseCaseImpl: AuthUseCase,
